@@ -1,0 +1,141 @@
+﻿@startuml
+enum EntityType {
+    CUSTOMER
+    CAR
+    TRANSACTION
+}
+
+enum DataType {
+    CSV
+    JSON
+}
+
+class CarRentalSystem {
+    -customers: List<Customer>
+    -availableCars: List<Car>
+    -rentedCars: List<Car>
+    -transactions: List<Transaction>
+    -dataManager: DataManger
+    +registerCustomer()
+    +rentCar()
+    +returnCar()
+    +listAvailableCars()
+    +listRentedCars()
+    +listCustomerTransactions()
+}
+
+class Customer {
+    -id: String
+    -name: String
+    -phoneNumber: String
+    -address: String
+    -email: String
+    -rentedCars: List<Car>
+    +rentCar()
+    +returnCar()
+    +listRentedCars()
+    +serialize(DataType dataType): String
+    +deserialize(String data, DataType dataType)
+}
+
+class Car {
+    -id: String
+    -make: String
+    -model: String
+    -year: int
+    -dailyPrice: double
+    -rented: boolean
+    +rent()
+    +return()
+    +serialize(DataType dataType): String
+    +deserialize(String data, DataType dataType)
+}
+
+class Transaction {
+    -id: String
+    -customer: Customer
+    -car: Car
+    -rentalDate: Date
+    -returnDate: Date
+    -totalPrice: double
+    +calculateTotalPrice()
+    +serialize(DataType dataType): String
+    +deserialize(String data, DataType dataType)
+}
+
+class DataManager {
+    +readData(entityType: EntityType, dataType: DataType)
+    +writeData(entityType: EntityType, dataType: DataType)
+}
+
+interface IErrorHandler {
+    +handleError(exception: Exception)
+}
+
+interface IAuthenticationManager {
+    +login(username: String, password: String): boolean
+    +logout()
+}
+
+interface ISecurityManager {
+    +encrypt(data: String): String
+    +decrypt(data: String): String
+    +authorize(user: User, permission: String): boolean
+}
+
+interface IMessageHandler {
+    +log(message: String)
+    +showMessage(message: String)
+}
+
+class ErrorHandler implements IErrorHandler {
+    +handleError(exception: Exception)
+}
+
+class AuthenticationManager implements IAuthenticationManager {
+    -users: List<User>
+    +login(username: String, password: String): boolean
+    +logout()
+}
+
+class SecurityManager implements ISecurityManager {
+    -key: byte[]
+    +encrypt(data: String): String
+    +decrypt(data: String): String
+    +authorize(user: User, permission: String): boolean
+}
+
+class MessageHandler implements IMessageHandler {
+    +log(message: String)
+    +showMessage(message: String)
+}
+
+class User {
+    -id: String
+    -name: String
+    -role: UserRole
+}
+
+enum UserRole {
+    ADMIN
+    POWER_USER
+    USER
+    GUEST
+}
+
+CarRentalSystem -up-> IMessageHandler : uses >
+CarRentalSystem -left-> IAuthenticationManager : uses >
+CarRentalSystem -up-> ISecurityManager : uses >
+CarRentalSystem -left-> IErrorHandler : uses >
+CarRentalSystem -down-> Customer : manages >
+CarRentalSystem -down-> Car : manages >
+CarRentalSystem -down-> Transaction : manages >
+CarRentalSystem -right-> DataManager : uses >
+AuthenticationManager --> User : manages
+Customer --> Car : has
+Transaction -left-> Customer : has
+Transaction --> Car : has
+DataManager --> EntityType : uses
+DataManager --> DataType : uses
+User -left-> UserRole : has
+@enduml

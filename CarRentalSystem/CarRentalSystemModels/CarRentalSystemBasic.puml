@@ -1,4 +1,4 @@
-@startuml
+﻿@startuml
 enum EntityType {
     CUSTOMER
     CAR
@@ -15,6 +15,7 @@ class CarRentalSystem {
     -availableCars: List<Car>
     -rentedCars: List<Car>
     -transactions: List<Transaction>
+    -dataManager: DataManger
     +registerCustomer()
     +rentCar()
     +returnCar()
@@ -67,53 +68,14 @@ class DataManager {
     +writeData(EntityType entityType, DataType dataType)
 }
 
-class ErrorHandler {
-    +handleError(exception: Exception)
-}
 
-class AuthenticationManager {
-    -users: List<User>
-    +login(username: String, password: String): boolean
-    +logout()
-}
-
-class SecurityManager {
-    +encrypt(data: String): String
-    +decrypt(data: String): String
-    +authorize(user: User, permission: String): boolean
-}
-
-class MessageHandler {
-    +log(message: String)
-    +showMessage(message: String)
-}
-
-class User {
-    -id: String
-    -name: String
-    -role: UserRole
-}
-
-enum UserRole {
-    ADMIN
-    POWER_USER
-    USER
-    GUEST
-}
-
-CarRentalSystem -left-> MessageHandler : uses >
-CarRentalSystem -up-> AuthenticationManager : uses >
-CarRentalSystem -up-> SecurityManager : uses >
-CarRentalSystem -up-> ErrorHandler : uses >
 CarRentalSystem -down-> Customer : manages >
 CarRentalSystem -down-> Car : manages >
 CarRentalSystem -down-> Transaction : manages >
 CarRentalSystem -right-> DataManager : uses >
-AuthenticationManager --> User : manages
 Customer --> Car : has
 Transaction -left-> Customer : has
 Transaction --> Car : has
-DataManager --> EntityType : manages
+DataManager --> EntityType : uses
 DataManager --> DataType : uses
-User -left-> UserRole : has
 @enduml

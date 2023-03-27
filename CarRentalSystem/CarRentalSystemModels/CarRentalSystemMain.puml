@@ -15,6 +15,7 @@ class CarRentalSystem {
     -availableCars: List<Car>
     -rentedCars: List<Car>
     -transactions: List<Transaction>
+    -dataManager: DataManger
     +registerCustomer()
     +rentCar()
     +returnCar()
@@ -113,7 +114,7 @@ AuthenticationManager --> User : manages
 Customer --> Car : has
 Transaction -left-> Customer : has
 Transaction --> Car : has
-DataManager --> EntityType : manages
+DataManager --> EntityType : uses
 DataManager --> DataType : uses
 User -left-> UserRole : has
 @enduml
