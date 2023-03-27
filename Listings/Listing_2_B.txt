@@ -1,0 +1,12 @@
+@startuml
+
+' ... all classes equal to Listing 3a.
+
+CarRentalSystem --> Car
+CarRentalSystem --> Rental
+CarRentalSystem --> Customer
+' corrected relation
+Rental --> Car  
+Rental --> Customer
+Car --> RentalStatus
+@enduml

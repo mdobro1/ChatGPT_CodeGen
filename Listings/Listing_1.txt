@@ -1,0 +1,30 @@
+@startuml
+class CarRentalSystem {
+  +addCar()
+  +removeCar()
+  +rentCar()
+  +returnCar()
+}
+
+class Car {
+  -make: string
+  -model: string
+  -year: int
+  -rentalStatus: boolean
+  +getMake()
+  +getModel()
+  +getYear()
+  +isRented()
+}
+
+class Customer {
+  -name: string
+  -licenseNumber: string
+  +getName()
+  +getLicenseNumber()
+}
+
+CarRentalSystem *-- Car
+CarRentalSystem *-- Customer
+Car --o Customer
+@enduml

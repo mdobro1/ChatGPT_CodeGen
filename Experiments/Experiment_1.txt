@@ -1,0 +1,38 @@
+Me:> Make a Car Rental System as PlantUML diagram.
+
+ChatGPT:> Sure, here's a PlantUML diagram for a basic car rental system:
+
+@startuml
+class CarRentalSystem {
+  +addCar()
+  +removeCar()
+  +rentCar()
+  +returnCar()
+}
+
+class Car {
+  -make: string
+  -model: string
+  -year: int
+  -rentalStatus: boolean
+  +getMake()
+  +getModel()
+  +getYear()
+  +isRented()
+}
+
+class Customer {
+  -name: string
+  -licenseNumber: string
+  +getName()
+  +getLicenseNumber()
+}
+
+CarRentalSystem *-- Car
+CarRentalSystem *-- Customer
+Car --o Customer
+
+@enduml
+
+This diagram shows three classes: CarRentalSystem, Car, and Customer. 
+The CarRentalSystem class has methods for adding and removing cars from the system, as well as renting and returning cars to customers. 

@@ -1,0 +1,54 @@
+Me:> Make a Car Rental System using following entities - CarRentalSystem, Car, Rental and Customer. Use PlantUML format.
+
+ChatGPT:> Sure, here's an example Car Rental System using PlantUML format:
+
+@startuml
+class CarRentalSystem {
+    +searchAvailableCars(startDate: Date, endDate: Date): List<Car>
+    +rentCar(car: Car, customer: Customer, startDate: Date, endDate: Date): Rental
+    +returnCar(rental: Rental, endDate: Date): void
+}
+
+class Car {
+    -id: int
+    -make: String
+    -model: String
+    -year: int
+    -color: String
+    -status: RentalStatus
+}
+
+class Rental {
+    -id: int
+    -car: Car
+    -customer: Customer
+    -startDate: Date
+    -endDate: Date
+}
+
+class Customer {
+    -id: int
+    -name: String
+    -address: String
+    -phoneNumber: String
+}
+
+enum RentalStatus {
+    AVAILABLE
+    RENTED
+}
+
+CarRentalSystem -> Car
+CarRentalSystem -> Rental
+CarRentalSystem -> Customer
+Car -> Rental
+Rental -> Customer
+Car --> RentalStatus
+@enduml
+
+In this system, CarRentalSystem is the main entity, which contains methods for searching available cars, renting a car, and returning a car. 
+Car represents a specific car in the system, which has an ID, make, model, year, color, and rental status. 
+Rental represents a rental agreement between a customer and a car, which has an ID, a car, a customer, a start date, and an end date. 
+Customer represents a customer in the system, which has an ID, a name, an address, and a phone number. 
+RentalStatus is an enum that represents the rental status of a car, which can be either available or rented.
+The diagram shows the relationships between the entities, such as how CarRentalSystem interacts with Car, Rental, and Customer, and how Car and Rental are related.

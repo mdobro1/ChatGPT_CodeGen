@@ -1,0 +1,68 @@
+public class Car
+{
+    private string id;
+    private string make;
+    private string model;
+    private int year;
+    private double dailyPrice;
+    private bool rented;
+
+    public Car(string id, string make, string model, int year, double dailyPrice, bool rented)
+    {
+        this.id = id;
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.dailyPrice = dailyPrice;
+        this.rented = rented;
+    }
+
+    public string Id
+    {
+        get { return id; }
+        set { id = value; }
+    }
+	
+	...
+
+    public void Rent()
+    {
+        rented = true;
+    }
+
+    public void Return()
+    {
+        rented = false;
+    }
+
+    public string Serialize(DataType dataType)
+    {
+        string result = "";
+        switch (dataType)
+        {
+            case DataType.CSV:
+                result = $"{id},{make},{model},{year},{dailyPrice},{rented}";
+                break;
+            case DataType.JSON:
+                result = JsonConvert.SerializeObject(this);
+                break;
+        }
+        return result;
+    }
+
+    public static Car Deserialize(string data, DataType dataType)
+    {
+        Car car = null;
+        switch (dataType)
+        {
+            case DataType.CSV:
+                string[] values = data.Split(',');
+                car = new Car(values[0], values[1], values[2], int.Parse(values[3]), double.Parse(values[4]), bool.Parse(values[5]));
+                break;
+            case DataType.JSON:
+                car = JsonConvert.DeserializeObject<Car>(data);
+                break;
+        }
+        return car;
+    }
+}

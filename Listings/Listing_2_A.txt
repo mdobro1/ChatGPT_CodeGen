@@ -1,0 +1,43 @@
+@startuml
+class CarRentalSystem {
+    +searchAvailableCars(startDate: Date, endDate: Date): List<Car>
+    +rentCar(car: Car, customer: Customer, startDate: Date, endDate: Date): Rental
+    +returnCar(rental: Rental, endDate: Date): void
+}
+
+class Car {
+    -id: int
+    -make: String
+    -model: String
+    -year: int
+    -color: String
+    -status: RentalStatus
+}
+
+class Rental {
+    -id: int
+    -car: Car
+    -customer: Customer
+    -startDate: Date
+    -endDate: Date
+}
+
+class Customer {
+    -id: int
+    -name: String
+    -address: String
+    -phoneNumber: String
+}
+
+enum RentalStatus {
+    AVAILABLE
+    RENTED
+}
+
+CarRentalSystem -> Car
+CarRentalSystem -> Rental
+CarRentalSystem -> Customer
+Car -> Rental
+Rental -> Customer
+Car --> RentalStatus
+@enduml

@@ -1,0 +1,63 @@
+Me:> Make a Car Rental System as PlantUML diagram.
+
+ChatGPT:> Sure, here's an example Car Rental System represented as a PlantUML class diagram:
+
+@startuml
+class CarRentalSystem {
+    -customers: List<Customer>
+    -availableCars: List<Car>
+    -rentedCars: List<Car>
+    -transactions: List<Transaction>
+    +registerCustomer()
+    +rentCar()
+    +returnCar()
+    +listAvailableCars()
+    +listRentedCars()
+    +listCustomerTransactions()
+}
+
+class Customer {
+    -id: String
+    -name: String
+    -phoneNumber: String
+    -address: String
+    -email: String
+    -rentedCars: List<Car>
+    +rentCar()
+    +returnCar()
+    +listRentedCars()
+}
+
+class Car {
+    -id: String
+    -make: String
+    -model: String
+    -year: int
+    -dailyPrice: double
+    -rented: boolean
+    +rent()
+    +return()
+}
+
+class Transaction {
+    -id: String
+    -customer: Customer
+    -car: Car
+    -rentalDate: Date
+    -returnDate: Date
+    -totalPrice: double
+    +calculateTotalPrice()
+}
+
+CarRentalSystem --> Customer
+CarRentalSystem --> Car
+CarRentalSystem --> Transaction
+Customer --> Car
+Transaction --> Customer
+Transaction --> Car
+@enduml
+
+In this diagram, the CarRentalSystem is the main class that manages the list of customers, available cars, rented cars, and transactions. 
+Customers can rent and return cars, and view their rented cars. 
+Cars can be rented and returned, and transactions keep track of the details of each rental. 
+The Transaction class has a method to calculate the total price of the rental based on the rental date, return date, and daily price of the car.

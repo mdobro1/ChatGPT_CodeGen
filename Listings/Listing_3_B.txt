@@ -1,0 +1,79 @@
+@startuml
+enum EntityType {
+    CUSTOMER
+    CAR
+    TRANSACTION
+}
+
+enum DataType {
+    CSV
+    JSON
+}
+
+class CarRentalSystem {
+    -customers: List<Customer>
+    -availableCars: List<Car>
+    -rentedCars: List<Car>
+    -transactions: List<Transaction>
+    +registerCustomer()
+    +rentCar()
+    +returnCar()
+    +listAvailableCars()
+    +listRentedCars()
+    +listCustomerTransactions()
+}
+
+class Customer {
+    -id: String
+    -name: String
+    -phoneNumber: String
+    -address: String
+    -email: String
+    -rentedCars: List<Car>
+    +rentCar()
+    +returnCar()
+    +listRentedCars()
+    +toString(DataType dataType): String
+    +fromString(String data, DataType dataType)
+}
+
+class Car {
+    -id: String
+    -make: String
+    -model: String
+    -year: int
+    -dailyPrice: double
+    -rented: boolean
+    +rent()
+    +return()
+    +toString(DataType dataType): String
+    +fromString(String data, DataType dataType)
+}
+
+class Transaction {
+    -id: String
+    -customer: Customer
+    -car: Car
+    -rentalDate: Date
+    -returnDate: Date
+    -totalPrice: double
+    +calculateTotalPrice()
+    +toString(DataType dataType): String
+    +fromString(String data, DataType dataType)
+}
+
+class DataManager {
+    +readData(EntityType entityType, DataType dataType)
+    +writeData(EntityType entityType, DataType dataType)
+}
+
+CarRentalSystem -down-> Customer : manages >
+CarRentalSystem -down-> Car : manages >
+CarRentalSystem -down-> Transaction : manages >
+CarRentalSystem -up-> DataManager : uses >
+Customer --> Car : has
+Transaction --> Customer : has
+Transaction --> Car : has
+DataManager --> EntityType : manages
+DataManager --> DataType : uses
+@enduml

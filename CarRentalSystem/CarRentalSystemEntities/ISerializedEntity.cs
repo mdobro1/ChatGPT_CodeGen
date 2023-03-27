@@ -1,0 +1,8 @@
+﻿namespace sf.systems.rentals.cars
+{
+    public interface ISerializedEntity<T>
+    {
+        string Serialize(DataType dataType);
+        T DeserializeHandler(string data, DataType dataType);
+    }
+}
