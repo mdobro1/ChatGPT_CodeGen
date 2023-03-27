@@ -18,10 +18,10 @@ namespace sf.systems.rentals.cars
             this.messageHandler = messageHandler;
         }
 
-        public List<T> ReadData<T>(EntityType entityType, DataType dataType) 
+        public List<T> ReadData<T>(EntityType entityType, DataType dataType, string fileSuffix) 
             where T : ISerializedEntity<T>, new()
         {
-            string filePath = GetFilePath(entityType, dataType);
+            string filePath = GetFilePath(entityType, dataType, fileSuffix);
             List<T> dataList = new List<T>();
 
             if (File.Exists(filePath))
@@ -48,10 +48,15 @@ namespace sf.systems.rentals.cars
             return dataList;
         }
 
-        public bool WriteData<T>(List<T> dataList, EntityType entityType, DataType dataType) 
+        public bool WriteData<T>(List<T> dataList, EntityType entityType, DataType dataType, string fileSuffix) 
             where T : ISerializedEntity<T>, new()
         {
-            string filePath = GetFilePath(entityType, dataType);
+            string filePath = GetFilePath(entityType, dataType, fileSuffix);
+            string directoryPath = Path.GetDirectoryName(filePath);
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
 
             try
             {
@@ -62,6 +67,7 @@ namespace sf.systems.rentals.cars
                         string line = Serialize<T>(data, dataType);
                         writer.WriteLine(line);
                     }
+                    messageHandler.LogPlusMessage($"Write Data - Rows:{dataList.Count}, Entity:{entityType}, Data:{dataType} ({fileSuffix}).");
                 }
                 return true;
             }
@@ -72,9 +78,31 @@ namespace sf.systems.rentals.cars
             }
         }
 
-        private string GetFilePath(EntityType entityType, DataType dataType)
+        public void ReadData<T>(List<T> targetList, EntityType entityType, DataType dataType, string fileSuffix)
+            where T : ISerializedEntity<T>, new()
         {
-            string fileName = $"{entityType.ToString().ToLower()}.{dataType.ToString().ToLower()}";
+            if (targetList == null) errorHandler.HandleError(new ArgumentNullException("targetList"));
+
+            List<T> listItems = (List<T>)ReadData<T>(entityType, dataType, fileSuffix);
+            if (listItems != null)
+            {
+                targetList.Clear();
+                targetList.AddRange(listItems);
+                messageHandler.LogPlusMessage($"Read Data - Rows:{targetList.Count}, Entity:{entityType}, Data:{dataType} ({fileSuffix}).");
+            }
+            else
+            {
+                messageHandler.LogPlusMessage($"No Data - Entity:{entityType}, Data:{dataType}.");
+            }
+        }
+
+        private string GetFilePath(EntityType entityType, DataType dataType, string fileSuffix)
+        {
+            string suffix = "";
+            if (!string.IsNullOrEmpty(fileSuffix)) suffix = $"_{fileSuffix}";
+            
+            string fileName = $"{entityType.ToString().ToLower()}{suffix}.{dataType.ToString().ToLower()}";
+
             return Path.Combine(DataFolderPath, fileName);
         }
 

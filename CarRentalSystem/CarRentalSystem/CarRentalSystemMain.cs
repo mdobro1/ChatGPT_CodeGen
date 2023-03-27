@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace sf.systems.rentals.cars
@@ -42,9 +43,35 @@ namespace sf.systems.rentals.cars
 
         public Customer RegisterCustomer(string id, string name, string phoneNumber, string address, string email)
         {
-            Customer customer = new Customer(id, name, phoneNumber, address, email);
-            customers.Add(customer);
-            return customer;
+            var seekCustomer =
+                (from item in customers
+                 where String.Equals(item.Id.Trim(), id.Trim(), StringComparison.OrdinalIgnoreCase)
+                 select item).FirstOrDefault();
+
+            if (seekCustomer == null)
+            {
+                Customer customer = new Customer(id, name, phoneNumber, address, email);
+                customers.Add(customer);
+                return customer;
+            }
+            else
+            {
+                return seekCustomer;
+            }
+        }
+
+        public void AddCar(string idCar, string make, string model, int year, double dailyPrice)
+        {
+            var seekCar =
+                (from item in availableCars
+                 where String.Equals(item.Id.Trim(), idCar.Trim(), StringComparison.OrdinalIgnoreCase)
+                 select item).FirstOrDefault();
+
+            if (seekCar == null)
+            {
+                Car newCar = new Car(idCar, make, model, year, dailyPrice, false);
+                availableCars.Add(newCar);
+            }
         }
 
         public void RentCar(Customer customer, Car car, DateTime rentalDate, DateTime returnDate)
@@ -54,43 +81,70 @@ namespace sf.systems.rentals.cars
                 errorHandler.HandleError(new InvalidOperationException("The specified car is not available for rental."));
             }
 
-            if (customer.RentedCars.Contains(car))
+            var seekRentCustomer = transactions.FindAll(item => !item.IsClosed && item.Customer.Id == customer.Id).FirstOrDefault();
+
+            if (seekRentCustomer == null)
             {
-                errorHandler.HandleError(new InvalidOperationException("The specified customer has already rented the specified car."));
+                double totalPrice = car.DailyPrice * (returnDate - rentalDate).TotalDays;
+                Transaction transaction = new Transaction(Guid.NewGuid().ToString(), customer, car, rentalDate, returnDate, totalPrice);
+                transactions.Add(transaction);
+                customer.RentCar(car);
+                car.Rent();
+                availableCars.Remove(car);
+                rentedCars.Add(car);
+            }
+            else
+            {
+                messageHandler.LogPlusMessage($"The specified customer with ID: {customer.Id} has already rented a car!");
             }
 
-            double totalPrice = car.DailyPrice * (returnDate - rentalDate).TotalDays;
-            Transaction transaction = new Transaction(Guid.NewGuid().ToString(), customer, car, rentalDate, returnDate, totalPrice);
-            transactions.Add(transaction);
-            customer.RentCar(car);
-            car.Rent();
-            availableCars.Remove(car);
-            rentedCars.Add(car);
         }
 
-        public void ReturnCar(Customer customer, Car car, DateTime returnDate)
+        public void ReturnCar(Customer customer, Car car)
         {
             if (!rentedCars.Contains(car))
             {
                 errorHandler.HandleError(new InvalidOperationException("The specified car has not been rented by the specified customer."));
             }
 
+            /*
             if (!customer.RentedCars.Contains(car))
             {
                 errorHandler.HandleError(new InvalidOperationException("The specified customer has not rented the specified car."));
-            }
+            }*/
 
-            Transaction transaction = transactions.Find(t => t.Customer == customer && t.Car == car && t.ReturnDate == null);
+            Transaction transaction = transactions.Find(t => !t.IsClosed && t.Customer.Id == customer.Id && t.Car.Id == car.Id);
             if (transaction == null)
             {
                 errorHandler.HandleError(new InvalidOperationException("The specified transaction could not be found."));
             }
 
-            transaction.ReturnDate = returnDate;
+            transaction.CloseTransaction();
             car.Return();
             rentedCars.Remove(car);
             availableCars.Add(car);
             customer.ReturnCar(car);
+        }
+
+        public void ReturnCar(Customer customer)
+        {
+            if (customer != null)
+            {
+                var seekCarId = (from item in ListCustomerTransactions(customer)
+                                 where item.Customer != null && item.Customer.Id == customer.Id
+                                 select item.Car.Id).FirstOrDefault();
+
+                var seekCar = (from item in ListRentedCars()
+                               where item.Id == seekCarId
+                               select item).FirstOrDefault();
+
+                if (seekCar != null)
+                    ReturnCar(customer, seekCar);
+                else
+                    LogAndShowMessage($"Car with ID:{seekCarId} has not been rented!");
+            }
+            else
+                LogAndShowMessage("Customer has not been found!");
         }
 
         public List<Car> ListAvailableCars()
@@ -109,7 +163,7 @@ namespace sf.systems.rentals.cars
 
         public List<Transaction> ListCustomerTransactions(Customer customer)
         {
-            return transactions.FindAll(t => t.Customer == customer);
+            return transactions.FindAll(t => t.Customer.Id == customer.Id);
         }
     }
 }

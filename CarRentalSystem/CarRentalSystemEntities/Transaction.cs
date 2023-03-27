@@ -11,6 +11,8 @@ namespace sf.systems.rentals.cars
         public DateTime RentalDate { get; set; }
         public DateTime ReturnDate { get; set; }
         public double TotalPrice { get; set; }
+        public DateTime ClosedDate { get; private set; }
+        public bool IsClosed { get; private set; }
 
         public Transaction() { }
 
@@ -22,6 +24,12 @@ namespace sf.systems.rentals.cars
             RentalDate = rentalDate;
             ReturnDate = returnDate;
             TotalPrice = totalPrice;
+        }
+
+        public void CloseTransaction()
+        {
+            IsClosed = true;
+            ClosedDate = DateTime.Now;
         }
 
         public double CalculateTotalPrice()
@@ -47,7 +55,7 @@ namespace sf.systems.rentals.cars
         private static Transaction CreateFromCsv(string csv)
         {
             string[] values = csv.Split(',');
-            if (values.Length != 6)
+            if (values.Length < 6)
             {
                 throw new ArgumentException($"Invalid CSV data: {csv}");
             }

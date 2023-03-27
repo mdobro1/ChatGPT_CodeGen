@@ -32,5 +32,11 @@ namespace sf.systems.rentals.cars
         {
             Console.WriteLine(message);
         }
+
+        public void LogPlusMessage(string message)
+        {
+            Log(message);
+            ShowMessage(message);
+        }
     }
 }

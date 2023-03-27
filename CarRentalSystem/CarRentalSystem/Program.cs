@@ -9,7 +9,8 @@ namespace sf.systems.rentals.cars
         static void Main(string[] args)
         {
             // init command
-            string cmd = "new_car"; // "register_customers"; // args[0].ToLower();
+            // first run "new_car", then "register_customers" and then "rent_car" and "return_car"
+            string cmd = "rent_car"; // "new_car"; //"rent_car"; // "register_customers"; // args[0].ToLower();
 
             // Initialize system 
             var carRentalSystem = new CarRentalSystem();
@@ -20,6 +21,7 @@ namespace sf.systems.rentals.cars
             switch (cmd)
             {
                 case "new_car":
+                    addNewCars(carRentalSystem);
                     break;
                 case "register_customers":
                     registerCustomers(carRentalSystem);
@@ -28,13 +30,25 @@ namespace sf.systems.rentals.cars
                     rentCar(carRentalSystem);
                     break;
                 case "return_car":
-                    carRentalSystem.ReturnCar(getFirstCustomer(carRentalSystem), getFirstCar(carRentalSystem), DateTime.Now);
+                    returnCar(getFirstCustomer(carRentalSystem), carRentalSystem);
                     break;
             }
 
 
             // Save the data to disk
             carRentalSystem.SaveData();
+        }
+
+        private static void returnCar(Customer customer, CarRentalSystem carRentalSystem)
+        {
+            carRentalSystem.ReturnCar(customer);
+        }
+
+        private static void addNewCars(CarRentalSystem carRentalSystem)
+        {
+            carRentalSystem.AddCar("CAR1","Toyota", "Corolla", 2022, 50.0);
+            carRentalSystem.AddCar("CAR2","Honda", "Civic", 2021, 45.0);
+            carRentalSystem.AddCar("CAR7","Audi", "Q7", 2020, 120.0); 
         }
 
         private static void rentCar(CarRentalSystem carRentalSystem)
