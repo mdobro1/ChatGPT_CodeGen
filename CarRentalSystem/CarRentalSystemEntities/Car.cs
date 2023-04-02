@@ -3,7 +3,7 @@ using System;
 
 namespace sf.systems.rentals.cars
 {
-    public class Car : ISerializedEntity<Car>
+    public class Car : ISerializedEntity<Car>, ICar
     {
         public string Id { get; }
         public string Make { get; }
@@ -24,9 +24,9 @@ namespace sf.systems.rentals.cars
             Rented = rented;
         }
 
-        public void Rent() => Rented = true;
+        internal void Rent() => Rented = true;
 
-        public void Return() => Rented = false;
+        internal void Return() => Rented = false;
 
         public string Serialize(DataType dataType) => dataType switch
         {
@@ -44,12 +44,14 @@ namespace sf.systems.rentals.cars
 
         private static Car CreateFromCsv(string csv)
         {
+            int csv_len = 6;
             string[] values = csv.Split(',');
-            if (values.Length != 6)
+            if (values.Length != csv_len)
             {
-                throw new ArgumentException($"Invalid CSV data: {csv}");
+                throw new ArgumentException($"Invalid CSV data length - expected {csv_len}, got {values.Length}. CSV-Data: {csv}.");
             }
-            return new Car(values[0], values[1], values[2], int.Parse(values[3]), double.Parse(values[4]), bool.Parse(values[5]));
+            return new Car(values[0], values[1], values[2], int.Parse(values[3]),
+                double.Parse(values[4]), bool.Parse(values[5]));
         }
 
         public Car DeserializeHandler(string data, DataType dataType)

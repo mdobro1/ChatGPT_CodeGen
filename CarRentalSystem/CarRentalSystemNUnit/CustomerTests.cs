@@ -1,74 +1,73 @@
 ﻿using NUnit.Framework;
+using System.Collections.Generic;
 using sf.systems.rentals.cars;
-using System.Linq;
 
 namespace sf.systems.rentals.cars.tests
 {
-    [TestFixture]
     public class CustomerTests
     {
-        private const string CustomerCsvData = "CUS1,John Doe,555-1234,123 Main St,john.doe@example.com";
-        private const string CustomerJsonData = "{\"Id\":\"CUS1\",\"Name\":\"John Doe\",\"PhoneNumber\":\"555-1234\",\"Address\":\"123 Main St\",\"Email\":\"john.doe@example.com\",\"RentedCars\":[]}";
-
         [Test]
-        public void TestCreateCustomerFromCsv()
+        public void Serialize_ReturnsCorrectCSVFormat()
         {
-            Customer customer = Customer.Deserialize(CustomerCsvData, DataType.CSV);
-            Assert.AreEqual("CUS1", customer.Id);
-            Assert.AreEqual("John Doe", customer.Name);
-            Assert.AreEqual("555-1234", customer.PhoneNumber);
-            Assert.AreEqual("123 Main St", customer.Address);
-            Assert.AreEqual("john.doe@example.com", customer.Email);
-            Assert.IsEmpty(customer.RentedCars);
+            // Arrange
+            ICustomer customer = new Customer("1", "John Doe", "555-1234", "123 Main St", "johndoe@example.com");
+            string expected = "1,John Doe,555-1234,123 Main St,johndoe@example.com";
+
+            // Act
+            string result = customer.Serialize(DataType.CSV);
+
+            // Assert
+            Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void TestCreateCustomerFromJson()
+        public void DeserializeHandler_ReturnsCustomerInstance()
         {
-            Customer customer = Customer.Deserialize(CustomerJsonData, DataType.JSON);
-            Assert.AreEqual("CUS1", customer.Id);
-            Assert.AreEqual("John Doe", customer.Name);
-            Assert.AreEqual("555-1234", customer.PhoneNumber);
-            Assert.AreEqual("123 Main St", customer.Address);
-            Assert.AreEqual("john.doe@example.com", customer.Email);
-            Assert.IsEmpty(customer.RentedCars);
+            // Arrange
+            string csvData = "1,John Doe,555-1234,123 Main St,johndoe@example.com";
+
+            // Act
+            Customer result = new Customer().DeserializeHandler(csvData, DataType.CSV);
+
+            // Assert
+            Assert.IsInstanceOf<Customer>(result);
+            Assert.AreEqual("1", result.Id);
+            Assert.AreEqual("John Doe", result.Name);
+            Assert.AreEqual("555-1234", result.PhoneNumber);
+            Assert.AreEqual("123 Main St", result.Address);
+            Assert.AreEqual("johndoe@example.com", result.Email);
         }
 
         [Test]
-        public void TestSerializeCustomerToCsv()
+        public void RentedCarsPoolExtend_AddsNewCarsToList()
         {
-            Customer customer = new Customer("CUS1", "John Doe", "555-1234", "123 Main St", "john.doe@example.com");
-            string csvData = customer.Serialize(DataType.CSV);
-            Assert.AreEqual(CustomerCsvData, csvData);
+            // Arrange
+            ICustomer customer = new Customer("1", "John Doe", "555-1234", "123 Main St", "johndoe@example.com");
+            List<Car> cars = new List<Car>() { new Car("1", "Honda", "Civic", 2020, 30, false) };
+
+            // Act
+            customer.RentedCarsPoolExtend(cars);
+
+            // Assert
+            Assert.AreEqual(1, customer.RentedCarsCopy.Count);
+            Assert.AreEqual("Honda", customer.RentedCarsCopy[0].Make);
         }
 
         [Test]
-        public void TestSerializeCustomerToJson()
+        public void RentedCarsPoolNew_ReplacesOldCarsWithNewCars()
         {
-            Customer customer = new Customer("CUS1", "John Doe", "555-1234", "123 Main St", "john.doe@example.com");
-            string jsonData = customer.Serialize(DataType.JSON);
-            Assert.AreEqual(CustomerJsonData, jsonData);
-        }
+            // Arrange
+            ICustomer customer = new Customer("1", "John Doe", "555-1234", "123 Main St", "johndoe@example.com");
+            List<Car> oldCars = new List<Car>() { new Car("1", "Honda", "Civic", 2020, 30, false) };
+            List<Car> newCars = new List<Car>() { new Car("2", "Toyota", "Corolla", 2021, 35, false) };
+            customer.RentedCarsPoolExtend(oldCars);
 
-        [Test]
-        public void TestRentCar()
-        {
-            Customer customer = new Customer("CUS1", "John Doe", "555-1234", "123 Main St", "john.doe@example.com");
-            Car car = new Car("CAR1", "Toyota", "Corolla", 2022, 40.0, false);
-            customer.RentCar(car);
-            Assert.IsTrue(customer.RentedCars.Contains(car));
-            Assert.IsTrue(car.Rented);
-        }
+            // Act
+            customer.RentedCarsPoolNew(newCars);
 
-        [Test]
-        public void TestReturnCar()
-        {
-            Customer customer = new Customer("CUS1", "John Doe", "555-1234", "123 Main St", "john.doe@example.com");
-            Car car = new Car("CAR1", "Toyota", "Corolla", 2022, 40.0, true);
-            customer.RentCar(car); // Rent the car first
-            customer.ReturnCar(car); // Return the car
-            Assert.IsFalse(customer.RentedCars.Contains(car));
-            Assert.IsFalse(car.Rented);
+            // Assert
+            Assert.AreEqual(1, customer.RentedCarsCopy.Count);
+            Assert.AreEqual("Toyota", customer.RentedCarsCopy[0].Make);
         }
     }
 }

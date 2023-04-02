@@ -4,14 +4,16 @@ using System.Collections.Generic;
 
 namespace sf.systems.rentals.cars
 {
-    public class Customer : ISerializedEntity<Customer>
+    public class Customer : ISerializedEntity<Customer>, ICustomer
     {
         public string Id { get; set; }
-        public string Name { get; set;  }
+        public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
-        private readonly List<Car> rentedCars;
+
+        private readonly int CarRentalMaxLimit = 1;
+        internal List<Car> RentedCarsPool { get; }
 
         public Customer() { }
 
@@ -22,27 +24,34 @@ namespace sf.systems.rentals.cars
             PhoneNumber = phoneNumber;
             Address = address;
             Email = email;
-            rentedCars = new List<Car>();
+            RentedCarsPool = new List<Car>();
         }
 
-        public List<Car> RentedCars => rentedCars;
-
-        public void RentCar(Car car)
+        public List<Car> RentedCarsCopy
         {
-            if (!rentedCars.Contains(car))
+            get
             {
-                rentedCars.Add(car);
-                car.Rent();
+                var result = new List<Car>();
+                result.AddRange(RentedCarsPool);
+                return result;
             }
         }
 
-        public void ReturnCar(Car car)
+        internal void RentCar(Car car)
         {
-            if (rentedCars.Contains(car))
-            {
-                rentedCars.Remove(car);
-                car.Return();
-            }
+            if (car == null) throw new ArgumentNullException("car");
+            if (RentedCarsPool.Contains(car)) throw new InvalidOperationException($"Already rented car with ID: {car.Id}!");
+            if (RentedCarsPool.Count >= CarRentalMaxLimit) throw new InvalidOperationException(
+                $"Customer ({Id}) is not allowed to rent more than {CarRentalMaxLimit} car(s)!");
+
+            car.Rent();
+            RentedCarsPool.Add(car);
+        }
+
+        internal void ReturnCar(Car car)
+        {
+            if (RentedCarsPool.Contains(car)) RentedCarsPool.Remove(car);
+            car.Return();
         }
 
         public string Serialize(DataType dataType) => dataType switch
@@ -72,6 +81,18 @@ namespace sf.systems.rentals.cars
         public Customer DeserializeHandler(string data, DataType dataType)
         {
             return Deserialize(data, dataType);
+        }
+
+        public void RentedCarsPoolNew(List<Car> rentedCars)
+        {
+            RentedCarsPool.Clear();
+            RentedCarsPoolExtend(rentedCars);
+        }
+        public void RentedCarsPoolExtend(List<Car> rentedCars)
+        {
+            if (rentedCars == null) throw new ArgumentNullException("rentedCars");
+
+            RentedCarsPool.AddRange(rentedCars);
         }
     }
 }

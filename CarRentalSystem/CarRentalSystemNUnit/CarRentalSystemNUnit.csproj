@@ -5,7 +5,7 @@
 
     <IsPackable>false</IsPackable>
 
-    <RootNamespace>sf.systems.rentals.car.tests</RootNamespace>
+    <RootNamespace>sf.systems.rentals.cars.tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CarRentalSystem\CarRentalSystem.csproj" />
+    <ProjectReference Include="..\CarRentalSystemController\CarRentalSystemController.csproj" />
   </ItemGroup>
 
 </Project>

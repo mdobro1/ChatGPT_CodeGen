@@ -2,7 +2,7 @@
 
 namespace sf.systems.rentals.cars
 {
-    public partial class CarRentalSystem
+    public partial class CarRentalSystem 
     {
         private readonly AuthenticationManager authenticationManager;
         private User currentUser;

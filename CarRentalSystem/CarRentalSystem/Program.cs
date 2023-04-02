@@ -8,40 +8,72 @@ namespace sf.systems.rentals.cars
     {
         static void Main(string[] args)
         {
-            // init command
-            // first run "new_car", then "register_customers" and then "rent_car" and "return_car"
-            string cmd = "rent_car"; // "new_car"; //"rent_car"; // "register_customers"; // args[0].ToLower();
+            // command-args
+            string cmd;
+            string customerId;
+            string carId;
+
+            // get command
+            if (args.Length > 0)
+                cmd = args[0].ToLower();
+            else
+            {
+                // init command
+                // cmd = "new_car"; // first run cmd = "new_car"
+                // cmd = "register_customers"; // then "register_customers"
+                // cmd = "rent_car"; // then "rent_car"
+                cmd = "return_car"; // and finally return car
+            }
+
+            // get customer
+            if (args.Length > 1)
+                customerId = args[1];
+            else
+                customerId = "C002"; 
+
+            // get customer
+            if (args.Length > 2)
+                carId = args[2];
+            else
+                carId = "CAR1";
 
             // Initialize system 
             var carRentalSystem = new CarRentalSystem();
-
-            // Load the data from disk
-            carRentalSystem.LoadData();
-
-            switch (cmd)
+            
+            try
             {
-                case "new_car":
-                    addNewCars(carRentalSystem);
-                    break;
-                case "register_customers":
-                    registerCustomers(carRentalSystem);
-                    break;
-                case "rent_car":
-                    rentCar(carRentalSystem);
-                    break;
-                case "return_car":
-                    returnCar(getFirstCustomer(carRentalSystem), carRentalSystem);
-                    break;
+                // Load the data from disk
+                carRentalSystem.LoadData();
+
+                switch (cmd)
+                {
+                    case "new_car":
+                        addNewCars(carRentalSystem);
+                        break;
+                    case "register_customers":
+                        registerCustomers(carRentalSystem);
+                        break;
+                    case "rent_car":
+                        rentCar(carRentalSystem, customerId, carId);
+                        break;
+                    case "return_car":
+                        returnCar(carRentalSystem, customerId);
+                        break;
+                }
+
+                // Save the data to disk
+                carRentalSystem.SaveData();
             }
-
-
-            // Save the data to disk
-            carRentalSystem.SaveData();
+            catch (Exception ex)
+            {
+                carRentalSystem.LogAndShowMessage($"\nERROR: {ex.Message} \n\nSTACK-TRACE: {ex.StackTrace}");
+            }
         }
 
-        private static void returnCar(Customer customer, CarRentalSystem carRentalSystem)
+        private static void returnCar(CarRentalSystem carRentalSystem, string idCustomer)
         {
-            carRentalSystem.ReturnCar(customer);
+            carRentalSystem.ReturnCar(
+                carRentalSystem.LookupCustomer(idCustomer));
         }
 
         private static void addNewCars(CarRentalSystem carRentalSystem)
@@ -51,29 +83,36 @@ namespace sf.systems.rentals.cars
             carRentalSystem.AddCar("CAR7","Audi", "Q7", 2020, 120.0); 
         }
 
-        private static void rentCar(CarRentalSystem carRentalSystem)
+        private static void rentCar(CarRentalSystem carRentalSystem, string idCustomer, string idCard)
         {
-            Car firstCar = getFirstCar(carRentalSystem);
-            Customer firstCustomer = getFirstCustomer(carRentalSystem);
-
-            // Rent fisrt avaliable car by first customer for 3 days
-            if (firstCar != null && firstCustomer != null)
-                carRentalSystem.RentCar(firstCustomer, firstCar, DateTime.Now, DateTime.Now.AddDays(3));
-            else
+            var validationError = false;
+            // validate params
+            if (string.IsNullOrEmpty(idCustomer))
             {
-                if (firstCar == null) carRentalSystem.LogAndShowMessage("No cars avaliable!");
-                if (firstCustomer == null) carRentalSystem.LogAndShowMessage("No registered customers!");
+                carRentalSystem.LogAndShowMessage("Customer-ID is empty!");
+                validationError = true;
             }
+            var car = carRentalSystem.GetCar(idCard);
+            if (car == null)
+            {
+                carRentalSystem.LogAndShowMessage($"Car with ID:{idCard} is not avaliable!");
+                validationError = true;
+            }
+            if (validationError) return;
+
+
+            // Rent fisrt avaliable car by given customer for 3 days
+            carRentalSystem.RentCar(
+                idCustomer, 
+                car.Id, 
+                DateTime.Now, 
+                DateTime.Now.AddDays(3)
+                );
         }
 
         private static Customer getFirstCustomer(CarRentalSystem carRentalSystem)
         {
             return carRentalSystem.ListRegisteredCustomers().FirstOrDefault();
-        }
-
-        private static Car getFirstCar(CarRentalSystem carRentalSystem)
-        {
-            return carRentalSystem.ListAvailableCars().FirstOrDefault();
         }
 
         private static void registerCustomers(CarRentalSystem system)

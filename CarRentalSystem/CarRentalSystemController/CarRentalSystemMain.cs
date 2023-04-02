@@ -5,12 +5,13 @@ using System.Collections.Generic;
 
 namespace sf.systems.rentals.cars
 {
-    public partial class CarRentalSystem
+    public partial class CarRentalSystem : IEntitiesList
     {
         private readonly List<Customer> customers;
         private readonly List<Car> availableCars;
         private readonly List<Car> rentedCars;
-        private readonly List<Transaction> transactions;
+        private readonly List<Transaction> currentTransactions;
+        private readonly List<Transaction> archiveTransactions;
 
         private readonly ErrorHandler errorHandler;
         private readonly MessageHandler messageHandler;
@@ -20,8 +21,9 @@ namespace sf.systems.rentals.cars
             customers = new List<Customer>();
             availableCars = new List<Car>();
             rentedCars = new List<Car>();
-            transactions = new List<Transaction>();
-            
+            currentTransactions = new List<Transaction>();
+            archiveTransactions = new List<Transaction>();
+
             errorHandler = new ErrorHandler(true);
             dataManager = new DataManager(errorHandler, new MessageHandler(errorHandler));
             messageHandler = new MessageHandler(errorHandler);
@@ -43,10 +45,7 @@ namespace sf.systems.rentals.cars
 
         public Customer RegisterCustomer(string id, string name, string phoneNumber, string address, string email)
         {
-            var seekCustomer =
-                (from item in customers
-                 where String.Equals(item.Id.Trim(), id.Trim(), StringComparison.OrdinalIgnoreCase)
-                 select item).FirstOrDefault();
+            var seekCustomer = LookupCustomer(id);
 
             if (seekCustomer == null)
             {
@@ -74,30 +73,24 @@ namespace sf.systems.rentals.cars
             }
         }
 
-        public void RentCar(Customer customer, Car car, DateTime rentalDate, DateTime returnDate)
+        public void RentCar(string customerId, string carId, DateTime rentalDate, DateTime returnDate)
         {
+            var car = LookupCar(carId);
             if (!availableCars.Contains(car))
             {
-                errorHandler.HandleError(new InvalidOperationException("The specified car is not available for rental."));
+                errorHandler.HandleError(new InvalidOperationException($"The specified car (ID={carId}) is not available for rental."));
             }
 
-            var seekRentCustomer = transactions.FindAll(item => !item.IsClosed && item.Customer.Id == customer.Id).FirstOrDefault();
+            var customer = LookupCustomer(customerId);
 
-            if (seekRentCustomer == null)
+            if (customer != null)
             {
-                double totalPrice = car.DailyPrice * (returnDate - rentalDate).TotalDays;
-                Transaction transaction = new Transaction(Guid.NewGuid().ToString(), customer, car, rentalDate, returnDate, totalPrice);
-                transactions.Add(transaction);
-                customer.RentCar(car);
-                car.Rent();
-                availableCars.Remove(car);
-                rentedCars.Add(car);
+                var transaction = Transaction.OpenTransaction(this,customer.Id, car.Id, rentalDate, returnDate);
             }
             else
             {
-                messageHandler.LogPlusMessage($"The specified customer with ID: {customer.Id} has already rented a car!");
+                messageHandler.LogPlusMessage($"The specified customer with ID: {customerId} has not been found!");
             }
-
         }
 
         public void ReturnCar(Customer customer, Car car)
@@ -107,23 +100,13 @@ namespace sf.systems.rentals.cars
                 errorHandler.HandleError(new InvalidOperationException("The specified car has not been rented by the specified customer."));
             }
 
-            /*
-            if (!customer.RentedCars.Contains(car))
-            {
-                errorHandler.HandleError(new InvalidOperationException("The specified customer has not rented the specified car."));
-            }*/
-
-            Transaction transaction = transactions.Find(t => !t.IsClosed && t.Customer.Id == customer.Id && t.Car.Id == car.Id);
+            Transaction transaction = currentTransactions.Find(t => !t.IsClosed && t.Customer.Id == customer.Id && t.Car.Id == car.Id);
             if (transaction == null)
             {
                 errorHandler.HandleError(new InvalidOperationException("The specified transaction could not be found."));
             }
 
-            transaction.CloseTransaction();
-            car.Return();
-            rentedCars.Remove(car);
-            availableCars.Add(car);
-            customer.ReturnCar(car);
+            transaction.CloseTransaction(this);
         }
 
         public void ReturnCar(Customer customer)
@@ -141,7 +124,7 @@ namespace sf.systems.rentals.cars
                 if (seekCar != null)
                     ReturnCar(customer, seekCar);
                 else
-                    LogAndShowMessage($"Car with ID:{seekCarId} has not been rented!");
+                    LogAndShowMessage($"Customer with ID:{customer.Id} has no rented cars!");
             }
             else
                 LogAndShowMessage("Customer has not been found!");
@@ -163,7 +146,101 @@ namespace sf.systems.rentals.cars
 
         public List<Transaction> ListCustomerTransactions(Customer customer)
         {
-            return transactions.FindAll(t => t.Customer.Id == customer.Id);
+            return currentTransactions.FindAll(t => t.Customer.Id == customer.Id);
+        }
+
+        public Customer LookupCustomer(string customerId)
+        {
+            // validate registered customers list
+            var customers = GetRegisteredCustomers();
+            if (customers == null) throw new ArgumentNullException("No registered customers!");
+            // lookup customer           
+            var customer = customers.Find(c => string.Equals(c.Id, customerId, StringComparison.InvariantCultureIgnoreCase));
+            return customer;
+        }
+
+        public Car LookupCar(string carId)
+        {
+            // validate avaliable cars list
+            var avaliableCars = GetAvaliableCars();
+            if (avaliableCars == null) throw new ArgumentNullException("avaliableCars");
+
+            var rentedCars = GetRentedCars();
+            if (rentedCars == null) throw new ArgumentNullException("rentedCars");
+
+            // lookup car
+            var car = availableCars.Find(c => string.Equals(c.Id, carId, StringComparison.InvariantCultureIgnoreCase));
+            if (car == null)
+            {
+                car = rentedCars.Find(c => string.Equals(c.Id, carId, StringComparison.InvariantCultureIgnoreCase));
+            }
+            
+            return car;
+        }
+
+        public List<Car> GetAvaliableCars()
+        {
+            return availableCars;
+        }
+
+        public Car GetCar(string carId)
+        {
+            return availableCars.Find(
+                c => string.Equals(c.Id, carId, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        public Car GetFirstAvailiableCar(CarRentalSystem carRentalSystem)
+        {
+            return carRentalSystem.ListAvailableCars().FirstOrDefault();
+        }
+
+        public List<Customer> GetRegisteredCustomers()
+        {
+            return customers;
+        }
+
+        public List<Car> GetRentedCars()
+        {
+            return rentedCars;
+
+        }
+
+        public List<Car> GetRentedCars(Customer customer)
+        {
+            var result = new List<Car>();
+
+            var customerCurrentTransactions = 
+                currentTransactions.FindAll(tx => tx.Customer.Id == customer.Id);
+
+            foreach (var customerTransaction in customerCurrentTransactions)
+            {
+                result.Add(customerTransaction.Car);
+            }
+    
+            return result;
+        }
+
+        public void ArchiveTransaction(Transaction transaction)
+        {
+            archiveTransactions.Add(transaction);
+            currentTransactions.Remove(transaction);
+        }
+
+        public void RentCar(Car car)
+        {
+            availableCars.Remove(car);
+            rentedCars.Add(car);
+        }
+
+        public void ReturnCar(Car car)
+        {
+            rentedCars.Remove(car);
+            availableCars.Add(car);
+        }
+
+        public void NewTransaction(Transaction transaction)
+        {
+            currentTransactions.Add(transaction);
         }
     }
 }

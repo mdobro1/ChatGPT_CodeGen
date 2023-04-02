@@ -17,3 +17,5 @@
 /Experiments/bak
 /CarRentalSystem/CarRentalSystemModels/bin/Debug/netcoreapp3.1
 /CarRentalSystem/CarRentalSystemModels/obj
+/CarRentalSystem/.vs
+/CarRentalSystem/CarRentalSystemController/obj

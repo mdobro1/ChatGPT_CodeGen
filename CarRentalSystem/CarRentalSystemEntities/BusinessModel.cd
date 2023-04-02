@@ -1,28 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="sf.systems.rentals.cars.Car">
-    <Position X="2" Y="1.5" Width="1.5" />
+    <Position X="9.25" Y="3" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAACAAAABEAAABAAAAAAAAAAACBAAAAQAAgAEAIAAAA=</HashCode>
+      <HashCode>AAACAAQABEAAABAAAAAAAAAAACBAAAAQAAgAEAIAAAA=</HashCode>
       <FileName>Car.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="sf.systems.rentals.cars.Customer">
-    <Position X="5.25" Y="1.25" Width="1.5" />
+    <Position X="4.5" Y="1" Width="2.5" />
+    <AssociationLine Name="RentedCarsPool" Type="sf.systems.rentals.cars.Car" FixedFromPoint="true">
+      <Path>
+        <Point X="7" Y="3.25" />
+        <Point X="9.25" Y="3.25" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAACAAAAACCAABAAgQAAQAQAACBAAAACAAAAAAEAAAA=</HashCode>
+      <HashCode>AAACAIQAACAAABAAAUAAQAQQECBAAAACAAAAABEAAAA=</HashCode>
       <FileName>Customer.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="RentedCars" />
+      <Property Name="RentedCarsPool" />
     </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="sf.systems.rentals.cars.Transaction">
-    <Position X="8.5" Y="3.25" Width="1.5" />
+    <Position X="0.5" Y="0.75" Width="2.75" />
+    <AssociationLine Name="Customer" Type="sf.systems.rentals.cars.Customer" FixedFromPoint="true">
+      <Path>
+        <Point X="3.25" Y="1.775" />
+        <Point X="4.5" Y="1.775" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>BIECAAAAAAQAABAABAAAAAAAACBAQAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>BIECAASAKAQAEBAABAAAAhAAICBAQEAAAAAAAAAAAAA=</HashCode>
       <FileName>Transaction.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -31,15 +43,86 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="sf.systems.rentals.cars.ISerializedEntity&lt;T&gt;">
-    <Position X="7.75" Y="1.25" Width="1.5" />
+  <Interface Name="sf.systems.rentals.cars.ISerializeOwner">
+    <Position X="12.25" Y="2.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACBAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ISerializeOwner.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="sf.systems.rentals.cars.ISerializedEntity&lt;T&gt;">
+    <Position X="10.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ISerializedEntity.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Interface Name="sf.systems.rentals.cars.IEntitiesList">
+    <Position X="5.5" Y="6.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAIAIAAAQAAAgAAgAEAAAAAAAAAAAkAAAA=</HashCode>
+      <FileName>IEntitiesList.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="sf.systems.rentals.cars.ISerializedExtendedEntity&lt;T&gt;">
+    <Position X="7.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ISerializedExtendedEntity.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="sf.systems.rentals.cars.ITransaction">
+    <Position X="0.5" Y="6.75" Width="3.5" />
+    <AssociationLine Name="Owner" Type="sf.systems.rentals.cars.IEntitiesList" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4" Y="8.625" />
+        <Point X="4.698" Y="8.625" />
+        <Point X="4.698" Y="7.25" />
+        <Point X="5.5" Y="7.25" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Customer" Type="sf.systems.rentals.cars.Customer" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.656" Y="6.75" />
+        <Point X="3.656" Y="4.375" />
+        <Point X="4.5" Y="4.375" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>BIECAASAIAQAAAAABAAAAgAAICAAQEAAAAAAAAAAAAA=</HashCode>
+      <FileName>ITransaction.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Owner" />
+      <Property Name="Customer" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="sf.systems.rentals.cars.ICustomer">
+    <Position X="12" Y="7" Width="2.25" />
+    <AssociationLine Name="RentedCarsCopy" Type="sf.systems.rentals.cars.Car" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="12" Y="8.438" />
+        <Point X="10.812" Y="8.438" />
+        <Point X="10.812" Y="6.67" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAIQAACAAAAAAAEAAQAQAACAAAAACAAAAABAAAAA=</HashCode>
+      <FileName>ICustomer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="RentedCarsCopy" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="sf.systems.rentals.cars.ICar">
+    <Position X="12.25" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQABEAAAAAAAAAAAAAAACAAAAAQAAgAAAIAAAA=</HashCode>
+      <FileName>ICar.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Enum Name="sf.systems.rentals.cars.DataType">
-    <Position X="10" Y="1.25" Width="1.5" />
+    <Position X="12.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAEAA=</HashCode>
       <FileName>DataType.cs</FileName>

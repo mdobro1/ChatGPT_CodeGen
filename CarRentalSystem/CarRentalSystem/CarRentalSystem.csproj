@@ -12,9 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CarRentalSystemAspects\CarRentalSystemAspects.csproj" />
-    <ProjectReference Include="..\CarRentalSystemEntities\CarRentalSystemEntities.csproj" />
-    <ProjectReference Include="..\CarRentalSystemInterfaces\CarRentalSystemInterfaces.csproj" />
+    <ProjectReference Include="..\CarRentalSystemController\CarRentalSystemController.csproj" />
   </ItemGroup>
 
 </Project>

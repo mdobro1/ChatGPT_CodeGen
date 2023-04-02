@@ -1,69 +1,48 @@
 ﻿using NUnit.Framework;
-using sf.systems.rentals.cars;
 
 namespace sf.systems.rentals.cars.tests
 {
     [TestFixture]
     public class CarTests
     {
-        private const string CarCsvData = "CAR1,Toyota,Corolla,2022,40,False";
-        private const string CarJsonData = "{\"Id\":\"CAR1\",\"Make\":\"Toyota\"," 
-            + "\"Model\":\"Corolla\",\"Year\":2022,\"DailyPrice\":40.0,\"Rented\":false}";
+        private ICar car;
 
-        [Test]
-        public void TestCreateCarFromCsv()
+        [SetUp]
+        public void Setup()
         {
-            Car car = Car.Deserialize(CarCsvData, DataType.CSV);
-            Assert.AreEqual("CAR1", car.Id);
-            Assert.AreEqual("Toyota", car.Make);
-            Assert.AreEqual("Corolla", car.Model);
-            Assert.AreEqual(2022, car.Year);
-            Assert.AreEqual(40, car.DailyPrice);
-            Assert.AreEqual(false, car.Rented);
+            // Create a new instance of a Car object for each test
+            car = new Car("1234", "Toyota", "Camry", 2022, 50, true);
         }
 
         [Test]
-        public void TestCreateCarFromJson()
+        public void Serialize_ReturnsValidString()
         {
-            Car car = Car.Deserialize(CarJsonData, DataType.JSON);
-            Assert.AreEqual("CAR1", car.Id);
-            Assert.AreEqual("Toyota", car.Make);
-            Assert.AreEqual("Corolla", car.Model);
-            Assert.AreEqual(2022, car.Year);
-            Assert.AreEqual(40.0, car.DailyPrice);
-            Assert.AreEqual(false, car.Rented);
+            // Arrange
+            string expected = "1234,Toyota,Camry,2022,50,True";
+
+            // Act
+            string result = car.Serialize(DataType.CSV);
+
+            // Assert
+            Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void TestSerializeCarToCsv()
+        public void DeserializeHandler_ReturnsValidCarObject()
         {
-            Car car = new Car("CAR1", "Toyota", "Corolla", 2022, 40, false);
-            string csvData = car.Serialize(DataType.CSV);
-            Assert.AreEqual(CarCsvData, csvData);
-        }
+            // Arrange
+            string data = "1234,Toyota,Camry,2022,50,True";
 
-        [Test]
-        public void TestSerializeCarToJson()
-        {
-            Car car = new Car("CAR1", "Toyota", "Corolla", 2022, 40, false);
-            string jsonData = car.Serialize(DataType.JSON);
-            Assert.AreEqual(CarJsonData, jsonData);
-        }
+            // Act
+            ICar result = car.DeserializeHandler(data, DataType.CSV);
 
-        [Test]
-        public void TestRentCar()
-        {
-            Car car = new Car("CAR1", "Toyota", "Corolla", 2022, 40.0, false);
-            car.Rent();
-            Assert.AreEqual(true, car.Rented);
-        }
-
-        [Test]
-        public void TestReturnCar()
-        {
-            Car car = new Car("CAR1", "Toyota", "Corolla", 2022, 40.0, true);
-            car.Return();
-            Assert.AreEqual(false, car.Rented);
+            // Assert
+            Assert.AreEqual(car.Id, result.Id);
+            Assert.AreEqual(car.Make, result.Make);
+            Assert.AreEqual(car.Model, result.Model);
+            Assert.AreEqual(car.Year, result.Year);
+            Assert.AreEqual(car.DailyPrice, result.DailyPrice);
+            Assert.AreEqual(car.Rented, result.Rented);
         }
     }
 }

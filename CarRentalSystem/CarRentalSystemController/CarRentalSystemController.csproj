@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>sf.systems.rentals.cars</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CarRentalSystemAspects\CarRentalSystemAspects.csproj" />
+    <ProjectReference Include="..\CarRentalSystemEntities\CarRentalSystemEntities.csproj" />
+    <ProjectReference Include="..\CarRentalSystemInterfaces\CarRentalSystemInterfaces.csproj" />
+  </ItemGroup>
+
+</Project>
