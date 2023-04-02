@@ -59,7 +59,7 @@ namespace sf.systems.rentals.cars
             }
         }
 
-        public void AddCar(string idCar, string make, string model, int year, double dailyPrice)
+        public Car AddCar(string idCar, string make, string model, int year, double dailyPrice)
         {
             var seekCar =
                 (from item in availableCars
@@ -70,10 +70,13 @@ namespace sf.systems.rentals.cars
             {
                 Car newCar = new Car(idCar, make, model, year, dailyPrice, false);
                 availableCars.Add(newCar);
+                return newCar;
             }
+            else
+                return null;
         }
 
-        public void RentCar(string customerId, string carId, DateTime rentalDate, DateTime returnDate)
+        public Transaction RentCar(string customerId, string carId, DateTime rentalDate, DateTime returnDate)
         {
             var car = LookupCar(carId);
             if (!availableCars.Contains(car))
@@ -85,11 +88,12 @@ namespace sf.systems.rentals.cars
 
             if (customer != null)
             {
-                var transaction = Transaction.OpenTransaction(this,customer.Id, car.Id, rentalDate, returnDate);
+                return Transaction.OpenTransaction(this,customer.Id, car.Id, rentalDate, returnDate);
             }
             else
             {
                 messageHandler.LogPlusMessage($"The specified customer with ID: {customerId} has not been found!");
+                return null;
             }
         }
 

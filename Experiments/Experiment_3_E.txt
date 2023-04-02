@@ -1,4 +1,6 @@
-Me:> make unit-test for this interface: namespace sf.systems.rentals.cars
+Me:> make unit-test for this interface(CSV-format):
+
+namespace sf.systems.rentals.cars
 {
     public interface ICar
     {
@@ -17,10 +19,10 @@ Me:> make unit-test for this interface: namespace sf.systems.rentals.cars
 ChatGPT:> Here's an example unit test for the ICar interface:
 
 using NUnit.Framework;
-using sf.systems.rentals.cars;
 
-namespace CarRentalSystemTests
+namespace sf.systems.rentals.cars.Tests
 {
+    [TestFixture]
     public class CarTests
     {
         private ICar car;
@@ -28,72 +30,51 @@ namespace CarRentalSystemTests
         [SetUp]
         public void Setup()
         {
-            car = new Car("CAR001", "Toyota", "Corolla", 2018, 50.0, false);
+            // Create a new instance of a Car object for each test
+            car = new Car("1234", "Toyota", "Camry", 2022, 50.0, false);
         }
 
         [Test]
-        public void TestDailyPrice()
+        public void Serialize_ReturnsValidString()
         {
-            Assert.AreEqual(50.0, car.DailyPrice);
+            // Arrange
+            string expected = "1234,Toyota,Camry,2022,50.0,False";
+
+            // Act
+            string result = car.Serialize(DataType.CSV);
+
+            // Assert
+            Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void TestId()
+        public void DeserializeHandler_ReturnsValidCarObject()
         {
-            Assert.AreEqual("CAR001", car.Id);
-        }
+            // Arrange
+            string data = "1234,Toyota,Camry,2022,50.0,True";
 
-        [Test]
-        public void TestMake()
-        {
-            Assert.AreEqual("Toyota", car.Make);
-        }
+            // Act
+            ICar result = car.DeserializeHandler(data, DataType.CSV);
 
-        [Test]
-        public void TestModel()
-        {
-            Assert.AreEqual("Corolla", car.Model);
-        }
-
-        [Test]
-        public void TestRented()
-        {
-            Assert.IsFalse(car.Rented);
-        }
-
-        [Test]
-        public void TestYear()
-        {
-            Assert.AreEqual(2018, car.Year);
-        }
-
-        [Test]
-        public void TestSerialize()
-        {
-            string serializedData = car.Serialize(DataType.XML);
-            Assert.IsNotEmpty(serializedData);
-        }
-
-        [Test]
-        public void TestDeserializeHandler()
-        {
-            string serializedData = car.Serialize(DataType.JSON);
-            ICar deserializedCar = car.DeserializeHandler(serializedData, DataType.JSON);
-            Assert.AreEqual(car.Id, deserializedCar.Id);
-            Assert.AreEqual(car.Make, deserializedCar.Make);
-            Assert.AreEqual(car.Model, deserializedCar.Model);
-            Assert.AreEqual(car.Year, deserializedCar.Year);
-            Assert.AreEqual(car.DailyPrice, deserializedCar.DailyPrice);
-            Assert.AreEqual(car.Rented, deserializedCar.Rented);
+            // Assert
+            Assert.AreEqual(car.Id, result.Id);
+            Assert.AreEqual(car.Make, result.Make);
+            Assert.AreEqual(car.Model, result.Model);
+            Assert.AreEqual(car.Year, result.Year);
+            Assert.AreEqual(car.DailyPrice, result.DailyPrice);
+            Assert.AreEqual(car.Rented, result.Rented);
         }
     }
 }
+
 
 This test sets up a Car object in the Setup() method, and then has individual tests for each of the properties of the ICar interface, as well as tests for the Serialize() and DeserializeHandler() methods.
 ___________________________________________________________________________________________________
 
 
-Me:> make unit-test for this interface: using System.Collections.Generic;
+Me:> make unit-test for this interface(CSV-format): 
+
+using System.Collections.Generic;
 
 namespace sf.systems.rentals.cars
 {
@@ -116,90 +97,61 @@ namespace sf.systems.rentals.cars
 
 > ChatGPT: Here's an example of a unit test for the ICustomer interface:
 
-swift
-Copy code
 using NUnit.Framework;
-using System.Collections.Generic;
 
 namespace sf.systems.rentals.cars.Tests
 {
-    public class CustomerTests
+    [TestFixture]
+    public class CarTests
     {
-        [Test]
-        public void RentedCarsPoolNew_AddsNewListToRentedCarsPool()
+        private ICar car;
+
+        [SetUp]
+        public void Setup()
         {
-            // Arrange
-            var customer = new Customer("1", "John Doe", "1234567890", "123 Main St", "johndoe@example.com");
-            var rentedCars = new List<Car>();
-
-            // Act
-            customer.RentedCarsPoolNew(rentedCars);
-
-            // Assert
-            Assert.AreEqual(rentedCars, customer.RentedCarsCopy);
+            // Create a new instance of a Car object for each test
+            car = new Car("1234", "Toyota", "Camry", 2022, 50.0, false);
         }
 
         [Test]
-        public void RentedCarsPoolExtend_AddsToExistingRentedCarsPool()
+        public void Serialize_ReturnsValidString()
         {
             // Arrange
-            var customer = new Customer("1", "John Doe", "1234567890", "123 Main St", "johndoe@example.com");
-            var rentedCars = new List<Car>();
-            var car1 = new Car("1", "Honda", "Civic", 2022, 50.0, true);
-            rentedCars.Add(car1);
-
-            customer.RentedCarsPoolNew(rentedCars);
-
-            var car2 = new Car("2", "Toyota", "Corolla", 2022, 40.0, true);
-            rentedCars.Add(car2);
+            string expected = "1234,Toyota,Camry,2022,50.0,False";
 
             // Act
-            customer.RentedCarsPoolExtend(rentedCars);
+            string result = car.Serialize(DataType.CSV);
 
             // Assert
-            Assert.AreEqual(2, customer.RentedCarsCopy.Count);
-            Assert.Contains(car1, customer.RentedCarsCopy);
-            Assert.Contains(car2, customer.RentedCarsCopy);
+            Assert.AreEqual(expected, result);
         }
 
         [Test]
-        public void Serialize_ReturnsCorrectString()
+        public void DeserializeHandler_ReturnsValidCarObject()
         {
             // Arrange
-            var customer = new Customer("1", "John Doe", "1234567890", "123 Main St", "johndoe@example.com");
+            string data = "1234,Toyota,Camry,2022,50.0,True";
 
             // Act
-            string serializedData = customer.Serialize(DataType.JSON);
+            ICar result = car.DeserializeHandler(data, DataType.CSV);
 
             // Assert
-            Assert.AreEqual("{\"id\":\"1\",\"name\":\"John Doe\",\"phoneNumber\":\"1234567890\",\"address\":\"123 Main St\",\"email\":\"johndoe@example.com\",\"rentedCars\":[]}", serializedData);
-        }
-
-        [Test]
-        public void DeserializeHandler_ReturnsCorrectObject()
-        {
-            // Arrange
-            string serializedData = "{\"id\":\"1\",\"name\":\"John Doe\",\"phoneNumber\":\"1234567890\",\"address\":\"123 Main St\",\"email\":\"johndoe@example.com\",\"rentedCars\":[{\"id\":\"1\",\"make\":\"Honda\",\"model\":\"Civic\",\"year\":2022,\"dailyPrice\":50.0,\"rented\":true}]}";
-
-            // Act
-            var customer = Customer.DeserializeHandler(serializedData, DataType.JSON);
-
-            // Assert
-            Assert.IsNotNull(customer);
-            Assert.AreEqual("1", customer.Id);
-            Assert.AreEqual("John Doe", customer.Name);
-            Assert.AreEqual("1234567890", customer.PhoneNumber);
-            Assert.AreEqual("123 Main St", customer.Address);
-            Assert.AreEqual("johndoe@example.com", customer.Email);
-            Assert.AreEqual(1, customer.RentedCarsCopy.Count);
-            Assert.AreEqual("1", customer.RentedCarsCopy[0].Id);
+            Assert.AreEqual(car.Id, result.Id);
+            Assert.AreEqual(car.Make, result.Make);
+            Assert.AreEqual(car.Model, result.Model);
+            Assert.AreEqual(car.Year, result.Year);
+            Assert.AreEqual(car.DailyPrice, result.DailyPrice);
+            Assert.AreEqual(car.Rented, result.Rented);
         }
     }
 }
 
+
 ___________________________________________________________________________________________________
 
-Me:> make unit-test for this interface: using System;
+Me:> make unit-test for this interface(CSV-format): 
+
+using System;
 
 namespace sf.systems.rentals.cars
 {
@@ -224,80 +176,92 @@ namespace sf.systems.rentals.cars
     }
 }
 
-ChatGPT:> Here's an example of unit tests for the ITransaction interface:
+ChatGPT:> Sure, here's an example unit test for the ITransaction interface:
+
 
 using System;
 using NUnit.Framework;
 
-namespace sf.systems.rentals.cars.Tests
+namespace sf.systems.rentals.cars.UnitTests
 {
     [TestFixture]
     public class TransactionTests
     {
-        private IEntitiesList carRentalSystem;
+        private IEntitiesList entitiesList;
         private Customer customer;
         private Car car;
 
         [SetUp]
         public void Setup()
         {
-            carRentalSystem = new CarRentalSystem();
-            customer = carRentalSystem.RegisterCustomer("1", "John Doe", "1234567890", "123 Main St", "johndoe@example.com");
-            carRentalSystem.AddCar("1", "Honda", "Civic", 2022, 50.0);
-            car = carRentalSystem.LookupCar("1");
+            entitiesList = new CarRentalSystem();
+            customer = entitiesList.RegisterCustomer("1", "John Doe", "555-1234", "123 Main St", "john.doe@example.com");
+            car = new Car("1", "Toyota", "Corolla", 2020, 50, false);
+            entitiesList.AddCar("1", "Toyota", "Corolla", 2020, 50);
         }
 
         [Test]
-        public void TestAssignOwner()
+        public void TestTransactionProperties()
         {
-            var transaction = Transaction.OpenTransaction(null, "1", "1", DateTime.Today, DateTime.Today.AddDays(2));
-            Assert.IsNull(transaction.Owner);
+            var rentalDate = DateTime.Now;
+            var returnDate = rentalDate.AddDays(1);
+            var transaction = Transaction.OpenTransaction(entitiesList, customer.Id, car.Id, rentalDate, returnDate);
 
-            transaction.AssignOwner(carRentalSystem);
-            Assert.IsNotNull(transaction.Owner);
+            Assert.AreEqual(customer, transaction.Customer);
+            Assert.AreEqual(car, transaction.Car);
+            Assert.AreEqual(rentalDate, transaction.RentalDate);
+            Assert.AreEqual(returnDate, transaction.ReturnDate);
+            Assert.IsFalse(transaction.IsClosed);
+            Assert.AreEqual(0, transaction.TotalPrice);
         }
 
         [Test]
         public void TestCalculateTotalPrice()
         {
-            var transaction = Transaction.OpenTransaction(carRentalSystem, "1", "1", DateTime.Today, DateTime.Today.AddDays(2));
-            var totalPrice = transaction.CalculateTotalPrice();
-            Assert.AreEqual(100.0, totalPrice, 0.01);
+            var rentalDate = DateTime.Now;
+            var returnDate = rentalDate.AddDays(1);
+            var transaction = Transaction.OpenTransaction(entitiesList, customer.Id, car.Id, rentalDate, returnDate);
+
+            var expectedPrice = car.DailyPrice * (returnDate - rentalDate).TotalDays;
+            var actualPrice = transaction.CalculateTotalPrice();
+
+            Assert.AreEqual(expectedPrice, actualPrice);
         }
 
         [Test]
         public void TestCloseTransaction()
         {
-            var transaction = Transaction.OpenTransaction(carRentalSystem, "1", "1", DateTime.Today, DateTime.Today.AddDays(2));
-            transaction.CloseTransaction(carRentalSystem);
+            var rentalDate = DateTime.Now;
+            var returnDate = rentalDate.AddDays(1);
+            var transaction = Transaction.OpenTransaction(entitiesList, customer.Id, car.Id, rentalDate, returnDate);
+            var totalPrice = transaction.CalculateTotalPrice();
+            transaction.CloseTransaction(entitiesList);
+
             Assert.IsTrue(transaction.IsClosed);
-            Assert.IsNotNull(transaction.ClosedDate);
-            Assert.AreEqual(0.0, transaction.TotalPrice, 0.01);
-            Assert.IsFalse(car.Rented);
-            Assert.IsFalse(customer.RentedCarsCopy.Contains(car));
+            Assert.AreEqual(DateTime.Now.Date, transaction.ClosedDate.Date);
+            Assert.AreEqual(totalPrice, transaction.TotalPrice);
+            Assert.IsFalse(entitiesList.ListRentedCars().Contains(car));
+            Assert.IsTrue(entitiesList.ListAvailableCars().Contains(car));
         }
 
         [Test]
-        public void TestDeserializeHandler()
+        public void TestSerializeDeserialize()
         {
-            var transaction = Transaction.OpenTransaction(carRentalSystem, "1", "1", DateTime.Today, DateTime.Today.AddDays(2));
-            var data = transaction.Serialize(DataType.CSV);
-            var deserialized = transaction.DeserializeHandler(data, DataType.CSV);
-            Assert.AreEqual(transaction.Id, deserialized.Id);
-            Assert.AreEqual(transaction.Customer.Id, deserialized.Customer.Id);
-            Assert.AreEqual(transaction.Car.Id, deserialized.Car.Id);
-            Assert.AreEqual(transaction.RentalDate, deserialized.RentalDate);
-            Assert.AreEqual(transaction.ReturnDate, deserialized.ReturnDate);
-            Assert.AreEqual(transaction.TotalPrice, deserialized.TotalPrice, 0.01);
-            Assert.AreEqual(transaction.IsClosed, deserialized.IsClosed);
-        }
+            var rentalDate = DateTime.Now;
+            var returnDate = rentalDate.AddDays(1);
+            var transaction = Transaction.OpenTransaction(entitiesList, customer.Id, car.Id, rentalDate, returnDate);
+            var serializedData = transaction.Serialize(DataType.CSV);
+            var deserializedTransaction = new Transaction().DeserializeHandler(serializedData, DataType.CSV, entitiesList);
 
-        [Test]
-        public void TestSerialize()
-        {
-            var transaction = Transaction.OpenTransaction(carRentalSystem, "1", "1", DateTime.Today, DateTime.Today.AddDays(2));
-            var data = transaction.Serialize(DataType.CSV);
-            Assert.IsFalse(string.IsNullOrEmpty(data));
+            Assert.AreEqual(transaction.Id, deserializedTransaction.Id);
+            Assert.AreEqual(transaction.Customer.Id, deserializedTransaction.Customer.Id);
+            Assert.AreEqual(transaction.Car.Id, deserializedTransaction.Car.Id);
+            Assert.AreEqual(transaction.RentalDate, deserializedTransaction.RentalDate);
+            Assert.AreEqual(transaction.ReturnDate, deserializedTransaction.ReturnDate);
+            Assert.AreEqual(transaction.IsClosed, deserializedTransaction.IsClosed);
+            Assert.AreEqual(transaction.TotalPrice, deserializedTransaction.TotalPrice);
         }
     }
 }
+
+Note: This is just an example, and you may need to modify it based on your specific requirements and implementation.
