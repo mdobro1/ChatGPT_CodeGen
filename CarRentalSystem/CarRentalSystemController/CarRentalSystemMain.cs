@@ -97,7 +97,7 @@ namespace sf.systems.rentals.cars
             }
         }
 
-        public void ReturnCar(Customer customer, Car car)
+        public Transaction ReturnCar(Customer customer, Car car)
         {
             if (!rentedCars.Contains(car))
             {
@@ -111,9 +111,11 @@ namespace sf.systems.rentals.cars
             }
 
             transaction.CloseTransaction(this);
+
+            return transaction;
         }
 
-        public void ReturnCar(Customer customer)
+        public Transaction ReturnCar(Customer customer)
         {
             if (customer != null)
             {
@@ -126,12 +128,16 @@ namespace sf.systems.rentals.cars
                                select item).FirstOrDefault();
 
                 if (seekCar != null)
-                    ReturnCar(customer, seekCar);
+                    return ReturnCar(customer, seekCar);
                 else
+                {
                     LogAndShowMessage($"Customer with ID:{customer.Id} has no rented cars!");
+                }
             }
             else
                 LogAndShowMessage("Customer has not been found!");
+
+            return null;
         }
 
         public List<Car> ListAvailableCars()

@@ -72,8 +72,10 @@ namespace sf.systems.rentals.cars
 
         private static void returnCar(CarRentalSystem carRentalSystem, string idCustomer)
         {
-            carRentalSystem.ReturnCar(
+            var rental = carRentalSystem.ReturnCar(
                 carRentalSystem.LookupCustomer(idCustomer));
+
+            carRentalSystem.LogAndShowMessage($"\nCustomer rental is closed (ID-Customer:{idCustomer}, ID-Rental: {rental.Id}).\n");
         }
 
         private static void addNewCars(CarRentalSystem carRentalSystem)
@@ -83,7 +85,7 @@ namespace sf.systems.rentals.cars
             carRentalSystem.AddCar("CAR7","Audi", "Q7", 2020, 120.0); 
         }
 
-        private static void rentCar(CarRentalSystem carRentalSystem, string idCustomer, string idCard)
+        private static void rentCar(CarRentalSystem carRentalSystem, string idCustomer, string idCar)
         {
             var validationError = false;
             // validate params
@@ -92,22 +94,24 @@ namespace sf.systems.rentals.cars
                 carRentalSystem.LogAndShowMessage("Customer-ID is empty!");
                 validationError = true;
             }
-            var car = carRentalSystem.GetCar(idCard);
+            var car = carRentalSystem.GetCar(idCar);
             if (car == null)
             {
-                carRentalSystem.LogAndShowMessage($"Car with ID:{idCard} is not avaliable!");
+                carRentalSystem.LogAndShowMessage($"Car with ID:{idCar} is not avaliable!");
                 validationError = true;
             }
             if (validationError) return;
 
 
             // Rent fisrt avaliable car by given customer for 3 days
-            carRentalSystem.RentCar(
+            var rental = carRentalSystem.RentCar(
                 idCustomer, 
                 car.Id, 
                 DateTime.Now, 
                 DateTime.Now.AddDays(3)
                 );
+
+            carRentalSystem.LogAndShowMessage($"\nCar with (ID-Car:{idCar}) has been rented by Customer (ID-Customer:{idCustomer}).\n");
         }
 
         private static Customer getFirstCustomer(CarRentalSystem carRentalSystem)
