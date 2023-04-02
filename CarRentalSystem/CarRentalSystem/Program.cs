@@ -21,8 +21,8 @@ namespace sf.systems.rentals.cars
                 // init command
                 // cmd = "new_car"; // first run cmd = "new_car"
                 // cmd = "register_customers"; // then "register_customers"
-                // cmd = "rent_car"; // then "rent_car"
-                cmd = "return_car"; // and finally return car
+                cmd = "rent_car"; // then "rent_car"
+                // cmd = "return_car"; // and finally return car
             }
 
             // get customer
