@@ -16,7 +16,7 @@ namespace sf.systems.rentals.cars
             // cmd=delete_car car="CAR11"
             // cmd=rent_car car="CAR911" customer="C003"
 
-            // bool test-mode
+            // init
             var testMode = false;
             string argCommand = default;
             string[] argCustomer = default;
@@ -74,29 +74,62 @@ namespace sf.systems.rentals.cars
             // Go!
             try
             {
-                loadData(context);
+                CarRentalCommands.LoadData(context);
 
                 // run command
                 switch (argCommand)
                 {
                     // production commands
                     case "add_car":
-                        addCar(context, argCar);
+                        if (argCar == null || argCar.Length != 5)
+                        {
+                            logAndShow(context, "\nERROR: Invalid car data provided! Usage: cmd=add_car car=\"ID,Make,Model,Year,PricePerDay\"");
+                            return -1;
+                        }
+                        CarRentalCommands.AddCar(context, argCar);
                         break;
                     case "delete_car":
-                        deleteCar(context, argCar[0]);
+                        if (argCar == null || argCar.Length != 1)
+                        {
+                            logAndShow(context, "\nERROR: Invalid car ID provided! Usage: cmd=delete_car car=\"ID\"");
+                            return -1;
+                        }
+                        CarRentalCommands.DeleteCar(context, argCar[0]);
                         break;
                     case "register_customer":
-                        registerCustomer(context, argCustomer);
+                        if (argCustomer == null || argCustomer.Length != 5)
+                        {
+                            logAndShow(context, "\nERROR: Invalid customer data provided! Usage: cmd=register_customer customer=\"ID,Name,PhoneNumber,Address,Email\"");
+                            return -1;
+                        }
+                        CarRentalCommands.RegisterCustomer(context, argCustomer);
                         break;
                     case "delete_customer":
-                        deleteCustomer(context, argCustomer[0]);
+                        if (argCustomer == null || argCustomer.Length != 1)
+                        {
+                            logAndShow(context, "\nERROR: Invalid customer ID provided! Usage: cmd=delete_customer customer=\"ID\"");
+                            return -1;
+                        }
+                        CarRentalCommands.DeleteCustomer(context, argCustomer[0]);
                         break;
                     case "rent_car":
-                        context = rentCar(context);
+                        if (argCar == null || argCar.Length != 1 || argCustomer == null || argCustomer.Length != 1)
+                        {
+                            logAndShow(context, "\nERROR: Invalid car or customer ID provided! Usage: cmd=rent_car car=\"ID\" customer=\"ID\"");
+                            return -1;
+                        }
+                        context.CarID = argCar[0];
+                        context.CustomerID = argCustomer[0];
+                        context = CarRentalCommands.RentCar(context);
                         break;
                     case "return_car":
-                        context = returnCar(context);
+                        if (argCustomer == null || argCustomer.Length != 1)
+                        {
+                            logAndShow(context, "\nERROR: Invalid customer ID provided! Usage: cmd=return_car customer=\"ID\"");
+                            return -1;
+                        }
+                        context.CustomerID = argCustomer[0];
+                        context = CarRentalCommands.ReturnCar(context);
                         break;
 
                     // test commands
@@ -107,10 +140,10 @@ namespace sf.systems.rentals.cars
                         registerCustomersTest(context);
                         break;
                     case "rent_car_test":
-                        context = rentCar(context);
+                        context = CarRentalCommands.RentCar(context);
                         break;
                     case "return_car_test":
-                        context = returnCar(context);
+                        context = CarRentalCommands.ReturnCar(context);
                         break;
                     default:
                         logAndShow(context, $"\nUnknown command: \"{argCommand}\"!\n");
@@ -124,13 +157,13 @@ namespace sf.systems.rentals.cars
                         return -1;
                 }
 
-                saveData(context);
+                CarRentalCommands.SaveData(context);
                 return 0;
             }
             catch (Exception ex)
             {
                 logAndShow(context, $"\nERROR: {ex.Message} \n\nSTACK-TRACE: {ex.StackTrace}");
-                saveData(context);
+                CarRentalCommands.SaveData(context);
 
                 return -1;
             }
@@ -144,127 +177,6 @@ namespace sf.systems.rentals.cars
         private static void logAndShow(CarRentalContext context, string message)
         {
             context.CarRentalSystem.LogAndShowMessage(message);
-        }
-
-        private static void registerCustomer(CarRentalContext context, string[] argCustomer)
-        {
-            // init
-            var rentalSystem = context.CarRentalSystem;
-            var customerID = argCustomer[0];
-
-            // go
-            var customer = rentalSystem.LookupCustomer(customerID);
-            if (customer == null)
-            {
-                customer = rentalSystem.RegisterCustomer(argCustomer[0], argCustomer[1], argCustomer[2], argCustomer[3], argCustomer[4]);
-                context.CarRentalSystem.LogAndShowMessage(
-                    $"New Customer \"{customer.Name}\" (ID: {customer.Id}) has been successfully added to the System!");
-            }
-            else
-            {
-                context.CarRentalSystem.LogAndShowMessage(
-                    $"Customer \"{customer.Name}\" (ID: {customer.Id}) is already registered in the System!");
-            }
-        }
-
-        private static void deleteCustomer(CarRentalContext context, string customerId)
-        {
-            // init
-            var rentalSystem = context.CarRentalSystem;
-            var customer = rentalSystem.LookupCustomer(customerId);
-
-            // go
-            if (rentalSystem.DeleteCustomer(customerId))
-            {
-                context.CarRentalSystem.LogAndShowMessage(
-                    $"Customer \"{customer.Name}\" (ID: {customer.Id}) has been successfully deleted from the System!");
-            }
-            else
-            {
-                context.CarRentalSystem.LogAndShowMessage(
-                    $"Customer with ID: {customerId} has not been found!");
-            }
-        }
-
-        private static void deleteCar(CarRentalContext context, string carId)
-        {
-            if (context.CarRentalSystem.DeleteCar(carId))
-            {
-                context.CarRentalSystem.LogAndShowMessage(
-                    $"Car with ID: {carId} has been successfully deleted from the System!");
-            }
-        }
-
-        private static void addCar(CarRentalContext context, string[] argCar)
-        {
-            // init
-            var carRentalSystem = context.CarRentalSystem;
-            var carId = argCar[0];
-            var car = carRentalSystem.LookupCar(carId);
-
-            // go!
-            if (car == null)
-            {
-                var newCar = context.CarRentalSystem.AddCar(argCar[0], argCar[1], argCar[2], Convert.ToInt32(argCar[3]), Convert.ToDouble(argCar[4]));
-                context.CarRentalSystem.LogAndShowMessage($"New Car with ID: {newCar.Id} has been successfully added to the System!");
-            }
-            else
-                context.CarRentalSystem.LogAndShowMessage($"Car with ID: {car.Id} already exists in the System!");
-        }
-
-        private static void saveData(CarRentalContext context)
-        {
-            // Save the data to disk
-            context.CarRentalSystem.LogAndShowMessage("\nSaving data ...");
-            context.CarRentalSystem.SaveData();
-            context.CarRentalSystem.LogAndShowMessage("All data has been saved.\n");
-        }
-
-        private static void loadData(CarRentalContext context)
-        {
-            // Load the data from disk
-            context.CarRentalSystem.LogAndShowMessage("\nLoading data ...");
-            context.CarRentalSystem.LoadData();
-            context.CarRentalSystem.LogAndShowMessage("All data has been loaded.\n");
-        }
-
-        private static CarRentalContext returnCar(CarRentalContext context)
-        {
-            return CarRentalCommands.ReturnCar(context,
-                    (CarRentalContext ctx) =>
-                    {
-                        context.CarRentalSystem.LogAndShowMessage(
-                            $"\nCustomer rental is closed (ID-Customer:{context.CustomerID}, ID-Rental: {context.RentalTransaction.Id}).\n");
-                    
-                        return ctx;
-                    }
-                );           
-        }
-
-        private static CarRentalContext rentCar(CarRentalContext context)
-        {
-            return CarRentalCommands.RentCar(context,
-                    // empty customer
-                    (CarRentalContext ctx) =>
-                    {
-                        ctx.CarRentalSystem.LogAndShowMessage("Customer-ID is empty!");
-                        return ctx;
-                    },
-                    // car is not avaliable
-                    (CarRentalContext ctx) =>
-                    {
-                        ctx.CarRentalSystem.LogAndShowMessage($"Car with ID:{ctx.CarID} is not avaliable!");
-                        return ctx;
-                    },
-                    // posterior - rent message
-                    (CarRentalContext ctx) =>
-                    {
-                        ctx.CarRentalSystem.LogAndShowMessage(
-                            $"\nCar with (ID-Car:{ctx.CarID}) has been rented by Customer (ID-Customer:{ctx.CustomerID}," +
-                            $" ID-Rental: {ctx.RentalTransaction.Id}).\n");
-                        return ctx;
-                    }
-                );
         }
 
         private static void addCarsTest(CarRentalContext context)

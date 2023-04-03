@@ -1242,8 +1242,6 @@ The Encrypt and Decrypt methods use the AES algorithm to encrypt and decrypt dat
 
 The Authorize method checks whether a user has the required permissions for a given operation. The method takes a User object representing the user and a permission string, and returns a boolean indicating whether the user has
 
-
-
 ________________________________________________________________________________________________________________________________________________________Me:>Update model with the new types: 
 
 @startuml
@@ -1473,3 +1471,37 @@ DataManager --> EntityType : manages
 DataManager --> DataType : uses
 User -left-> UserRole : has
 @enduml
+________________________________________________________________________________________________________________________________________________________
+
+Me:> make example calls for Windows:
+
+add car
+delete car
+register customer
+delete customer
+rent car
+return car
+
+ChatGPT:> Sure! Here are some example calls you can make:
+
+To add a new car:
+CarRentalSystem cmd=add_car car="CAR911,Porsche,Macant,2023,190.0"
+
+To delete a car:
+CarRentalSystem cmd=delete_car car="CAR911"
+
+To register a new customer:
+CarRentalSystem cmd=register_customer customer="C003,Mary Jung,777 - 1234,911 Main St,mjung@example.com"
+
+To delete a customer:
+CarRentalSystem cmd=delete_customer customer="C003"
+
+To rent a car:
+CarRentalSystem cmd=rent_car car="CAR911" customer="C003"
+
+To return a car:
+CarRentalSystem cmd=return_car customer="C003"
+
+Note: Make sure to run the program from the command line with the appropriate arguments. 
+Also, please make sure to replace the sample data (car ID, customer ID, etc.) with actual data that you have set up in the system.
+
