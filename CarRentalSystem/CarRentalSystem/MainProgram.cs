@@ -15,6 +15,7 @@ namespace sf.systems.rentals.cars
             // cmd=add_car car="CAR11,Audi,A1,2021,90.0"
             // cmd=delete_car car="CAR11"
             // cmd=rent_car car="CAR911" customer="C003"
+            // cmd=return_car customer="C001"
 
             // init
             var testMode = false;

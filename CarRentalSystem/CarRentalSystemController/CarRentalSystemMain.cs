@@ -62,6 +62,7 @@ namespace sf.systems.rentals.cars
         public bool DeleteCar(string id)
         {
             var seekCar = LookupAvaliableCar(id);
+            var seekCarTransactions = LookupCarTransactions(id);
 
             if (seekCar == null)
             {
@@ -74,6 +75,11 @@ namespace sf.systems.rentals.cars
 
                 return false;
             }
+            else if (seekCarTransactions.Count > 0)
+            {
+                errorHandler.HandleError(new InvalidOperationException($"The specified car (ID={id}) was rented and can't be deleted!"));
+                return false;
+            }
             else
             {
                 this.availableCars.Remove(seekCar);
@@ -83,15 +89,17 @@ namespace sf.systems.rentals.cars
 
         public bool DeleteCustomer(string id)
         {
-            var seekCustomer = LookupCustomer(id);
+            var seekCustomerTransactions = LookupCustomerTransactions(id);
 
-            if (seekCustomer == null)
+            if (seekCustomerTransactions.Count > 0)
             {
+                errorHandler.HandleError(new InvalidOperationException($"The specified customer (ID={id}) has rented a car and can't be deleted!"));
                 return false;
             }
             else
             {
-                this.customers.Remove(seekCustomer);
+                var seekCustomer = LookupCustomer(id);
+                customers.Remove(seekCustomer);
                 return true;
             }
         }
@@ -201,6 +209,32 @@ namespace sf.systems.rentals.cars
             // lookup customer           
             var customer = customers.Find(c => string.Equals(c.Id, customerId, StringComparison.InvariantCultureIgnoreCase));
             return customer;
+        }
+
+        public List<Transaction> LookupCustomerTransactions(string customerId)
+        {
+            var result = new List<Transaction>();
+            
+            result.AddRange(currentTransactions.FindAll(
+                tx => string.Equals(tx.Customer.Id, customerId, StringComparison.InvariantCultureIgnoreCase)));
+
+            result.AddRange(archiveTransactions.FindAll(
+                tx => string.Equals(tx.Customer.Id, customerId, StringComparison.InvariantCultureIgnoreCase)));
+
+            return result;
+        }
+
+        public List<Transaction> LookupCarTransactions(string carId)
+        {
+            var result = new List<Transaction>();
+
+            result.AddRange(currentTransactions.FindAll(
+                tx => string.Equals(tx.Car.Id, carId, StringComparison.InvariantCultureIgnoreCase)));
+
+            result.AddRange(archiveTransactions.FindAll(
+                tx => string.Equals(tx.Car.Id, carId, StringComparison.InvariantCultureIgnoreCase)));
+
+            return result;
         }
 
         public Car LookupCar(string carId)

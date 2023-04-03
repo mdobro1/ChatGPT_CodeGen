@@ -1,7 +1,8 @@
 {
   "profiles": {
     "CarRentalSystem": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "cmd=delete_customer customer=\"C003\""
     }
   }
 }
