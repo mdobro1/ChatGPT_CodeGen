@@ -15,7 +15,7 @@ namespace sf.systems.rentals.cars
         public bool IsClosed { get; private set; }
         public IEntitiesList Owner { get; private set; }
 
-        public Transaction() { }
+        public Transaction() { Id = "?"; }
 
         public Transaction(string id, Customer customer, Car car, DateTime rentalDate, DateTime returnDate, DateTime closedDate, bool isClosed)
         {

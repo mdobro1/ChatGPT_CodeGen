@@ -59,12 +59,46 @@ namespace sf.systems.rentals.cars
             }
         }
 
+        public bool DeleteCar(string id)
+        {
+            var seekCar = LookupAvaliableCar(id);
+
+            if (seekCar == null)
+            {
+                seekCar = LookupRentedCar(id);
+
+                if (seekCar == null)
+                    errorHandler.HandleError(new InvalidOperationException($"The specified car (ID={id}) does not exist in the system!"));
+                else
+                    errorHandler.HandleError(new InvalidOperationException($"The specified car (ID={id}) is rented and can't be deleted!"));
+
+                return false;
+            }
+            else
+            {
+                this.availableCars.Remove(seekCar);
+                return true;
+            }
+        }
+
+        public bool DeleteCustomer(string id)
+        {
+            var seekCustomer = LookupCustomer(id);
+
+            if (seekCustomer == null)
+            {
+                return false;
+            }
+            else
+            {
+                this.customers.Remove(seekCustomer);
+                return true;
+            }
+        }
+
         public Car AddCar(string idCar, string make, string model, int year, double dailyPrice)
         {
-            var seekCar =
-                (from item in availableCars
-                 where String.Equals(item.Id.Trim(), idCar.Trim(), StringComparison.OrdinalIgnoreCase)
-                 select item).FirstOrDefault();
+            var seekCar = LookupCar(idCar);
 
             if (seekCar == null)
             {
@@ -73,7 +107,7 @@ namespace sf.systems.rentals.cars
                 return newCar;
             }
             else
-                return null;
+                return seekCar;
         }
 
         public Transaction RentCar(string customerId, string carId, DateTime rentalDate, DateTime returnDate)
@@ -93,7 +127,7 @@ namespace sf.systems.rentals.cars
             else
             {
                 messageHandler.LogPlusMessage($"The specified customer with ID: {customerId} has not been found!");
-                return null;
+                return new Transaction();
             }
         }
 
@@ -137,7 +171,7 @@ namespace sf.systems.rentals.cars
             else
                 LogAndShowMessage("Customer has not been found!");
 
-            return null;
+            return new Transaction();
         }
 
         public List<Car> ListAvailableCars()
@@ -171,20 +205,34 @@ namespace sf.systems.rentals.cars
 
         public Car LookupCar(string carId)
         {
+            Car car = LookupAvaliableCar(carId);
+
+            if (car == null)
+            {
+                car = LookupRentedCar(carId);
+            }
+
+            return car;
+        }
+
+        public Car LookupRentedCar(string carId)
+        {
+            Car car;
+            var rentedCars = GetRentedCars();
+            if (rentedCars == null) throw new ArgumentNullException("rentedCars");
+
+            car = rentedCars.Find(c => string.Equals(c.Id, carId, StringComparison.InvariantCultureIgnoreCase));
+            return car;
+        }
+
+        public Car LookupAvaliableCar(string carId)
+        {
             // validate avaliable cars list
             var avaliableCars = GetAvaliableCars();
             if (avaliableCars == null) throw new ArgumentNullException("avaliableCars");
 
-            var rentedCars = GetRentedCars();
-            if (rentedCars == null) throw new ArgumentNullException("rentedCars");
-
             // lookup car
             var car = availableCars.Find(c => string.Equals(c.Id, carId, StringComparison.InvariantCultureIgnoreCase));
-            if (car == null)
-            {
-                car = rentedCars.Find(c => string.Equals(c.Id, carId, StringComparison.InvariantCultureIgnoreCase));
-            }
-            
             return car;
         }
 
