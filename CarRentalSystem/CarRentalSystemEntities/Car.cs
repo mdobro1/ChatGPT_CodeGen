@@ -3,7 +3,7 @@ using System;
 
 namespace sf.systems.rentals.cars
 {
-    public class Car : ISerializedEntity<Car>, ICar
+    public class Car : ISerializedEntity<Car>
     {
         public string Id { get; }
         public string Make { get; }

@@ -10,7 +10,7 @@ namespace sf.systems.rentals.cars.tests
         public void Serialize_ReturnsCorrectCSVFormat()
         {
             // Arrange
-            ICustomer customer = new Customer("1", "John Doe", "555-1234", "123 Main St", "johndoe@example.com");
+            Customer customer = new Customer("1", "John Doe", "555-1234", "123 Main St", "johndoe@example.com");
             string expected = "1,John Doe,555-1234,123 Main St,johndoe@example.com";
 
             // Act
@@ -42,7 +42,7 @@ namespace sf.systems.rentals.cars.tests
         public void RentedCarsPoolExtend_AddsNewCarsToList()
         {
             // Arrange
-            ICustomer customer = new Customer("1", "John Doe", "555-1234", "123 Main St", "johndoe@example.com");
+            Customer customer = new Customer("1", "John Doe", "555-1234", "123 Main St", "johndoe@example.com");
             List<Car> cars = new List<Car>() { new Car("1", "Honda", "Civic", 2020, 30, false) };
 
             // Act
@@ -57,7 +57,7 @@ namespace sf.systems.rentals.cars.tests
         public void RentedCarsPoolNew_ReplacesOldCarsWithNewCars()
         {
             // Arrange
-            ICustomer customer = new Customer("1", "John Doe", "555-1234", "123 Main St", "johndoe@example.com");
+            Customer customer = new Customer("1", "John Doe", "555-1234", "123 Main St", "johndoe@example.com");
             List<Car> oldCars = new List<Car>() { new Car("1", "Honda", "Civic", 2020, 30, false) };
             List<Car> newCars = new List<Car>() { new Car("2", "Toyota", "Corolla", 2021, 35, false) };
             customer.RentedCarsPoolExtend(oldCars);

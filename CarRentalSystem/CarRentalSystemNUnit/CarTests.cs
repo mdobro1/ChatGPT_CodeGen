@@ -5,7 +5,7 @@ namespace sf.systems.rentals.cars.tests
     [TestFixture]
     public class CarTests
     {
-        private ICar car;
+        private Car car;
 
         [SetUp]
         public void Setup()
@@ -34,7 +34,7 @@ namespace sf.systems.rentals.cars.tests
             string data = "1234,Toyota,Camry,2022,50,True";
 
             // Act
-            ICar result = car.DeserializeHandler(data, DataType.CSV);
+            Car result = car.DeserializeHandler(data, DataType.CSV);
 
             // Assert
             Assert.AreEqual(car.Id, result.Id);

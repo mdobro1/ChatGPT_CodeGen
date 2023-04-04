@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace sf.systems.rentals.cars
 {
-    public class Customer : ISerializedEntity<Customer>, ICustomer
+    public class Customer : ISerializedEntity<Customer>
     {
         public string Id { get; set; }
         public string Name { get; set; }
