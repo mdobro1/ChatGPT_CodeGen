@@ -35,7 +35,7 @@ To run the Car Rental System, you need to have the following installed on your s
 - Visual Studio (recommended) or any other C# compiler
 - Once you have installed the required dependencies, you can clone this repository and open the solution file in Visual Studio to build and run the application.
 
-#### Usage
+### Usage
 The Car Rental System is a console-based application that takes input as command-line arguments. Here are the available commands and their usage:
 
 - `cmd=register_customer customer="ID,Name,PhoneNumber,Address,Email"`: Register a new customer
