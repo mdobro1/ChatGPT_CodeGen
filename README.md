@@ -4,6 +4,23 @@ Demo-Projects for the article "Code Generation Revolution from models to the nat
 ## Car Rental System in C# (CarRentalSystem)
 This project is a console-based car rental system built with C# using .NET Framework. It allows users to register customers, add and delete cars, and rent and return cars. The system uses a file-based data storage system to persist data between application runs.
 
+## Business perspective
+From a business perspective, the code represents a car rental system where customers can register and rent cars. 
+The system allows for adding and deleting cars and customers, as well as renting and returning cars. 
+The code also includes test commands to test the system.
+
+## Technical perspective
+From a technical perspective, the code includes several classes and methods:
+
+- ***MainProgram*** class includes the main method which handles the program execution and calls other methods to perform specific commands. 
+- ***CarRentalSystem*** class represents the car rental system and includes methods to add and delete cars and customers, as well as renting and returning cars. 
+- ***CarRentalCommands*** class includes methods to load and save data, as well as perform the specific commands such as adding and deleting cars and customers, and renting and returning cars.
+- ***CarRentalContext*** class is a data structure that holds information about the current command being executed and the specific car or customer involved. 
+
+The code uses command-line arguments to pass information to the program, and includes error handling to ensure that the correct arguments are provided. 
+Tha data is loaded/saved from/to the ***data***-sub-directory. 
+The code also includes logging and messaging functionality to provide feedback to the user.
+
 ### Installation
 To run the Car Rental System, you need to have the following installed on your system:
 
