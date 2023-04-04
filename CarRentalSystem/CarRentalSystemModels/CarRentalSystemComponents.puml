@@ -1,0 +1,33 @@
+﻿@startuml
+package "Car Rental System" {
+  package "Car Rental System Interfaces" {
+    rectangle "ICarRentalSystem" as ICarRentalSystem
+  }
+
+  package "Car Rental System Entities" {
+    rectangle "Customer" as Customer
+    rectangle "Car" as Car
+    rectangle "Rental" as Rental
+  }
+
+  package "Car Rental System Aspects" {
+    rectangle "CarRentalContext" as CarRentalContext
+  }
+
+  package "Car Rental System Controller" {
+    rectangle "CarRentalCommands" as CarRentalCommands
+  }
+
+  package "Car Rental System Main Program" {
+    rectangle "MainProgram" as MainProgram
+  }
+
+  ICarRentalSystem --> CarRentalContext
+  CarRentalContext <- Customer
+  CarRentalContext <- Car
+  CarRentalContext <-- Rental
+  CarRentalContext <-- CarRentalCommands
+  MainProgram --> CarRentalCommands
+  CarRentalCommands --> ICarRentalSystem
+}
+@enduml
