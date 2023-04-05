@@ -1,33 +1,46 @@
 ﻿@startuml
+
 package "Car Rental System" {
-  package "Car Rental System Interfaces" {
-    rectangle "ICarRentalSystem" as ICarRentalSystem
+
+  package "Car Rental System Interfaces" as Interfaces {
+    rectangle "Interface classes"
   }
 
-  package "Car Rental System Entities" {
-    rectangle "Customer" as Customer
+  package "Car Rental System Entities" as Entities {
+    rectangle Customer
     rectangle "Car" as Car
     rectangle "Rental" as Rental
   }
 
-  package "Car Rental System Aspects" {
-    rectangle "CarRentalContext" as CarRentalContext
+  package "Car Rental System Aspects" as Aspects{
+    rectangle "Authentication"
+    rectangle "Security"
+    rectangle "Data Persistence"
+    rectangle "Error Handler"
+    rectangle "Message Handler"
+    rectangle "Data Persistence"
   }
 
-  package "Car Rental System Controller" {
-    rectangle "CarRentalCommands" as CarRentalCommands
+  package "Car Rental System Controller" as Controller {
+    rectangle "CarRentalSystem" 
+    rectangle "CarRentalContext"
+    rectangle "CarRentalCommands"
   }
 
-  package "Car Rental System Main Program" {
+  package "Car Rental System Main Program" as Main {
     rectangle "MainProgram" as MainProgram
   }
 
-  ICarRentalSystem --> CarRentalContext
-  CarRentalContext <- Customer
-  CarRentalContext <- Car
-  CarRentalContext <-- Rental
-  CarRentalContext <-- CarRentalCommands
-  MainProgram --> CarRentalCommands
-  CarRentalCommands --> ICarRentalSystem
+  Main -down-> Controller
+
+  Controller -right-> Aspects
+  Controller -down-> Entities
+
+  Aspects -down-> Entities
+
+  Controller -left-> Interfaces
+  Entities -up-> Interfaces
+  
+  Aspects -> Interfaces
 }
 @enduml
