@@ -62,19 +62,19 @@ namespace sf.systems.rentals.cars
 
             if (entitiesList == null)
             {
-                customer = defaultCustomer(customerId);
-                car = defaultCar(carId);
+                customer = DefaultCustomer(customerId);
+                car = DefaultCar(carId);
             }
             else
             {
                 customer = entitiesList.LookupCustomer(customerId);
                 if (customer == null)
-                    customer = defaultCustomer(customerId);
+                    customer = DefaultCustomer(customerId);
                 else
                     customer.RentedCarsPoolNew(entitiesList.GetRentedCars(customer));
 
                 car = entitiesList.LookupCar(carId);
-                if (car == null) car = defaultCar(carId);
+                if (car == null) car = DefaultCar(carId);
             }
 
             DateTime rentalDate = DateTime.Parse(values[3]);
@@ -86,12 +86,12 @@ namespace sf.systems.rentals.cars
 
         }
 
-        private static Car defaultCar(string carId)
+        private static Car DefaultCar(string carId)
         {
             return new Car(carId, "", "", 0, 0.0, false);
         }
 
-        private static Customer defaultCustomer(string customerId)
+        private static Customer DefaultCustomer(string customerId)
         {
             return new Customer(customerId, "", "", "", "");
         }

@@ -7,7 +7,6 @@ namespace sf.systems.rentals.cars
     public class AuthenticationManager
     {
         private readonly string credentialsFilePath = "data/credentials.txt";
-        private readonly string rolesFilePath = "data/roles.txt";
         private readonly Dictionary<string, string> credentials;
         private readonly Dictionary<string, UserRole> userRoles;
         private readonly SecurityManager securityManager;
