@@ -1,19 +1,85 @@
 from __future__ import annotations
 from typing import Type
 import json
+from abc import ABC, abstractmethod
+from typing import TypeVar
+from typing import List
 from datetime import datetime, timedelta
 from uuid import uuid4  # for generating unique ids
 
-from DataType import DataType
-from IEntitiesList import IEntitiesList
-from ISerializedEntity import ISerializedEntity
-from ISerializedExtendedEntity import ISerializedExtendedEntity
-from ISerializeOwner import ISerializeOwner
-from Customer import Customer
-from Car import Car
-from Transaction import Transaction
+from entities.DataType import DataType
+from entities.ISerializedEntity import ISerializedEntity
+from entities.Customer import Customer
+from entities.Car import Car
+from entities.DataType import DataType
 
-class Transaction(ISerializedExtendedEntity[Transaction], ISerializeOwner):
+T = TypeVar('T')
+
+#====================================================================================================
+# Serialize Owner Interface
+#====================================================================================================
+class ISerializeOwner(ABC):
+    @abstractmethod
+    def assign_owner(self, entities_list: IEntitiesList):
+        pass
+
+#====================================================================================================
+# Entities List Interface
+#====================================================================================================
+class IEntitiesList(ABC):
+    @abstractmethod
+    def get_registered_customers(self) -> List[Customer]:
+        pass
+    
+    @abstractmethod
+    def lookup_customer(self, customer_id: str) -> Customer:
+        pass
+    
+    @abstractmethod
+    def get_available_cars(self) -> List[Car]:
+        pass
+    
+    @abstractmethod
+    def get_rented_cars(self) -> List[Car]:
+        pass
+    
+    @abstractmethod
+    def get_rented_cars_by_customer(self, customer: Customer) -> List[Car]:
+        pass
+    
+    @abstractmethod
+    def lookup_car(self, car_id: str) -> Car:
+        pass
+    
+    @abstractmethod
+    def new_transaction(self, transaction: Transaction):
+        pass
+    
+    @abstractmethod
+    def archive_transaction(self, transaction: Transaction):
+        pass
+    
+    @abstractmethod
+    def rent_car(self, car: Car):
+        pass
+    
+    @abstractmethod
+    def return_car(self, car: Car):
+        pass
+
+
+#====================================================================================================
+# SerializedExtendedEntity interface
+#====================================================================================================
+class ISerializedExtendedEntity(ISerializedEntity[T], ABC):
+    def deserialize_handler(self, data: str, data_type: DataType, entities_list: IEntitiesList) -> T:
+        pass
+
+
+#===============================================================================
+# Transaction class
+#===============================================================================
+class Transaction(ISerializedExtendedEntity["Transaction"], ISerializeOwner):
 
     def __init__(self, id: str, customer: Customer, car: Car, rental_date: datetime, return_date: datetime, closed_date: datetime, is_closed: bool):
         self._id = id

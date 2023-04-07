@@ -2,11 +2,11 @@ from __future__ import annotations
 from typing import Type
 import json
 
-from Car import Car
-from DataType import DataType  
-from ISerializedEntity import ISerializedEntity 
+from entities.DataType import DataType  
+from entities.ISerializedEntity import ISerializedEntity 
 
-class Car(ISerializedEntity[Car]):
+
+class Car(ISerializedEntity["Car"]):
     def __init__(self, id: str, make: str, model: str, year: int, daily_price: float, rented: bool):
         self._id = id
         self._make = make

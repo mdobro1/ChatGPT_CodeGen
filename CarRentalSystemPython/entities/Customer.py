@@ -2,11 +2,12 @@ from __future__ import annotations
 from typing import List, Type
 import json
 
-from ISerializedEntity import ISerializedEntity, DataType
-from Car import Car
-from Customer import Customer
+from entities.DataType import DataType
+from entities.ISerializedEntity import ISerializedEntity
+from entities.Car import Car
 
-class Customer(ISerializedEntity[Customer]):
+
+class Customer(ISerializedEntity["Customer"]):
     CAR_RENTAL_MAX_LIMIT = 1
 
     def __init__(self, id: str, name: str, phone_number: str, address: str, email: str):

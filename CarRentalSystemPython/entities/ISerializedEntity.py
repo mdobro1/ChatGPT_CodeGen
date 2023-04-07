@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 from enum import Enum
-from DataType import DataType
-from typing import TypeVar
+from entities.DataType import DataType
+from typing import TypeVar, Generic
 
 T = TypeVar('T')    # Declare type variable
 
-class ISerializedEntity(ABC):
+class ISerializedEntity(ABC, Generic[T]):
     @abstractmethod
     def serialize(self, data_type: DataType) -> str:
         pass

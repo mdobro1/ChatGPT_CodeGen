@@ -1,6 +1,7 @@
 import os
 import base64
 import hashlib
+from enum import Enum
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.backends import default_backend
@@ -16,9 +17,9 @@ class SecurityManager:
         else:
             self.key = key
 
-        iv = os.urandom(self.BLOCK_SIZE)
+        self.iv = os.urandom(self.BLOCK_SIZE)
         self.backend = default_backend()
-        self.cipher = Cipher(algorithms.AES(key), modes.CBC(iv), backend=self.backend)
+        self.cipher = Cipher(algorithms.AES(self.key), modes.CBC(self.iv), backend=self.backend)
         self.padder = padding.PKCS7(self.BLOCK_SIZE * 8).padder()
         self.unpadder = padding.PKCS7(self.BLOCK_SIZE * 8).unpadder()
 
@@ -41,6 +42,16 @@ class SecurityManager:
         padded_data = self.padder.update(data.encode()) + self.padder.finalize()    
         encrypted_data = encryptor.update(padded_data) + encryptor.finalize()
         return base64.b64encode(encrypted_data).decode()
+    
+    def encrypt2(self, data):
+        iv = os.urandom(16)
+        data_bytes = data.encode('utf-8')
+        padder = padding.PKCS7(algorithms.AES.block_size).padder()
+        padded_data = padder.update(data_bytes) + padder.finalize()
+        cipher = Cipher(algorithms.AES(self.key), modes.CBC(iv), backend=default_backend())
+        encryptor = cipher.encryptor()
+        encrypted_data = encryptor.update(padded_data) + encryptor.finalize()
+        return base64.b64encode(iv + encrypted_data).decode('utf-8')
 
     def decrypt(self, data:str)->str:   
         decryptor = self.cipher.decryptor()
@@ -70,8 +81,7 @@ class User:
         self.Role = role
 
 
-class UserRole:
-    Admin = "Admin"
-    PowerUser = "PowerUser"
-    User = "User"
-    Guest = "Guest"
+class UserRole(Enum):
+    ADMIN = 1
+    MANAGER = 2
+    USER = 3
