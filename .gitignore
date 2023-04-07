@@ -20,3 +20,7 @@
 /CarRentalSystem/.vs
 /CarRentalSystem/CarRentalSystemController/obj
 CarRentalSystemPython/key.bin
+CarRentalSystemPython/aspects/__pycache__
+CarRentalSystemPython/controller/__pycache__
+CarRentalSystemPython/entities/__pycache__
+CarRentalSystemPython/interfaces/__pycache__
