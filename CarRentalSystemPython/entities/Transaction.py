@@ -5,7 +5,8 @@ from abc import ABC, abstractmethod
 from typing import TypeVar
 from typing import List
 from datetime import datetime, timedelta
-from uuid import uuid4  # for generating unique ids
+from uuid import uuid4
+import uuid  # for generating unique ids
 
 from entities.DataType import DataType
 from entities.ISerializedEntity import ISerializedEntity
@@ -81,7 +82,8 @@ class ISerializedExtendedEntity(ISerializedEntity[T], ABC):
 #===============================================================================
 class Transaction(ISerializedExtendedEntity["Transaction"], ISerializeOwner):
 
-    def __init__(self, id: str, customer: Customer, car: Car, rental_date: datetime, return_date: datetime, closed_date: datetime, is_closed: bool):
+    def __init__(self, id: str = str(uuid.uuid4()), customer: Customer = None, car: Car = None, \
+                 rental_date: datetime = None, return_date: datetime = None, closed_date: datetime = None, is_closed: bool = False):
         self._id = id
         self._customer = customer
         self._car = car
@@ -90,7 +92,7 @@ class Transaction(ISerializedExtendedEntity["Transaction"], ISerializeOwner):
         self._closed_date = closed_date
         self._is_closed = is_closed
         self._owner = None
-        self._total_price = self._calculate_total_price()
+        self._total_price = self._calculate_total_price()        
 
     @property
     def id(self) -> str:

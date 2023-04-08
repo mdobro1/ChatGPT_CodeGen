@@ -1,4 +1,5 @@
-from typing import List
+from abc import ABC, abstractmethod
+from typing import List, TypeVar
 from datetime import datetime
 import os
 import uuid  
@@ -8,6 +9,7 @@ from aspects.MessageHandler import MessageHandler
 from aspects.AuthenticationManager import AuthenticationManager
 from aspects.SecurityManager import SecurityManager, User, UserRole
 from aspects.DataManager import DataManager
+from entities.IEntitesFactory import Entity, IEntitesFactory
 
 from entities.Transaction import IEntitiesList
 from entities.EntityType import EntityType
@@ -17,7 +19,9 @@ from entities.Customer import Customer
 from entities.Car import Car
 from entities.Transaction import Transaction
 
-class CarRentalSystem:
+
+
+class CarRentalSystem(IEntitesFactory):
     #==========================================================
     # Constructors
     #==========================================================
@@ -289,23 +293,29 @@ class CarRentalSystem:
     FILE_SUFFIX_ARCHIVE = "archive"
 
 
-    def load_data(self) -> None:
-        self.data_manager.assign_owner(None)
-        self.data_manager.read_data(self.customers, EntityType.CUSTOMER, DataType.CSV, "")
-        self.data_manager.read_data(self.available_cars, EntityType.CAR, DataType.CSV, str(RentedType.AVALIABLE))
-        self.data_manager.read_data(self.rented_cars, EntityType.CAR, DataType.CSV, str(RentedType.RENTED))
-
+    def load_data(self):
         self.data_manager.assign_owner(self)
+        
+        self.data_manager.read_data(self.customers, EntityType.CUSTOMER, DataType.CSV, "")
+        self.data_manager.read_data(self.available_cars, EntityType.CAR, DataType.CSV, str(RentedType.AVAILABLE).split(".")[1].lower())
+        self.data_manager.read_data(self.rented_cars, EntityType.CAR, DataType.CSV, str(RentedType.RENTED).split(".")[1].lower())
+        
         self.data_manager.read_data_extended(self.current_transactions, EntityType.TRANSACTION, DataType.CSV, self.FILE_SUFFIX_CURRENT, self)
         self.data_manager.read_data_extended(self.archive_transactions, EntityType.TRANSACTION, DataType.CSV, self.FILE_SUFFIX_ARCHIVE, self)
 
-    def save_data(self) -> None:
+    def save_data(self):
         self.data_manager.write_data(self.customers, EntityType.CUSTOMER, DataType.CSV, "")
-        self.data_manager.write_data(self.available_cars, EntityType.CAR, DataType.CSV, str(RentedType.AVALIABLE))
-        self.data_manager.write_data(self.rented_cars, EntityType.CAR, DataType.CSV, str(RentedType.RENTED))
+        self.data_manager.write_data(self.available_cars, EntityType.CAR, DataType.CSV, str(RentedType.AVAILABLE).split(".")[1].lower())
+        self.data_manager.write_data(self.rented_cars, EntityType.CAR, DataType.CSV, str(RentedType.RENTED).split(".")[1].lower())
         self.data_manager.write_data(self.current_transactions, EntityType.TRANSACTION, DataType.CSV, self.FILE_SUFFIX_CURRENT)
         self.data_manager.write_data(self.archive_transactions, EntityType.TRANSACTION, DataType.CSV, self.FILE_SUFFIX_ARCHIVE)
-        
+
+    def new_entity(self, entity_type: EntityType) -> Entity:
+        if entity_type == EntityType.CUSTOMER: return Customer()
+        if entity_type == EntityType.CAR: return Car()  
+        if entity_type == EntityType.TRANSACTION: return Transaction()
+        return None
+
     #===========================================================================
     # Logging, messages and errors handling
     #===========================================================================

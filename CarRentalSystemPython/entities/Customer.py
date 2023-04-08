@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import List, Type
 import json
+import uuid
 
 from entities.DataType import DataType
 from entities.ISerializedEntity import ISerializedEntity
@@ -10,7 +11,7 @@ from entities.Car import Car
 class Customer(ISerializedEntity["Customer"]):
     CAR_RENTAL_MAX_LIMIT = 1
 
-    def __init__(self, id: str, name: str, phone_number: str, address: str, email: str):
+    def __init__(self, id: str = str(uuid.uuid4()), name: str = "" , phone_number: str = "", address: str = "", email: str = ""):
         self._id = id
         self._name = name
         self._phone_number = phone_number

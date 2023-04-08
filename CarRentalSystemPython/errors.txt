@@ -1,0 +1,75 @@
+2023-04-08 12:01:18.323476 - 'Car' object has no attribute 'Serialize'
+Traceback (most recent call last):
+  File "./car_rental.py", line 56, in main
+    CarRentalCommands.add_car(context, arg_car)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalCommands.py", line 97, in add_car
+    context.car_rental_system.log_and_show_message(f"New Car with ID: {new_car.Id} has been successfully added to the system!")
+AttributeError: 'Car' object has no attribute 'Id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 91, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 141, in serialize
+    return data.Serialize(dataType)
+AttributeError: 'Car' object has no attribute 'Serialize'
+2023-04-08 12:10:09.881813 - 'Car' object has no attribute 'Serialize'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 91, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 141, in serialize
+    return data.Serialize(dataType)
+AttributeError: 'Car' object has no attribute 'Serialize'
+2023-04-08 12:10:14.009749 - 'Car' object has no attribute 'Serialize'
+Traceback (most recent call last):
+  File "./car_rental.py", line 96, in main
+    CarRentalCommands.save_data(context)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalCommands.py", line 104, in save_data
+    context.car_rental_system.save_data()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalSystem.py", line 304, in save_data
+    self.data_manager.write_data(self.available_cars, EntityType.CAR, DataType.CSV, str(RentedType.AVAILABLE).split(".")[1].lower())
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 96, in write_data
+    self.error_handler.handle_error(ex)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\ErrorHandler.py", line 22, in handle_error
+    raise ex
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 91, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 141, in serialize
+    return data.Serialize(dataType)
+AttributeError: 'Car' object has no attribute 'Serialize'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 91, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 141, in serialize
+    return data.Serialize(dataType)
+AttributeError: 'Car' object has no attribute 'Serialize'
+2023-04-08 12:39:21.743934 - 'TypeVar' object is not callable
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 33, in read_data_job
+    data = self.deserialize(line.strip(), data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 150, in deserialize
+    obj : ISerializedEntity = T()
+TypeError: 'TypeVar' object is not callable
+2023-04-08 14:46:29.003324 - 'CarRentalSystem' object has no attribute 'deserialize_handler'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 33, in read_data_job
+    data = self.deserialize(line.strip(), data_type, self.owner)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 153, in deserialize
+    return result.deserialize_handler(data, dataType)
+AttributeError: 'CarRentalSystem' object has no attribute 'deserialize_handler'
+2023-04-08 14:49:50.455754 - 'DataManager' object has no attribute 'deserialize_handler'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 33, in read_data_job
+    data = self.deserialize(line.strip(), data_type, self)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 153, in deserialize
+    return result.deserialize_handler(data, dataType)
+AttributeError: 'DataManager' object has no attribute 'deserialize_handler'
+2023-04-08 16:17:53.956415 - deserialize() missing 1 required positional argument: 'entities_factory'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 35, in read_data_job
+    data = self.deserialize(line.strip(), data_type, self.owner)
+TypeError: deserialize() missing 1 required positional argument: 'entities_factory'

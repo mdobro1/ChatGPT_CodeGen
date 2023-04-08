@@ -7,11 +7,11 @@ from controller.CarRentalCommands import CarRentalCommands
 
 
 def show_message(context: CarRentalContext, message: str) -> None:
-    context.CarRentalSystem.show_message(message)
+    context.car_rental_system.show_message(message)
 
 
 def log_and_show(context: CarRentalContext, message: str) -> None:
-    context.CarRentalSystem.log_and_show_message(message)
+    context.car_rental_system.log_and_show_message(message)
     
 def main(args) -> int:
     # init
@@ -93,12 +93,12 @@ def main(args) -> int:
             show_message(context, "car_rental cmd=rent_car car=\"CAR911\" customer=\"C003\"")
             sys.exit(-1)
 
-        CarRentalCommands.SaveData(context)
+        CarRentalCommands.save_data(context)
         sys.exit(0)
         
     except Exception as ex:
         log_and_show(context, f"\nERROR: {ex} \n\nSTACK-TRACE: {ex.__traceback__}")
-        CarRentalCommands.SaveData(context)
+        CarRentalCommands.save_data(context)
         sys.exit(-1)
 
 if __name__ == '__main__':

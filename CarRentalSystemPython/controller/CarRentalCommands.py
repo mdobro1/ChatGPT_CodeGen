@@ -12,8 +12,8 @@ class CarRentalCommands:
         CarRentalCommands.validate_context(rentalContext)
 
         # go!
-        rentalContext.RentalTransaction = rentalContext.CarRentalSystem.return_car(
-            rentalContext.CarRentalSystem.lookup_customer(rentalContext.CustomerID))
+        rentalContext.RentalTransaction = rentalContext.car_rental_system.return_car(
+            rentalContext.car_rental_system.lookup_customer(rentalContext.customer_id))
 
         # finally
         rentalContext.ActionCompleted = rentalContext.RentalTransaction.is_closed
@@ -34,7 +34,7 @@ class CarRentalCommands:
         # go!
         # validate params
         validationError = CarRentalCommands.validateCustomer(rentalContext, notifierEmptyCustomer)
-        car = rentalContext.CarRentalSystem.get_car(rentalContext.CarID)
+        car = rentalContext.car_rental_system.get_car(rentalContext.car_id)
         validationError = CarRentalCommands.validateCar(rentalContext, notifierCarIsnotAvaliable, car)
         
         # exit if a validation is occurred
@@ -42,9 +42,9 @@ class CarRentalCommands:
             return rentalContext
 
         # Rent first available car by given customer for 3 days
-        rentalContext.RentalTransaction = rentalContext.CarRentalSystem.rent_car(
-            rentalContext.CustomerID,
-            rentalContext.CarID,
+        rentalContext.RentalTransaction = rentalContext.car_rental_system.rent_car(
+            rentalContext.customer_id,
+            rentalContext.car_id,
             datetime.datetime.now(),
             datetime.datetime.now() + datetime.timedelta(days=3)
         )
@@ -84,31 +84,31 @@ class CarRentalCommands:
 
     @staticmethod
     def delete_car(context: CarRentalContext, car_id: str) -> None:
-        if context.CarRentalSystem.DeleteCar(car_id):
-            context.CarRentalSystem.LogAndShowMessage(f"Car with ID: {car_id} has been successfully deleted from the system!")
+        if context.car_rental_system.delete_car(car_id):
+            context.car_rental_system.log_and_show_message(f"Car with ID: {car_id} has been successfully deleted from the system!")
 
     @staticmethod
     def add_car(context: CarRentalContext, arg_car: List[str]) -> None:
         car_id = arg_car[0]
-        car = context.CarRentalSystem.LookupCar(car_id)
+        car = context.car_rental_system.lookup_car(car_id)
         
         if car is None:
-            new_car = context.CarRentalSystem.AddCar(car_id, arg_car[1], arg_car[2], int(arg_car[3]), float(arg_car[4]))
-            context.CarRentalSystem.LogAndShowMessage(f"New Car with ID: {new_car.Id} has been successfully added to the system!")
+            new_car = context.car_rental_system.add_car(car_id, arg_car[1], arg_car[2], int(arg_car[3]), float(arg_car[4]))
+            context.car_rental_system.log_and_show_message(f"New Car with ID: {new_car.id} has been successfully added to the system!")
         else:
-            context.CarRentalSystem.LogAndShowMessage(f"Car with ID: {car.Id} already exists in the system!")
+            context.car_rental_system.log_and_show_message(f"Car with ID: {car.id} already exists in the system!")
 
     @staticmethod
     def save_data(context: CarRentalContext) -> None:
-        context.CarRentalSystem.LogAndShowMessage("\nSaving data ...")
-        context.CarRentalSystem.SaveData()
-        context.CarRentalSystem.LogAndShowMessage("All data has been saved.\n")
+        context.car_rental_system.log_and_show_message("\nSaving data ...")
+        context.car_rental_system.save_data()
+        context.car_rental_system.log_and_show_message("All data has been saved.\n")
 
     @staticmethod
     def load_data(context: CarRentalContext) -> None:
-        context.CarRentalSystem.LogAndShowMessage("\nLoading data ...")
-        context.CarRentalSystem.LoadData()
-        context.CarRentalSystem.LogAndShowMessage("All data has been loaded.\n")
+        context.car_rental_system.log_and_show_message("\nLoading data ...")
+        context.car_rental_system.load_data()
+        context.car_rental_system.log_and_show_message("All data has been loaded.\n")
 
     @staticmethod
     def validate_context(rental_context: CarRentalContext) -> None:

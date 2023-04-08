@@ -1,0 +1,446 @@
+2023-04-07 16:15:00.110342 - 
+Loading data ...
+2023-04-07 16:15:35.010896 - 
+Loading data ...
+2023-04-07 16:16:40.704488 - 
+Loading data ...
+2023-04-07 16:16:58.763744 - 
+Loading data ...
+2023-04-07 16:17:51.699315 - 
+Loading data ...
+2023-04-07 16:19:15.904174 - 
+Loading data ...
+2023-04-07 16:20:43.593948 - 
+Loading data ...
+2023-04-07 16:32:54.845991 - 
+Loading data ...
+2023-04-07 16:33:36.360482 - 
+Loading data ...
+2023-04-07 16:34:33.383970 - 
+Loading data ...
+2023-04-07 16:34:57.742493 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-07 21:36:49.098103 - 
+Loading data ...
+2023-04-07 21:37:18.511659 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-07 21:37:49.153894 - 
+Loading data ...
+2023-04-07 21:37:57.705046 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-07 21:38:27.352635 - 
+Loading data ...
+2023-04-07 21:38:35.234932 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-07 21:39:19.297338 - 
+Loading data ...
+2023-04-07 21:39:23.765617 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-07 21:41:31.081151 - 
+Loading data ...
+2023-04-07 21:41:35.599151 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-07 21:41:55.224554 - 
+ERROR: AVALIABLE 
+
+STACK-TRACE: <traceback object at 0x000001E20E1C5780>
+2023-04-07 21:42:55.968731 - 
+Loading data ...
+2023-04-07 21:43:02.982188 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-07 21:47:44.175712 - 
+Loading data ...
+2023-04-07 21:47:45.059473 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 11:05:20.627720 - 
+Loading data ...
+2023-04-08 11:05:23.361959 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 11:05:28.624872 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:05:32.770905 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:05:44.516768 - 
+ERROR: read_data_extended() takes 4 positional arguments but 6 were given 
+
+STACK-TRACE: <traceback object at 0x000001BD07143080>
+2023-04-08 11:05:45.167890 - 
+Saving data ...
+2023-04-08 11:05:56.119106 - 
+Loading data ...
+2023-04-08 11:05:57.111967 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 11:06:12.413256 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:06:13.341819 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:06:30.705233 - 
+ERROR: read_data_extended() takes 4 positional arguments but 6 were given 
+
+STACK-TRACE: <traceback object at 0x00000260FB48D040>
+2023-04-08 11:06:30.721215 - 
+Saving data ...
+2023-04-08 11:07:26.865002 - 
+Loading data ...
+2023-04-08 11:07:27.830577 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 11:07:28.494286 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:07:29.409102 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:07:39.698978 - 
+ERROR: read_data_extended() takes 4 positional arguments but 6 were given 
+
+STACK-TRACE: <traceback object at 0x0000021BBAE52680>
+2023-04-08 11:07:44.901543 - 
+Saving data ...
+2023-04-08 11:07:44.920546 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 11:07:44.923542 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 11:07:44.926551 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 11:07:44.930584 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 11:07:44.933539 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 11:07:44.935540 - All data has been saved.
+
+2023-04-08 11:22:05.425620 - 
+Loading data ...
+2023-04-08 11:22:06.924988 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 11:22:07.856106 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:22:08.666555 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:22:21.545907 - 
+ERROR: 'module' object is not callable 
+
+STACK-TRACE: <traceback object at 0x0000022ACBF1C900>
+2023-04-08 11:22:21.602896 - 
+Saving data ...
+2023-04-08 11:22:21.615896 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 11:22:21.624894 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 11:22:21.627900 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 11:22:21.635893 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 11:22:21.639901 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 11:22:21.642896 - All data has been saved.
+
+2023-04-08 11:22:37.809285 - 
+Loading data ...
+2023-04-08 11:22:38.220806 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 11:22:38.775360 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:22:39.264362 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:23:02.546481 - 
+ERROR: 'module' object is not callable 
+
+STACK-TRACE: <traceback object at 0x0000018F6B85DAC0>
+2023-04-08 11:23:02.565461 - 
+Saving data ...
+2023-04-08 11:23:02.591457 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 11:23:02.596453 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 11:23:02.600456 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 11:23:02.605459 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 11:23:02.611472 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 11:23:02.614457 - All data has been saved.
+
+2023-04-08 11:54:56.898042 - 
+Loading data ...
+2023-04-08 11:55:00.178303 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 11:55:02.574801 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:55:04.420632 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:55:15.772192 - 
+ERROR: __init__() missing 1 required positional argument: 'error_handler' 
+
+STACK-TRACE: <traceback object at 0x000002DAE3ED8780>
+2023-04-08 11:55:15.784188 - 
+Saving data ...
+2023-04-08 11:55:15.799189 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 11:55:15.804189 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 11:55:15.808195 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 11:55:15.812190 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 11:55:15.816187 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 11:55:15.818196 - All data has been saved.
+
+2023-04-08 11:55:32.697507 - 
+Loading data ...
+2023-04-08 11:55:32.953506 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 11:55:33.749474 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:55:38.441595 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:56:32.496787 - 
+Loading data ...
+2023-04-08 11:56:33.388846 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 11:56:34.414823 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:56:34.900004 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:56:49.299663 - 
+ERROR: 'DataManager' object has no attribute 'AssignOwner' 
+
+STACK-TRACE: <traceback object at 0x000001A195DB9A80>
+2023-04-08 11:56:49.309701 - 
+Saving data ...
+2023-04-08 11:56:49.317676 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 11:56:49.320672 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 11:56:49.322685 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 11:56:49.324672 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 11:56:49.327676 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 11:56:49.328673 - All data has been saved.
+
+2023-04-08 11:57:00.722147 - 
+Loading data ...
+2023-04-08 11:57:01.377516 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 11:57:01.781376 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:57:02.156751 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:57:30.974261 - 
+ERROR: 'DataManager' object has no attribute 'AssignOwner' 
+
+STACK-TRACE: <traceback object at 0x000001F62B77AF00>
+2023-04-08 11:57:30.990258 - 
+Saving data ...
+2023-04-08 11:57:31.001250 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 11:57:31.005252 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 11:57:31.008251 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 11:57:31.012247 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 11:57:31.014282 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 11:57:31.017253 - All data has been saved.
+
+2023-04-08 11:58:07.815635 - 
+Loading data ...
+2023-04-08 11:58:08.069631 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 11:58:08.285635 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:58:08.480336 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:58:48.563367 - 
+ERROR: 'MessageHandler' object has no attribute 'LogPlusMessage' 
+
+STACK-TRACE: <traceback object at 0x000002536659C540>
+2023-04-08 11:58:49.405953 - 
+Saving data ...
+2023-04-08 11:58:49.412951 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 11:58:49.415990 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 11:58:49.418956 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 11:58:49.421956 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 11:58:49.424955 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 11:58:49.425958 - All data has been saved.
+
+2023-04-08 11:59:33.199614 - 
+Loading data ...
+2023-04-08 11:59:34.027057 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 11:59:34.209897 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:59:34.472928 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 11:59:43.397888 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 11:59:49.879690 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 11:59:52.234935 - All data has been loaded.
+
+2023-04-08 12:01:17.646904 - 
+ERROR: 'Car' object has no attribute 'Id' 
+
+STACK-TRACE: <traceback object at 0x000001AE0C00AB40>
+2023-04-08 12:01:18.314473 - 
+Saving data ...
+2023-04-08 12:01:18.320475 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 12:09:04.207867 - 
+Loading data ...
+2023-04-08 12:09:05.809319 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 12:09:06.339194 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 12:09:06.762403 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 12:09:09.759479 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 12:09:11.561259 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 12:09:11.569250 - All data has been loaded.
+
+2023-04-08 12:09:24.878590 - New Car with ID: CAR911 has been successfully added to the system!
+2023-04-08 12:09:41.363495 - 
+Saving data ...
+2023-04-08 12:10:06.856131 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 12:10:13.975763 - 
+ERROR: 'Car' object has no attribute 'Serialize' 
+
+STACK-TRACE: <traceback object at 0x000001AB306DC340>
+2023-04-08 12:10:13.988752 - 
+Saving data ...
+2023-04-08 12:10:14.003758 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 12:10:32.529599 - 
+Loading data ...
+2023-04-08 12:10:34.215192 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 12:10:34.769863 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 12:10:35.300615 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 12:10:39.589047 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 12:10:40.997306 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 12:10:41.004296 - All data has been loaded.
+
+2023-04-08 12:10:44.398508 - New Car with ID: CAR911 has been successfully added to the system!
+2023-04-08 12:10:54.788766 - 
+Saving data ...
+2023-04-08 12:11:42.875563 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 12:37:19.698729 - 
+Loading data ...
+2023-04-08 12:37:20.659696 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 12:37:21.233599 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 12:37:21.740595 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 12:37:27.383513 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 12:37:29.668059 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 12:37:29.685034 - All data has been loaded.
+
+2023-04-08 12:37:34.318819 - New Car with ID: CAR911 has been successfully added to the system!
+2023-04-08 12:37:38.944821 - 
+Saving data ...
+2023-04-08 12:37:42.082475 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 12:38:11.572141 - Write Data - Rows:1, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 12:38:19.836623 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 12:38:21.095991 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 12:38:22.049607 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 12:38:25.475981 - All data has been saved.
+
+2023-04-08 12:38:53.086859 - 
+Loading data ...
+2023-04-08 12:39:06.392865 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 12:39:25.595698 - 
+ERROR: 'TypeVar' object is not callable 
+
+STACK-TRACE: <traceback object at 0x000001E5AAE49500>
+2023-04-08 12:39:25.627679 - 
+Saving data ...
+2023-04-08 12:39:25.639671 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 12:39:25.644675 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 12:39:25.649672 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 12:39:25.653679 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 12:39:25.659671 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 12:39:25.661669 - All data has been saved.
+
+2023-04-08 14:15:32.193597 - 
+Loading data ...
+2023-04-08 14:15:33.043541 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 14:15:33.792203 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 14:15:34.689483 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 14:15:44.422561 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 14:15:52.302599 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 14:15:59.459316 - All data has been loaded.
+
+2023-04-08 14:16:15.935094 - New Car with ID: CAR911 has been successfully added to the system!
+2023-04-08 14:16:27.164871 - 
+Saving data ...
+2023-04-08 14:16:31.180339 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 14:16:55.620674 - Write Data - Rows:1, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 14:16:59.585009 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 14:17:00.438938 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 14:17:01.153194 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 14:17:02.166308 - All data has been saved.
+
+2023-04-08 14:17:40.558370 - 
+Loading data ...
+2023-04-08 14:17:47.127840 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 14:45:54.971724 - 
+Loading data ...
+2023-04-08 14:45:55.562605 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 14:46:31.165985 - 
+ERROR: 'CarRentalSystem' object has no attribute 'deserialize_handler' 
+
+STACK-TRACE: <traceback object at 0x0000025A38261C00>
+2023-04-08 14:46:31.178954 - 
+Saving data ...
+2023-04-08 14:46:31.190961 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 14:46:31.194955 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 14:46:31.197951 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 14:46:31.200948 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 14:46:31.203949 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 14:46:31.204950 - All data has been saved.
+
+2023-04-08 14:48:05.703126 - 
+Loading data ...
+2023-04-08 14:48:05.921117 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 14:48:06.345121 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 14:48:30.113709 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 14:48:58.527113 - 
+Loading data ...
+2023-04-08 14:48:59.514013 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 14:49:00.847886 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 14:49:01.328964 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 14:49:05.401294 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 14:49:06.997100 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 14:49:07.019100 - All data has been loaded.
+
+2023-04-08 14:49:09.350192 - New Car with ID: CAR911 has been successfully added to the system!
+2023-04-08 14:49:09.375191 - 
+Saving data ...
+2023-04-08 14:49:09.390186 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 14:49:11.344878 - Write Data - Rows:1, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 14:49:11.347882 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 14:49:11.351883 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 14:49:11.354890 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 14:49:11.356881 - All data has been saved.
+
+2023-04-08 14:49:20.310187 - 
+Loading data ...
+2023-04-08 14:49:24.928595 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 14:49:51.347989 - 
+ERROR: 'DataManager' object has no attribute 'deserialize_handler' 
+
+STACK-TRACE: <traceback object at 0x0000012F34E102C0>
+2023-04-08 14:49:51.357978 - 
+Saving data ...
+2023-04-08 14:49:51.366981 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 14:49:51.369981 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 14:49:51.372983 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 14:49:51.375985 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 14:49:51.378981 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 14:49:51.380984 - All data has been saved.
+
+2023-04-08 15:12:39.086991 - 
+Loading data ...
+2023-04-08 15:12:39.091991 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 15:12:39.093991 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 15:12:39.095998 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 15:12:39.096992 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 15:12:39.098997 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 15:12:39.099996 - All data has been loaded.
+
+2023-04-08 15:12:39.101993 - New Car with ID: CAR911 has been successfully added to the system!
+2023-04-08 15:12:39.103993 - 
+Saving data ...
+2023-04-08 15:12:39.106992 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 15:12:39.110996 - Write Data - Rows:1, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 15:12:39.114993 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 15:12:39.117995 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 15:12:39.119991 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 15:12:39.121992 - All data has been saved.
+
+2023-04-08 15:13:00.216938 - 
+Loading data ...
+2023-04-08 15:13:06.688853 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 15:40:31.492743 - 
+Loading data ...
+2023-04-08 15:40:35.420625 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 16:15:15.387989 - 
+Loading data ...
+2023-04-08 16:15:22.469015 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 16:17:48.917241 - 
+Loading data ...
+2023-04-08 16:17:50.041246 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 16:17:56.478937 - 
+ERROR: deserialize() missing 1 required positional argument: 'entities_factory' 
+
+STACK-TRACE: <traceback object at 0x0000017B5F3337C0>
+2023-04-08 16:17:56.485915 - 
+Saving data ...
+2023-04-08 16:17:56.492902 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 16:17:56.495909 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 16:17:56.499906 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 16:17:56.502919 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 16:17:56.505909 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 16:17:56.506907 - All data has been saved.
+
+2023-04-08 16:18:35.966963 - 
+Loading data ...
+2023-04-08 16:18:38.119735 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 16:19:46.851493 - 
+Loading data ...
+2023-04-08 16:19:48.225629 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 16:21:26.109075 - Read Data - Rows:1, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 16:21:30.119184 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 16:21:34.481890 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 16:21:36.180781 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 16:21:36.191779 - All data has been loaded.
+
+2023-04-08 16:21:38.539745 - Car with ID: CAR911 already exists in the system!
+2023-04-08 16:21:38.557790 - 
+Saving data ...
+2023-04-08 16:21:38.561748 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 16:21:40.939312 - Write Data - Rows:1, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 16:21:40.948298 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 16:21:40.957317 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 16:21:40.963293 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 16:21:40.965295 - All data has been saved.
+
+2023-04-08 16:21:53.913287 - 
+Loading data ...
+2023-04-08 16:21:53.918267 - No Data - Entity:EntityType.CUSTOMER, Data:DataType.CSV.
+2023-04-08 16:21:53.920259 - Read Data - Rows:1, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 16:21:53.921255 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-08 16:21:53.923257 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 16:21:53.925273 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-08 16:21:53.926260 - All data has been loaded.
+
+2023-04-08 16:21:53.927253 - Car with ID: CAR911 already exists in the system!
+2023-04-08 16:21:53.928256 - 
+Saving data ...
+2023-04-08 16:21:53.930256 - Write Data - Rows:0, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-08 16:21:53.933254 - Write Data - Rows:1, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-08 16:21:53.935255 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-08 16:21:53.938258 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-08 16:21:53.941253 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-08 16:21:53.942255 - All data has been saved.
+

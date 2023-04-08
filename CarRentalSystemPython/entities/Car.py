@@ -1,13 +1,14 @@
 from __future__ import annotations
 from typing import Type
 import json
+import uuid
 
 from entities.DataType import DataType  
 from entities.ISerializedEntity import ISerializedEntity 
 
 
 class Car(ISerializedEntity["Car"]):
-    def __init__(self, id: str, make: str, model: str, year: int, daily_price: float, rented: bool):
+    def __init__(self, id: str = str(uuid.uuid4()), make: str = "", model: str = "", year: int = 0, daily_price: float = 0.0, rented: bool = False):
         self._id = id
         self._make = make
         self._model = model
