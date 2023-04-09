@@ -2,6 +2,7 @@ import datetime
 import sys
 import argparse
 from typing import List
+from utils.DateUtils import DateUtils
 from controller.CarRentalSystem import CarRentalSystem
 from controller.CarRentalContext import CarRentalContext
 from controller.CarRentalCommands import CarRentalCommands
@@ -40,7 +41,7 @@ def main(args) -> int:
             elif arg_key == "from":
                 arg_from  = arg_value.split(",")
             elif arg_key == "to":
-                arg_from  = arg_value.split(",")
+                arg_to  = arg_value.split(",")
 
     # Initialize car rental system 
     car_rental_system = CarRentalSystem()
@@ -48,10 +49,11 @@ def main(args) -> int:
     context : CarRentalContext = CarRentalContext()
     context.car_rental_system = car_rental_system
     context.command = arg_command
-    context.car_id = arg_car[0] if arg_car else None
-    context.customer_id = arg_customer[0] if arg_customer else None
-    context.rent_from = arg_from[0] if arg_from else datetime.datetime.now()
-    context.rent_to = arg_to[0] if arg_to else context.rent_from + datetime.timedelta(days=3)
+    context.car_id = arg_car[0] if len(arg_car) else None
+    context.customer_id = arg_customer[0] if len(arg_customer) else None
+    now = datetime.datetime.now().date()
+    context.rent_from = DateUtils.parse_date(arg_from[0]) if len(arg_from) else now
+    context.rent_to =  DateUtils.parse_date(arg_to[0]) if len(arg_to) else DateUtils.parse_date(context.rent_from).replace(day=now.day + 3).date()
 
     # Go!
     try:
@@ -83,12 +85,12 @@ def main(args) -> int:
                 log_and_show(context, "\nERROR: Invalid car or customer ID provided! Usage: cmd=rent_car car=\"ID\" customer=\"ID\"")
                 sys.exit(-1)
             context = CarRentalCommands.rent_car(context, 
-                                                lambda: show_message(context, "Customer-ID is empty!"), 
-                                                lambda: show_message(context, f"Car with ID:{context.car_id} is not avaliable!"),
-                                                lambda: show_message(context, 
-                                                                     f"\nCar with (ID-Car:{context.car_id}) has been rented " +
-                                                                     f"by Customer (ID-Customer:{context.customer_id}," +
-                                                                     f" ID-Rental: {context.rental_transaction.id}).\n"))
+                                                lambda ctx: show_message(ctx, "Customer-ID is empty!"), 
+                                                lambda ctx: show_message(ctx, f"Car with ID:{ctx.car_id} is not avaliable!"),
+                                                lambda ctx: show_message(ctx, 
+                                                                     f"\nCar with (ID-Car:{ctx.car_id}) has been rented " +
+                                                                     f"by Customer (ID-Customer:{ctx.customer_id}," +
+                                                                     f" ID-Rental: {ctx.rental_transaction.id}).\n"))
 
                                                  
         elif arg_command == "return_car":
@@ -114,7 +116,8 @@ def main(args) -> int:
         
     except Exception as ex:
         log_and_show(context, f"\nERROR: {ex} \n\nSTACK-TRACE: {ex.__traceback__}")
-        CarRentalCommands.save_data(context)
+        # don'save date if exception is occured 
+        # CarRentalCommands.save_data(context)
         sys.exit(-1)
 
 def customer_empty(context: CarRentalContext): 

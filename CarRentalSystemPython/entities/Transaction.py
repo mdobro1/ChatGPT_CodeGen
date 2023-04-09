@@ -13,6 +13,7 @@ from entities.ISerializedEntity import ISerializedEntity
 from entities.Customer import Customer
 from entities.Car import Car
 from entities.DataType import DataType
+from utils.DateUtils import DateUtils
 
 T = TypeVar('T')
 
@@ -143,16 +144,19 @@ class Transaction(ISerializedExtendedEntity["Transaction"], ISerializeOwner):
         entities_list.archive_transaction(self)
 
     def _calculate_total_price(self) -> float:
-        rental_period = self._return_date - self._rental_date
-        total_days = int(rental_period.total_seconds() / timedelta(days=1).total_seconds())
-        if total_days < 1:
-            total_days = 1
-        return total_days * self._car.daily_price
+        if self._return_date and self._return_date:
+            rental_period = self._return_date - self._rental_date
+            total_days = int(rental_period.total_seconds() / timedelta(days=1).total_seconds())
+            if total_days < 1:
+                total_days = 1
+            return total_days * self._car.daily_price
+        else:
+            return 0.0
 
     def serialize(self, data_type: DataType) -> str:
         if data_type == DataType.CSV:
-            return f"{self._id},{self._customer.id},{self._car.id},{self._rental_date.strftime('%m/%d/%Y')}," \
-                 + f"{self._return_date.strftime('%m/%d/%Y')},{self._closed_date.strftime('%m/%d/%Y')},{self._is_closed}"
+            return f"{self._id},{self._customer.id},{self._car.id},{DateUtils.date_to_str(self._rental_date)}," \
+                 + f"{DateUtils.date_to_str(self._return_date)},{DateUtils.date_to_str(self._closed_date)},{self._is_closed}"
         elif data_type == DataType.JSON:
             return json.dumps(self.__dict__)
         else:
@@ -161,16 +165,25 @@ class Transaction(ISerializedExtendedEntity["Transaction"], ISerializeOwner):
     def deserialize_handler(self, data: str, data_type: DataType, entities_list: IEntitiesList) -> Transaction:
         return Transaction.deserialize(data, data_type, entities_list)
 
-    def deserialize_handler(self, data: str, data_type: DataType) -> Transaction:
-        return Transaction.deserialize(data, data_type, self._owner)
+    #def deserialize_handler(self, data: str, data_type: DataType) -> Transaction:
+    #    return Transaction.deserialize(data, data_type)
 
     def assign_owner(self, entities_list: IEntitiesList) -> None:
         self._owner = entities_list
 
+    '''
     @staticmethod
     def deserialize(data: str, data_type: DataType) -> Transaction:
         if data_type == DataType.CSV:
             return Transaction.create_from_csv(data)
+        elif data_type == DataType.JSON:
+            return Transaction(**json.loads(data))         
+    '''      
+
+    @staticmethod
+    def deserialize(data: str, data_type: DataType, entities_list: IEntitiesList) -> Transaction:
+        if data_type == DataType.CSV:
+            return Transaction.create_from_csv(data, entities_list)
         elif data_type == DataType.JSON:
             return Transaction(**json.loads(data))               
         
@@ -204,7 +217,7 @@ class Transaction(ISerializedExtendedEntity["Transaction"], ISerializeOwner):
         # create rental transaction
         newTransaction = Transaction(txID, customer, car, rental_date, return_date, None, False)
         newTransaction.customer.rent_car(car)
-        entities_list.rent_car(customer_id, car_id, rental_date, return_date)
+        #entities_list.rent_car(customer_id, car_id, rental_date, return_date)
         entities_list.new_transaction(newTransaction)
         return newTransaction
         
@@ -230,18 +243,16 @@ class Transaction(ISerializedExtendedEntity["Transaction"], ISerializeOwner):
             if customer is None:
                 customer = Transaction.default_customer(customer_id)
             else:
-                customer.RentedCarsPoolNew(entities_list.GetRentedCars(customer))
+                rented_cars = entities_list.get_rented_cars_by_customer(customer)
+                customer.rented_cars_pool_new(rented_cars)
 
-            car = entities_list.LookupCar(car_id)
+            car = entities_list.lookup_car(car_id)
             if car is None:
                 car = Transaction.default_car(car_id)
         
-        rental_date = datetime.strptime(values[3], '%m/%d/%Y')
-        return_date = datetime.strptime(values[4], '%m/%d/%Y')
-        
-        closed_date = None
-        if values[5] != "None":
-            closed_date = datetime.strptime(values[5], '%m/%d/%Y')
+        rental_date = DateUtils.parse_date(values[3], None)
+        return_date = DateUtils.parse_date(values[4], None)
+        closed_date = DateUtils.parse_date(values[5], None)
         
         is_closed = bool(values[6])
         

@@ -1,0 +1,431 @@
+2023-04-09 14:38:31.992822 - 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "./car_rental.py", line 87, in main
+    context = CarRentalCommands.rent_car(context,
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalCommands.py", line 54, in rent_car
+    rentalContext = posteriorReturnCar(rentalContext)
+TypeError: <lambda>() takes 0 positional arguments but 1 was given
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 155, in serialize
+    + f"{self._return_date.strftime('%m/%d/%Y')},{self._closed_date.strftime('%m/%d/%Y')},{self._is_closed}"
+AttributeError: 'NoneType' object has no attribute 'strftime'
+2023-04-09 14:42:40.754742 - 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "./car_rental.py", line 87, in main
+    context = CarRentalCommands.rent_car(context,
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalCommands.py", line 54, in rent_car
+    rentalContext = posteriorReturnCar()
+  File "./car_rental.py", line 93, in <lambda>
+    f" ID-Rental: {context.rental_transaction.id}).\n"))
+AttributeError: 'NoneType' object has no attribute 'id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 155, in serialize
+    + f"{self._return_date.strftime('%m/%d/%Y')},{self._closed_date.strftime('%m/%d/%Y')},{self._is_closed}"
+AttributeError: 'NoneType' object has no attribute 'strftime'
+2023-04-09 14:45:23.327711 - 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "./car_rental.py", line 87, in main
+    context = CarRentalCommands.rent_car(context,
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalCommands.py", line 54, in rent_car
+    posteriorReturnCar()
+  File "./car_rental.py", line 93, in <lambda>
+    f" ID-Rental: {context.rental_transaction.id}).\n"))
+AttributeError: 'NoneType' object has no attribute 'id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 155, in serialize
+    + f"{self._return_date.strftime('%m/%d/%Y')},{self._closed_date.strftime('%m/%d/%Y')},{self._is_closed}"
+AttributeError: 'NoneType' object has no attribute 'strftime'
+2023-04-09 15:16:51.107895 - 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "./car_rental.py", line 87, in main
+    context = CarRentalCommands.rent_car(context,
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalCommands.py", line 54, in rent_car
+    posteriorReturnCar()
+  File "./car_rental.py", line 93, in <lambda>
+    f" ID-Rental: {context.rental_transaction.id}).\n"))
+AttributeError: 'NoneType' object has no attribute 'id'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 155, in serialize
+    + f"{self._return_date.strftime('%m/%d/%Y')},{self._closed_date.strftime('%m/%d/%Y')},{self._is_closed}"
+AttributeError: 'NoneType' object has no attribute 'strftime'
+2023-04-09 15:23:29.446991 - 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "./car_rental.py", line 87, in main
+    context = CarRentalCommands.rent_car(context,
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalCommands.py", line 51, in rent_car
+    rentalContext.action_completed = bool(rentalContext.RentalTransaction.id)
+AttributeError: 'CarRentalContext' object has no attribute 'RentalTransaction'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 155, in serialize
+    + f"{self._return_date.strftime('%m/%d/%Y')},{self._closed_date.strftime('%m/%d/%Y')},{self._is_closed}"
+AttributeError: 'NoneType' object has no attribute 'strftime'
+2023-04-09 15:27:27.504453 - 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 155, in serialize
+    + f"{self._return_date.strftime('%m/%d/%Y')},{self._closed_date.strftime('%m/%d/%Y')},{self._is_closed}"
+AttributeError: 'NoneType' object has no attribute 'strftime'
+2023-04-09 15:27:27.518442 - 'NoneType' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "./car_rental.py", line 114, in main
+    CarRentalCommands.save_data(context)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\controller\CarRentalCommands.py", line 103, in save_data
+    context.car_rental_system.save_data()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\controller\CarRentalSystem.py", line 310, in save_data
+    self.data_manager.write_data(self.current_transactions, EntityType.TRANSACTION, DataType.CSV, self.FILE_SUFFIX_CURRENT)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 95, in write_data
+    self.error_handler.handle_error(ex)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\ErrorHandler.py", line 22, in handle_error
+    raise ex
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 155, in serialize
+    + f"{self._return_date.strftime('%m/%d/%Y')},{self._closed_date.strftime('%m/%d/%Y')},{self._is_closed}"
+AttributeError: 'NoneType' object has no attribute 'strftime'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 155, in serialize
+    + f"{self._return_date.strftime('%m/%d/%Y')},{self._closed_date.strftime('%m/%d/%Y')},{self._is_closed}"
+AttributeError: 'NoneType' object has no attribute 'strftime'
+2023-04-09 15:40:08.101898 - combine() missing required argument 'time' (pos 2)
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 155, in serialize
+    return f"{self._id},{self._customer.id},{self._car.id},{DateUtils.date_to_str(self._rental_date)}," \
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\utils\DateUtils.py", line 20, in date_to_str
+    dt = datetime.combine(date_value)
+TypeError: combine() missing required argument 'time' (pos 2)
+2023-04-09 15:40:10.438672 - combine() missing required argument 'time' (pos 2)
+Traceback (most recent call last):
+  File "./car_rental.py", line 114, in main
+    CarRentalCommands.save_data(context)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalCommands.py", line 103, in save_data
+    context.car_rental_system.save_data()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalSystem.py", line 310, in save_data
+    self.data_manager.write_data(self.current_transactions, EntityType.TRANSACTION, DataType.CSV, self.FILE_SUFFIX_CURRENT)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 95, in write_data
+    self.error_handler.handle_error(ex)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\ErrorHandler.py", line 22, in handle_error
+    raise ex
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 155, in serialize
+    return f"{self._id},{self._customer.id},{self._car.id},{DateUtils.date_to_str(self._rental_date)}," \
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\utils\DateUtils.py", line 20, in date_to_str
+    dt = datetime.combine(date_value)
+TypeError: combine() missing required argument 'time' (pos 2)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 155, in serialize
+    return f"{self._id},{self._customer.id},{self._car.id},{DateUtils.date_to_str(self._rental_date)}," \
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\utils\DateUtils.py", line 20, in date_to_str
+    dt = datetime.combine(date_value)
+TypeError: combine() missing required argument 'time' (pos 2)
+2023-04-09 15:41:56.119057 - 'module' object is not callable
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 155, in serialize
+    return f"{self._id},{self._customer.id},{self._car.id},{DateUtils.date_to_str(self._rental_date)}," \
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\utils\DateUtils.py", line 21, in date_to_str
+    dt = datetime.combine(date_value, time())
+TypeError: 'module' object is not callable
+2023-04-09 15:41:57.403293 - 'module' object is not callable
+Traceback (most recent call last):
+  File "./car_rental.py", line 114, in main
+    CarRentalCommands.save_data(context)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalCommands.py", line 103, in save_data
+    context.car_rental_system.save_data()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalSystem.py", line 310, in save_data
+    self.data_manager.write_data(self.current_transactions, EntityType.TRANSACTION, DataType.CSV, self.FILE_SUFFIX_CURRENT)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 95, in write_data
+    self.error_handler.handle_error(ex)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\ErrorHandler.py", line 22, in handle_error
+    raise ex
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 155, in serialize
+    return f"{self._id},{self._customer.id},{self._car.id},{DateUtils.date_to_str(self._rental_date)}," \
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\utils\DateUtils.py", line 21, in date_to_str
+    dt = datetime.combine(date_value, time())
+TypeError: 'module' object is not callable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 90, in write_data
+    line = self.serialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 142, in serialize
+    return data.serialize(dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 155, in serialize
+    return f"{self._id},{self._customer.id},{self._car.id},{DateUtils.date_to_str(self._rental_date)}," \
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\utils\DateUtils.py", line 21, in date_to_str
+    dt = datetime.combine(date_value, time())
+TypeError: 'module' object is not callable
+2023-04-09 15:45:28.639520 - deserialize() missing 2 required positional arguments: 'entityType' and 'entities_factory'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 70, in read_data_extended_job
+    data = self.deserialize(line, data_type)
+TypeError: deserialize() missing 2 required positional arguments: 'entityType' and 'entities_factory'
+2023-04-09 15:55:26.914326 - unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 48, in read_data_job
+    data = self.deserialize(line.strip(), data_type, entity_type, self.owner)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 155, in deserialize
+    entity : T = entities_factory.new_entity(entityType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\controller\CarRentalSystem.py", line 319, in new_entity
+    if entity_type == EntityType.TRANSACTION: return Transaction()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 96, in __init__
+    self._total_price = self._calculate_total_price()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 147, in _calculate_total_price
+    rental_period = self._return_date - self._rental_date
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+2023-04-09 15:56:31.398167 - unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 48, in read_data_job
+    data = self.deserialize(line.strip(), data_type, entity_type, self.owner)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 155, in deserialize
+    entity : T = entities_factory.new_entity(entityType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalSystem.py", line 319, in new_entity
+    if entity_type == EntityType.TRANSACTION: return Transaction()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 96, in __init__
+    self._total_price = self._calculate_total_price()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 147, in _calculate_total_price
+    rental_period = self._return_date - self._rental_date
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+2023-04-09 15:58:31.628421 - unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 48, in read_data_job
+    data = self.deserialize(line.strip(), data_type, entity_type, self.owner)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 155, in deserialize
+    entity : T = entities_factory.new_entity(entityType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalSystem.py", line 319, in new_entity
+    if entity_type == EntityType.TRANSACTION: return Transaction()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 96, in __init__
+    self._total_price = self._calculate_total_price()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 147, in _calculate_total_price
+    rental_period = self._return_date - self._rental_date
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+2023-04-09 16:05:33.188827 - unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 48, in read_data_job
+    data = self.deserialize(line.strip(), data_type, entity_type, self.owner)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 155, in deserialize
+    entity : T = entities_factory.new_entity(entityType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalSystem.py", line 322, in new_entity
+    return Transaction()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 97, in __init__
+    self._total_price = self._calculate_total_price()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 148, in _calculate_total_price
+    rental_period = self._return_date - self._rental_date
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+2023-04-09 16:14:51.611416 - unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, self.owner)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 173, in deserialize_extended
+    entity : E = entities_factory.new_entity(entityType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalSystem.py", line 319, in new_entity
+    return Transaction()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 96, in __init__
+    self._total_price = self._calculate_total_price()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 147, in _calculate_total_price
+    rental_period = self._return_date - self._rental_date
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+2023-04-09 16:17:38.625154 - unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, self.owner)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 173, in deserialize_extended
+    entity = entities_factory.new_entity(entityType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\controller\CarRentalSystem.py", line 319, in new_entity
+    return Transaction()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 96, in __init__
+    self._total_price = self._calculate_total_price()
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 147, in _calculate_total_price
+    rental_period = self._return_date - self._rental_date
+TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'
+2023-04-09 16:22:36.454122 - deserialize() takes 2 positional arguments but 3 were given
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, self.owner)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 179, in deserialize_extended
+    return entity.deserialize_handler(data, dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 169, in deserialize_handler
+    return Transaction.deserialize(data, data_type, self._owner)
+TypeError: deserialize() takes 2 positional arguments but 3 were given
+2023-04-09 16:29:48.189819 - create_from_csv() missing 1 required positional argument: 'entities_list'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, self.owner)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 179, in deserialize_extended
+    return entity.deserialize_handler(data, dataType)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 169, in deserialize_handler
+    return Transaction.deserialize(data, data_type)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 177, in deserialize
+    return Transaction.create_from_csv(data)
+TypeError: create_from_csv() missing 1 required positional argument: 'entities_list'
+2023-04-09 16:37:38.966823 - deserialize_extended() missing 1 required positional argument: 'entitiesList'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, entitiesList)
+TypeError: deserialize_extended() missing 1 required positional argument: 'entitiesList'
+2023-04-09 16:37:56.401749 - deserialize_extended() missing 1 required positional argument: 'entitiesList'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, entitiesList)
+TypeError: deserialize_extended() missing 1 required positional argument: 'entitiesList'
+2023-04-09 16:39:54.477515 - 'Customer' object has no attribute 'RentedCarsPoolNew'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, entitiesList, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 179, in deserialize_extended
+    return entity.deserialize_handler(data, dataType, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 166, in deserialize_handler
+    return Transaction.deserialize(data, data_type, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 186, in deserialize
+    return Transaction.create_from_csv(data, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 246, in create_from_csv
+    customer.RentedCarsPoolNew(entities_list.GetRentedCars(customer))
+AttributeError: 'Customer' object has no attribute 'RentedCarsPoolNew'
+2023-04-09 16:43:00.645984 - get_rented_cars() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, entitiesList, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 179, in deserialize_extended
+    return entity.deserialize_handler(data, dataType, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 166, in deserialize_handler
+    return Transaction.deserialize(data, data_type, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 186, in deserialize
+    return Transaction.create_from_csv(data, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 246, in create_from_csv
+    customer.rented_cars_pool_new(entities_list.get_rented_cars(customer))
+TypeError: get_rented_cars() takes 1 positional argument but 2 were given
+2023-04-09 16:43:29.499040 - get_rented_cars() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, entitiesList, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 179, in deserialize_extended
+    return entity.deserialize_handler(data, dataType, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 166, in deserialize_handler
+    return Transaction.deserialize(data, data_type, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 186, in deserialize
+    return Transaction.create_from_csv(data, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 246, in create_from_csv
+    customer.rented_cars_pool_new(entities_list.get_rented_cars(customer))
+TypeError: get_rented_cars() takes 1 positional argument but 2 were given
+2023-04-09 16:44:12.176722 - get_rented_cars() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, entitiesList, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 179, in deserialize_extended
+    return entity.deserialize_handler(data, dataType, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 166, in deserialize_handler
+    return Transaction.deserialize(data, data_type, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 186, in deserialize
+    return Transaction.create_from_csv(data, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 246, in create_from_csv
+    customer.rented_cars_pool_new(entities_list.get_rented_cars(customer))
+TypeError: get_rented_cars() takes 1 positional argument but 2 were given
+2023-04-09 16:45:01.172509 - get_rented_cars() takes 1 positional argument but 2 were given
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, entitiesList, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 179, in deserialize_extended
+    return entity.deserialize_handler(data, dataType, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 166, in deserialize_handler
+    return Transaction.deserialize(data, data_type, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 186, in deserialize
+    return Transaction.create_from_csv(data, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 246, in create_from_csv
+    customer.rented_cars_pool_new(entities_list.get_rented_cars(customer))
+TypeError: get_rented_cars() takes 1 positional argument but 2 were given
+2023-04-09 16:48:06.616407 - 'CarRentalSystem' object has no attribute 'get_rented_cars_by_customer'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, entitiesList, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 179, in deserialize_extended
+    return entity.deserialize_handler(data, dataType, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 166, in deserialize_handler
+    return Transaction.deserialize(data, data_type, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 186, in deserialize
+    return Transaction.create_from_csv(data, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 246, in create_from_csv
+    rented_cars = entities_list.get_rented_cars_by_customer(customer)
+AttributeError: 'CarRentalSystem' object has no attribute 'get_rented_cars_by_customer'
+2023-04-09 16:50:56.456821 - 'Customer' object has no attribute '_rented_cars_pool_extend'
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, entitiesList, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\aspects\DataManager.py", line 179, in deserialize_extended
+    return entity.deserialize_handler(data, dataType, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 166, in deserialize_handler
+    return Transaction.deserialize(data, data_type, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 186, in deserialize
+    return Transaction.create_from_csv(data, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Transaction.py", line 247, in create_from_csv
+    customer.rented_cars_pool_new(rented_cars)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Customer.py", line 91, in rented_cars_pool_new
+    self._rented_cars_pool_extend(rented_cars)
+AttributeError: 'Customer' object has no attribute '_rented_cars_pool_extend'

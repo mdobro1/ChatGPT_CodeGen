@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CarRentalSystemController\CarRentalSystemController.csproj" />
+    <ProjectReference Include="..\SysUtils\SysUtils.csproj" />
   </ItemGroup>
 
 </Project>

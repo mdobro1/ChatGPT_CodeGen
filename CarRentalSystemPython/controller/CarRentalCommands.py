@@ -42,16 +42,16 @@ class CarRentalCommands:
             return rentalContext
 
         # Rent first available car by given customer for 3 days
-        rentalContext.RentalTransaction = rentalContext.car_rental_system.rent_car(
+        rentalContext.rental_transaction = rentalContext.car_rental_system.rent_car(
             rentalContext.customer_id,
             rentalContext.car_id,
             rentalContext.rent_from,
             rentalContext.rent_to)
 
-        rentalContext.ActionCompleted = bool(rentalContext.RentalTransaction.id)
+        rentalContext.action_completed = bool(rentalContext.rental_transaction.id)
 
-        if rentalContext.ActionCompleted:
-            rentalContext = posteriorReturnCar(rentalContext)
+        if rentalContext.action_completed: 
+            posteriorReturnCar(rentalContext)
 
         return rentalContext
 

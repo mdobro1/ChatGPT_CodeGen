@@ -1,0 +1,7 @@
+C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystem\SysUtils\bin\Debug\netcoreapp3.1\SysUtils.deps.json
+C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystem\SysUtils\bin\Debug\netcoreapp3.1\SysUtils.dll
+C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystem\SysUtils\bin\Debug\netcoreapp3.1\SysUtils.pdb
+C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystem\SysUtils\obj\Debug\netcoreapp3.1\SysUtils.AssemblyInfoInputs.cache
+C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystem\SysUtils\obj\Debug\netcoreapp3.1\SysUtils.AssemblyInfo.cs
+C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystem\SysUtils\obj\Debug\netcoreapp3.1\SysUtils.dll
+C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystem\SysUtils\obj\Debug\netcoreapp3.1\SysUtils.pdb

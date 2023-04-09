@@ -240,6 +240,9 @@ class CarRentalSystem(IEntitesFactory):
 
     def get_rented_cars(self):
         return self.rented_cars
+    
+    def get_rented_cars_by_customer(self, customer):
+        return self.get_rented_cars_customer(customer)
 
     def get_rented_cars_customer(self, customer):
         result = []
@@ -311,10 +314,14 @@ class CarRentalSystem(IEntitesFactory):
         self.data_manager.write_data(self.archive_transactions, EntityType.TRANSACTION, DataType.CSV, self.FILE_SUFFIX_ARCHIVE)
 
     def new_entity(self, entity_type: EntityType) -> Entity:
-        if entity_type == EntityType.CUSTOMER: return Customer()
-        if entity_type == EntityType.CAR: return Car()  
-        if entity_type == EntityType.TRANSACTION: return Transaction()
-        return None
+        if entity_type == EntityType.CUSTOMER: 
+            return Customer()
+        elif entity_type == EntityType.CAR: 
+            return Car()  
+        elif entity_type == EntityType.TRANSACTION: 
+            return Transaction()
+        else:
+            return None
 
     #===========================================================================
     # Logging, messages and errors handling

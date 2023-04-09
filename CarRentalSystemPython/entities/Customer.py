@@ -88,9 +88,9 @@ class Customer(ISerializedEntity["Customer"]):
 
     def rented_cars_pool_new(self, rented_cars: List[Car]) -> None:
         self._rented_cars_pool.clear()
-        self._rented_cars_pool_extend(rented_cars)
+        self.rented_cars_pool_extend(rented_cars)
 
     def rented_cars_pool_extend(self, rented_cars: List[Car]) -> None:
-        if rented_cars is None:
-            raise ValueError("rented_cars cannot be None")
+        if rented_cars is not None:
+            self._rented_cars_pool.extend(rented_cars)
 

@@ -6,6 +6,7 @@
     "configurations": [
 
 
+
         {
             "name": "Python: Current File",
             "type": "python",
@@ -88,7 +89,9 @@
             "args": [
                 "cmd=rent_car",
                 "car=\"CAR911\"",
-                "customer=\"C003\""
+                "customer=\"C003\"",
+                "from=\"2023-04-09\"",
+                "to=\"2023-04-12\""
             ],
             "justMyCode": true
         }

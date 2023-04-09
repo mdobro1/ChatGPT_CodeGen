@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using sf.utils;
 
 namespace sf.systems.rentals.cars
 {
@@ -80,8 +81,10 @@ namespace sf.systems.rentals.cars
             context.Command = argCommand;
             context.CarID = argCar?[0];
             context.CustomerID = argCustomer?[0];
-            context.RentFrom = CarRentalContext.ParseDate(argFrom[0], DateTime.Now);
-            context.RentTo = CarRentalContext.ParseDate(argTo[0], DateTime.Now.AddDays(3));
+            string rentFrom = argFrom?[0];
+            string rentTo = argTo?[0];
+            context.RentFrom = rentFrom.ParseDate(DateTime.Now);
+            context.RentTo = rentTo.ParseDate(DateTime.Now.AddDays(3));
 
             // Go!
             try
@@ -173,7 +176,8 @@ namespace sf.systems.rentals.cars
             catch (Exception ex)
             {
                 logAndShow(context, $"\nERROR: {ex.Message} \n\nSTACK-TRACE: {ex.StackTrace}");
-                CarRentalCommands.SaveData(context);
+                // don'save date if exception is occured 
+                // CarRentalCommands.SaveData(context);
 
                 return -1;
             }

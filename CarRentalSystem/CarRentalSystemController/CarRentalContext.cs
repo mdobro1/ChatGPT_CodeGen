@@ -15,12 +15,6 @@ namespace sf.systems.rentals.cars
         public CarRentalSystem CarRentalSystem { get; set; }
         public Transaction RentalTransaction { get; set; }
         public bool ActionCompleted { get; set; }
-        public static DateTime ParseDate(string strDate, DateTime defaultDate)
-        {
-            DateTime resultDate = default;
-            if (!DateTime.TryParse(strDate, out resultDate))
-                resultDate = defaultDate;
-            return resultDate;
-        }
+
     }
 }
