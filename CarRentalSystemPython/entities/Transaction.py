@@ -61,11 +61,11 @@ class IEntitiesList(ABC):
         pass
     
     @abstractmethod
-    def rent_car(self, car: Car):
+    def rent_car(self, customer_id: str, car_id: str, rental_date: datetime, return_date: datetime):
         pass
     
     @abstractmethod
-    def return_car(self, car: Car):
+    def return_car(self, customer: Customer, car: Car):
         pass
 
 
@@ -187,7 +187,7 @@ class Transaction(ISerializedExtendedEntity["Transaction"], ISerializeOwner):
             raise ValueError("Rental date cannot be bigger than return date!")
         
         # get customer
-        customer = entities_list.LookupCustomer(customer_id)
+        customer = entities_list.lookup_customer(customer_id)
         # validate customer 
         if customer is None:
             raise ValueError(f"Customer with ID: {customer_id} has not been found!")
@@ -199,13 +199,13 @@ class Transaction(ISerializedExtendedEntity["Transaction"], ISerializeOwner):
             raise ValueError(f"Car with ID: {car_id} has not been found!")
         
         # generate Tx-ID
-        txID = str(uuid4.uuid4())
+        txID = str(uuid.uuid4())
         
         # create rental transaction
         newTransaction = Transaction(txID, customer, car, rental_date, return_date, None, False)
         newTransaction.customer.rent_car(car)
-        entities_list.rent_car(car)
-        entities_list.NewTransaction(newTransaction)
+        entities_list.rent_car(customer_id, car_id, rental_date, return_date)
+        entities_list.new_transaction(newTransaction)
         return newTransaction
         
     @staticmethod
@@ -226,7 +226,7 @@ class Transaction(ISerializedExtendedEntity["Transaction"], ISerializeOwner):
             customer = Transaction.default_customer(customer_id)
             car = Transaction.default_car(car_id)
         else:
-            customer = entities_list.LookupCustomer(customer_id)
+            customer = entities_list.lookup_customer(customer_id)
             if customer is None:
                 customer = Transaction.default_customer(customer_id)
             else:

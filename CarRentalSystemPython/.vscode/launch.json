@@ -4,6 +4,8 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
+
         {
             "name": "Python: Current File",
             "type": "python",
@@ -23,6 +25,85 @@
                 "car=\"CAR911,Porsche,Macant,2023,190.0\""
             ],
             "justMyCode": true
-        }    
+        }
+        ,
+        {
+            "name": "Python: Add CAR 11",
+            "type": "python",
+            "request": "launch",
+            "program": "./car_rental.py",
+            "console": "integratedTerminal",
+            "args": [
+                "cmd=add_car",
+                "car=\"CAR11,Audi,A1,2021,90.0\""
+            ],
+            "justMyCode": true
+        }
+        ,
+        {
+            "name": "Python: Register Customer C003",
+            "type": "python",
+            "request": "launch",
+            "program": "./car_rental.py",
+            "console": "integratedTerminal",
+            "args": [
+                "cmd=register_customer",
+                "customer=\"C003,Mary Jung,777 - 1234,911 Main St,mjung@example.com"
+            ],
+            "justMyCode": true
+        }
+        ,
+        {
+            "name": "Python: Delete Customer C003",
+            "type": "python",
+            "request": "launch",
+            "program": "./car_rental.py",
+            "console": "integratedTerminal",
+            "args": [
+                "cmd=delete_customer",
+                "customer=\"C003"
+            ],
+            "justMyCode": true
+        }
+        ,
+        {
+            "name": "Python: Delete Car CAR11",
+            "type": "python",
+            "request": "launch",
+            "program": "./car_rental.py",
+            "console": "integratedTerminal",
+            "args": [
+                "cmd=delete_car",
+                "car=\"CAR11"
+            ],
+            "justMyCode": true
+        }
+        ,
+        {
+            "name": "Python: Rent Car CAR911 by Customer C003",
+            "type": "python",
+            "request": "launch",
+            "program": "./car_rental.py",
+            "console": "integratedTerminal",
+            "args": [
+                "cmd=rent_car",
+                "car=\"CAR911\"",
+                "customer=\"C003\""
+            ],
+            "justMyCode": true
+        }
+        ,
+        {
+            "name": "Python: Return Car by Customer C003",
+            "type": "python",
+            "request": "launch",
+            "program": "./car_rental.py",
+            "console": "integratedTerminal",
+            "args": [
+                "cmd=return_car",
+                "customer=\"C003\""
+            ],
+            "justMyCode": true
+        }
     ]
 }

@@ -75,7 +75,15 @@ def main(args) -> int:
                 sys.exit(-1)
             context.car_id = arg_car[0]
             context.customer_id = arg_customer[0]
-            context = CarRentalCommands.rent_car(context)
+            context = CarRentalCommands.rent_car(context, 
+                                                lambda: show_message(context, "Customer-ID is empty!"), 
+                                                lambda: show_message(context, f"Car with ID:{context.car_id} is not avaliable!"),
+                                                lambda: show_message(context, 
+                                                                     f"\nCar with (ID-Car:{context.car_id}) has been rented " +
+                                                                     f"by Customer (ID-Customer:{context.customer_id}," +
+                                                                     f" ID-Rental: {context.rental_transaction.id}).\n"))
+
+                                                 
         elif arg_command == "return_car":
             if not arg_customer or len(arg_customer) != 1:
                 log_and_show(context, "\nERROR: Invalid customer ID provided! Usage: cmd=return_car customer=\"ID\"")
@@ -100,6 +108,9 @@ def main(args) -> int:
         log_and_show(context, f"\nERROR: {ex} \n\nSTACK-TRACE: {ex.__traceback__}")
         CarRentalCommands.save_data(context)
         sys.exit(-1)
+
+def customer_empty(context: CarRentalContext): 
+    show_message(context, "No customer found!")       
 
 if __name__ == '__main__':
     main(sys.argv[1:])

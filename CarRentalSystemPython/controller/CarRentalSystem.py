@@ -147,7 +147,7 @@ class CarRentalSystem(IEntitesFactory):
         result.extend(t for t in self.archive_transactions if t.car.id.lower() == car_id.lower())
         return result        
 
-    def rent_car(self, customer_id: str, car_id: str, rental_date: datetime, return_date: datetime) -> Transaction:
+    def rent_car_2(self, customer_id: str, car_id: str, rental_date: datetime, return_date: datetime) -> Transaction:
         car = self.lookup_car(car_id)
         if car not in self.available_cars:
             self.error_handler.handle_error(
@@ -252,7 +252,7 @@ class CarRentalSystem(IEntitesFactory):
         self.archive_transactions.append(transaction)
         self.current_transactions.remove(transaction)
 
-    def rent_car(self, car):
+    def rent_car_3(self, car):
         self.available_cars.remove(car)
         self.rented_cars.append(car)
 

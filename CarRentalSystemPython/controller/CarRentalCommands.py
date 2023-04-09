@@ -33,9 +33,9 @@ class CarRentalCommands:
 
         # go!
         # validate params
-        validationError = CarRentalCommands.validateCustomer(rentalContext, notifierEmptyCustomer)
+        validationError = CarRentalCommands.validate_customer(rentalContext, notifierEmptyCustomer)
         car = rentalContext.car_rental_system.get_car(rentalContext.car_id)
-        validationError = CarRentalCommands.validateCar(rentalContext, notifierCarIsnotAvaliable, car)
+        validationError = CarRentalCommands.validate_car(rentalContext, notifierCarIsnotAvaliable, car)
         
         # exit if a validation is occurred
         if validationError: 
