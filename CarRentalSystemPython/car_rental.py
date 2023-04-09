@@ -1,3 +1,4 @@
+import datetime
 import sys
 import argparse
 from typing import List
@@ -18,6 +19,8 @@ def main(args) -> int:
     arg_command = ""
     arg_customer = []
     arg_car = []
+    arg_from = []
+    arg_to = []
 
     # resolve args
     for arg in args:
@@ -34,6 +37,10 @@ def main(args) -> int:
                 arg_car = arg_value.split(",")
             elif arg_key == "customer":
                 arg_customer = arg_value.split(",")
+            elif arg_key == "from":
+                arg_from  = arg_value.split(",")
+            elif arg_key == "to":
+                arg_from  = arg_value.split(",")
 
     # Initialize car rental system 
     car_rental_system = CarRentalSystem()
@@ -43,6 +50,8 @@ def main(args) -> int:
     context.command = arg_command
     context.car_id = arg_car[0] if arg_car else None
     context.customer_id = arg_customer[0] if arg_customer else None
+    context.rent_from = arg_from[0] if arg_from else datetime.datetime.now()
+    context.rent_to = arg_to[0] if arg_to else context.rent_from + datetime.timedelta(days=3)
 
     # Go!
     try:
@@ -73,8 +82,6 @@ def main(args) -> int:
             if not arg_car or len(arg_car) != 1 or not arg_customer or len(arg_customer) != 1:
                 log_and_show(context, "\nERROR: Invalid car or customer ID provided! Usage: cmd=rent_car car=\"ID\" customer=\"ID\"")
                 sys.exit(-1)
-            context.car_id = arg_car[0]
-            context.customer_id = arg_customer[0]
             context = CarRentalCommands.rent_car(context, 
                                                 lambda: show_message(context, "Customer-ID is empty!"), 
                                                 lambda: show_message(context, f"Car with ID:{context.car_id} is not avaliable!"),
@@ -98,7 +105,8 @@ def main(args) -> int:
             show_message(context, "car_rental cmd=add_car car=\"CAR911,Porsche,Macant,2023,190.0\"")
             show_message(context, "car_rental cmd=add_car car=\"CAR11,Audi,A1,2021,90.0\"")
             show_message(context, "car_rental cmd=delete_car car=\"CAR11\"")
-            show_message(context, "car_rental cmd=rent_car car=\"CAR911\" customer=\"C003\"")
+            show_message(context, "car_rental cmd=rent_car car=\"CAR911\" customer=\"C003\" from=\"2021-10-01\" to=\"2021-10-03\"")
+            show_message(context, "car_rental cmd=return_car customer=\"C003\"")
             sys.exit(-1)
 
         CarRentalCommands.save_data(context)

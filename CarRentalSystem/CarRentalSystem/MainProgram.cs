@@ -22,6 +22,8 @@ namespace sf.systems.rentals.cars
             string argCommand = default;
             string[] argCustomer = default;
             string[] argCar = default;
+            string[] argFrom = default;
+            string[] argTo = default;
 
             // resolve args
             if (!testMode)
@@ -47,6 +49,12 @@ namespace sf.systems.rentals.cars
                             case "customer":
                                 argCustomer = argValue.Split(',');
                                 break;
+                            case "from":
+                                argFrom = argValue.Split(',');
+                                break;
+                            case "to":
+                                argTo = argValue.Split(',');
+                                break;
                         }
                     }
                 }
@@ -65,12 +73,15 @@ namespace sf.systems.rentals.cars
 
             // Initialize car rental system 
             var carRentalSystem = new CarRentalSystem();
+
             // create rental context
             var context = new CarRentalContext();
             context.CarRentalSystem = carRentalSystem;
             context.Command = argCommand;
             context.CarID = argCar?[0];
             context.CustomerID = argCustomer?[0];
+            context.RentFrom = CarRentalContext.ParseDate(argFrom[0], DateTime.Now);
+            context.RentTo = CarRentalContext.ParseDate(argTo[0], DateTime.Now.AddDays(3));
 
             // Go!
             try
@@ -119,8 +130,6 @@ namespace sf.systems.rentals.cars
                             logAndShow(context, "\nERROR: Invalid car or customer ID provided! Usage: cmd=rent_car car=\"ID\" customer=\"ID\"");
                             return -1;
                         }
-                        context.CarID = argCar[0];
-                        context.CustomerID = argCustomer[0];
                         context = CarRentalCommands.RentCar(context);
                         break;
                     case "return_car":
@@ -129,7 +138,6 @@ namespace sf.systems.rentals.cars
                             logAndShow(context, "\nERROR: Invalid customer ID provided! Usage: cmd=return_car customer=\"ID\"");
                             return -1;
                         }
-                        context.CustomerID = argCustomer[0];
                         context = CarRentalCommands.ReturnCar(context);
                         break;
 
@@ -154,7 +162,8 @@ namespace sf.systems.rentals.cars
                         showMessage(context, "CarRentalSystem cmd=add_car car=\"CAR911,Porsche,Macant,2023,190.0\"");
                         showMessage(context, "CarRentalSystem cmd=add_car car=\"CAR11,Audi,A1,2021,90.0\"");
                         showMessage(context, "CarRentalSystem cmd=delete_car car=\"CAR11\"");
-                        showMessage(context, "CarRentalSystem cmd=rent_car car=\"CAR911\" customer=\"C003\"");
+                        showMessage(context, "CarRentalSystem cmd=rent_car car=\"CAR911\" customer=\"C003\" from=2023-04-09 to=2023-04-12");
+                        showMessage(context, "CarRentalSystem cmd=return_car car=\"CAR911\"");
                         return -1;
                 }
 
@@ -169,6 +178,7 @@ namespace sf.systems.rentals.cars
                 return -1;
             }
         }
+
 
         private static void showMessage(CarRentalContext context, string message)
         {

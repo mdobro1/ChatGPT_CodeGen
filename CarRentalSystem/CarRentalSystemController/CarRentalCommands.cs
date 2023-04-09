@@ -47,8 +47,8 @@ namespace sf.systems.rentals.cars
             rentalContext.RentalTransaction = rentalContext.CarRentalSystem.RentCar(
                 rentalContext.CustomerID,
                 rentalContext.CarID,
-                DateTime.Now,
-                DateTime.Now.AddDays(3)
+                rentalContext.RentFrom,
+                rentalContext.RentTo
                 );
 
             rentalContext.ActionCompleted = 

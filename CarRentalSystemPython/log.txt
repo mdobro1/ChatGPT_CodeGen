@@ -1047,3 +1047,25 @@ Loading data ...
 2023-04-09 10:24:49.052213 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
 2023-04-09 10:24:49.053236 - All data has been loaded.
 
+2023-04-09 10:30:03.491491 - 
+Loading data ...
+2023-04-09 10:30:03.498458 - Read Data - Rows:1, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-09 10:30:03.504471 - Read Data - Rows:2, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-09 10:30:03.507458 - No Data - Entity:EntityType.CAR, Data:DataType.CSV.
+2023-04-09 10:30:03.509461 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-09 10:30:03.510460 - No Data - Entity:EntityType.TRANSACTION, Data:DataType.CSV.
+2023-04-09 10:30:03.512461 - All data has been loaded.
+
+2023-04-09 10:30:03.514461 - 
+ERROR: Already rented car with ID: CAR911! 
+
+STACK-TRACE: <traceback object at 0x0000024AC1125680>
+2023-04-09 10:30:03.516458 - 
+Saving data ...
+2023-04-09 10:30:03.518459 - Write Data - Rows:1, Entity:EntityType.CUSTOMER, Data:DataType.CSV ().
+2023-04-09 10:30:03.528455 - Write Data - Rows:2, Entity:EntityType.CAR, Data:DataType.CSV (available).
+2023-04-09 10:30:03.530467 - Write Data - Rows:0, Entity:EntityType.CAR, Data:DataType.CSV (rented).
+2023-04-09 10:30:03.533458 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (current).
+2023-04-09 10:30:03.535468 - Write Data - Rows:0, Entity:EntityType.TRANSACTION, Data:DataType.CSV (archive).
+2023-04-09 10:30:03.536457 - All data has been saved.
+

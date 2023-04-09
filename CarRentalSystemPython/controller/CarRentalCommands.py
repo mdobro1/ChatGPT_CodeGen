@@ -45,9 +45,8 @@ class CarRentalCommands:
         rentalContext.RentalTransaction = rentalContext.car_rental_system.rent_car(
             rentalContext.customer_id,
             rentalContext.car_id,
-            datetime.datetime.now(),
-            datetime.datetime.now() + datetime.timedelta(days=3)
-        )
+            rentalContext.rent_from,
+            rentalContext.rent_to)
 
         rentalContext.ActionCompleted = bool(rentalContext.RentalTransaction.id)
 
