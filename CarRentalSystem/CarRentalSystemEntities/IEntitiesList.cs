@@ -14,7 +14,7 @@ namespace sf.systems.rentals.cars
         Car LookupCar(string carId);
         void NewTransaction(Transaction transaction);
         void ArchiveTransaction(Transaction transaction);
-        void RentCar(Car car);
-        void ReturnCar(Car car);
+        void RegisterCarAsRented(Car car);
+        void UnregisterCarAsRented(Car car);
     }
 }

@@ -105,18 +105,6 @@ class CarRentalSystem(IEntitesFactory):
                 print(f"The specified customer with ID: {customer_id} has not been found!")
                 return Transaction()
 
-    def return_car(self, customer: Customer, car: Car) -> Transaction:
-        if car not in self.rented_cars:
-            raise ValueError("The specified car has not been rented by the specified customer.")
-
-        transaction = next((t for t in self.current_transactions if not t.is_closed and t.customer.id == customer.id and t.car.id == car.id), None)
-        if not transaction:
-            raise ValueError("The specified transaction could not be found.")
-
-        transaction.close_transaction(self)
-
-        return transaction
-
     def list_available_cars(self) -> List[Car]:
         return list(self.available_cars)
 
@@ -147,27 +135,25 @@ class CarRentalSystem(IEntitesFactory):
         result.extend(t for t in self.archive_transactions if t.car.id.lower() == car_id.lower())
         return result        
 
-    def rent_car_2(self, customer_id: str, car_id: str, rental_date: datetime, return_date: datetime) -> Transaction:
-        car = self.lookup_car(car_id)
-        if car not in self.available_cars:
-            self.error_handler.handle_error(
-                ValueError(f"The specified car (ID={car_id}) is not available for rental."))
-        customer = self.lookup_customer(customer_id)
-        if customer is not None:
-            return Transaction.open_transaction(self, customer_id, car_id, rental_date, return_date)
-        else:
-            self.message_handler.log_plus_message(f"The specified customer with ID: {customer_id} has not been found!")
-            return Transaction()
+    def return_all_customer_cars(self, customer: Customer) -> List[Transaction]:
+        closed_transactions = []
+        cars = self.get_rented_cars_by_customer(customer)
+        for car in cars:
+            closed_transactions.append(self.return_car(customer, car))
+        return closed_transactions
+
 
     def return_car(self, customer: Customer, car: Car) -> Transaction:
         if car not in self.rented_cars:
             self.error_handler.handle_error(ValueError("The specified car has not been rented by the specified customer."))
         transaction = next((t for t in self.current_transactions if not t.is_closed and t.customer.id == customer.id and t.car.id == car.id), None)
+
         if transaction is None:
             self.error_handler.handle_error(ValueError("The specified transaction could not be found."))
-        transaction.close_transaction(self)
-        return transaction
-
+        else:
+            transaction.close_transaction(self)
+            return transaction
+    
     def list_available_cars(self) -> List[Car]:
         return list(self.available_cars)
 
@@ -255,11 +241,11 @@ class CarRentalSystem(IEntitesFactory):
         self.archive_transactions.append(transaction)
         self.current_transactions.remove(transaction)
 
-    def rent_car_3(self, car):
+    def register_car_as_rented(self, car):
         self.available_cars.remove(car)
         self.rented_cars.append(car)
 
-    def return_car(self, car):
+    def unregister_car_as_rented(self, car: Car):
         self.rented_cars.remove(car)
         self.available_cars.append(car)
 
@@ -304,7 +290,22 @@ class CarRentalSystem(IEntitesFactory):
         self.data_manager.read_data(self.rented_cars, EntityType.CAR, DataType.CSV, str(RentedType.RENTED).split(".")[1].lower())
         
         self.data_manager.read_data_extended(self.current_transactions, EntityType.TRANSACTION, DataType.CSV, self.FILE_SUFFIX_CURRENT, self)
+        self.assign_customer_tranasctions(self.current_transactions)
+
         self.data_manager.read_data_extended(self.archive_transactions, EntityType.TRANSACTION, DataType.CSV, self.FILE_SUFFIX_ARCHIVE, self)
+
+    def assign_customer_tranasctions(self, transactions : List[Transaction]):
+        for transaction in transactions:   
+            self.assign_customer_transaction(transaction)
+    
+    def assign_customer_transaction(self, transaction):
+        customer = transaction.customer
+
+        if customer is not None:
+            rented_cars = self.get_rented_cars_by_customer(customer)
+            customer.rented_cars_pool_new(rented_cars)
+        else:
+            self.log_and_show_message("Customer not found for transaction: " + transaction.id)
 
     def save_data(self):
         self.data_manager.write_data(self.customers, EntityType.CUSTOMER, DataType.CSV, "")

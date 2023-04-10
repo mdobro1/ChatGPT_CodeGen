@@ -1,4 +1,5 @@
 from __future__ import annotations
+from ast import List
 from datetime import date, datetime
 from typing import Optional
 from entities.Transaction import Transaction
@@ -24,4 +25,5 @@ class CarRentalContext:
         self.car_rental_system: Optional[CarRentalSystem] = car_rental_system
         self.rental_transaction: Optional[Transaction] = rental_transaction
         self.action_completed: Optional[bool] = action_completed
+        self.closed_transactions: Optional[List[Transaction]] = None
 

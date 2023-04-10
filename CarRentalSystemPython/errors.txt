@@ -429,3 +429,16 @@ Traceback (most recent call last):
   File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\.\entities\Customer.py", line 91, in rented_cars_pool_new
     self._rented_cars_pool_extend(rented_cars)
 AttributeError: 'Customer' object has no attribute '_rented_cars_pool_extend'
+2023-04-10 11:36:13.465888 - Invalid CSV data: 
+Traceback (most recent call last):
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 85, in read_data_extended_job
+    data = self.deserialize_extended(line.strip(), data_type, entity_type, entitiesList, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\aspects\DataManager.py", line 179, in deserialize_extended
+    return entity.deserialize_handler(data, dataType, entitiesList)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 170, in deserialize_handler
+    return Transaction.deserialize(data, data_type, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 190, in deserialize
+    return Transaction.create_from_csv(data, entities_list)
+  File "C:\Users\dm_78\Source\Repos\ChatGPT_CodeGen\CarRentalSystemPython\entities\Transaction.py", line 232, in create_from_csv
+    raise ValueError(f"Invalid CSV data: {csv}")
+ValueError: Invalid CSV data: 

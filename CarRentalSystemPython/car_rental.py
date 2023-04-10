@@ -2,6 +2,7 @@ import datetime
 import sys
 import argparse
 from typing import List
+from entities.Transaction import Transaction
 from utils.DateUtils import DateUtils
 from controller.CarRentalSystem import CarRentalSystem
 from controller.CarRentalContext import CarRentalContext
@@ -52,8 +53,8 @@ def main(args) -> int:
     context.car_id = arg_car[0] if len(arg_car) else None
     context.customer_id = arg_customer[0] if len(arg_customer) else None
     now = datetime.datetime.now().date()
-    context.rent_from = DateUtils.parse_date(arg_from[0]) if len(arg_from) else now
-    context.rent_to =  DateUtils.parse_date(arg_to[0]) if len(arg_to) else DateUtils.parse_date(context.rent_from).replace(day=now.day + 3).date()
+    context.rent_from = DateUtils.parse_date(arg_from[0]) if len(arg_from) > 0 else now
+    context.rent_to =  DateUtils.parse_date(arg_to[0]) if len(arg_to) > 0 else context.rent_from.replace(day=now.day + 3)
 
     # Go!
     try:
@@ -98,7 +99,12 @@ def main(args) -> int:
                 log_and_show(context, "\nERROR: Invalid customer ID provided! Usage: cmd=return_car customer=\"ID\"")
                 sys.exit(-1)
             context.customer_id = arg_customer[0]
-            context = CarRentalCommands.return_car(context)
+            
+            context = CarRentalCommands.return_car(context, 
+                                                    lambda ctx: show_closed_rentals(ctx),
+                                                    lambda ctx: show_message(ctx, f"Customer with ID:{context.customer_id} has no rented cars!")
+                                                    )
+        
         else:
             log_and_show(context, f"\nUnknown command: \"{arg_command}\"!\n")
             show_message(context, "Use samples:")
@@ -119,6 +125,16 @@ def main(args) -> int:
         # don'save date if exception is occured 
         # CarRentalCommands.save_data(context)
         sys.exit(-1)
+
+def show_closed_rentals(context: CarRentalContext):
+    show_message(context, f"All cars have been returned by Customer with ID:{context.customer_id}!\n------------------\n")
+    for tx in context.closed_transactions:
+        closed_transaction : Transaction = tx
+        show_message(context, \
+                     f"Closed Rental-ID: {closed_transaction.id}, " + \
+                     f"Customer-ID: {closed_transaction.customer.id}," + \
+                     f" Car-ID: {closed_transaction.car.id}")   
+
 
 def customer_empty(context: CarRentalContext): 
     show_message(context, "No customer found!")       

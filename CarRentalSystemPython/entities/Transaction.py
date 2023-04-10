@@ -66,6 +66,14 @@ class IEntitiesList(ABC):
         pass
     
     @abstractmethod
+    def register_car_as_rented(self, car: Car):
+        pass
+
+    @abstractmethod
+    def unregister_car_as_rented(self, car: Car):
+        pass
+
+    @abstractmethod
     def return_car(self, customer: Customer, car: Car):
         pass
 
@@ -140,7 +148,7 @@ class Transaction(ISerializedExtendedEntity["Transaction"], ISerializeOwner):
         self._customer.return_car(self._car)
         self._is_closed = True
         self._closed_date = datetime.now()
-        entities_list.return_car(self._car)
+        entities_list.unregister_car_as_rented(self._car)
         entities_list.archive_transaction(self)
 
     def _calculate_total_price(self) -> float:
@@ -217,7 +225,7 @@ class Transaction(ISerializedExtendedEntity["Transaction"], ISerializeOwner):
         # create rental transaction
         newTransaction = Transaction(txID, customer, car, rental_date, return_date, None, False)
         newTransaction.customer.rent_car(car)
-        #entities_list.rent_car(customer_id, car_id, rental_date, return_date)
+        entities_list.register_car_as_rented(car)
         entities_list.new_transaction(newTransaction)
         return newTransaction
         
@@ -254,8 +262,12 @@ class Transaction(ISerializedExtendedEntity["Transaction"], ISerializeOwner):
         return_date = DateUtils.parse_date(values[4], None)
         closed_date = DateUtils.parse_date(values[5], None)
         
-        is_closed = bool(values[6])
-        
+        is_closed = False
+        val_Is_Closed = values[6]
+        if (val_Is_Closed is not None):
+            if (val_Is_Closed.strip().lower() == "true"):
+                is_closed = True
+
         return Transaction(id, customer, car, rental_date, return_date, closed_date, is_closed)
         
     @staticmethod

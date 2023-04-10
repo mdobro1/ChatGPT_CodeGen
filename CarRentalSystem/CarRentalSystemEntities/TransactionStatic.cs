@@ -31,7 +31,7 @@ namespace sf.systems.rentals.cars
             // create rental transaction
             var newTransaction = new Transaction(txID, customer, car, rentalDate, returnDate, default, false);
             newTransaction.Customer.RentCar(car);
-            entitiesList.RentCar(car);
+            entitiesList.RegisterCarAsRented(car);
             entitiesList.NewTransaction(newTransaction);
             return newTransaction;
         }

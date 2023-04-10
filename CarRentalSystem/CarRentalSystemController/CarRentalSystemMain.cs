@@ -318,13 +318,13 @@ namespace sf.systems.rentals.cars
             currentTransactions.Remove(transaction);
         }
 
-        public void RentCar(Car car)
+        public void RegisterCarAsRented(Car car)
         {
             availableCars.Remove(car);
             rentedCars.Add(car);
         }
 
-        public void ReturnCar(Car car)
+        public void UnregisterCarAsRented(Car car)
         {
             rentedCars.Remove(car);
             availableCars.Add(car);

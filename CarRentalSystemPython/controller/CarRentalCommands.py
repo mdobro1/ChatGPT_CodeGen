@@ -7,19 +7,33 @@ from controller.CarRentalContextAction import CarRentalContextAction
 
 class CarRentalCommands:
     @staticmethod
-    def return_car(rentalContext: CarRentalContext, posteriorReturnCar: CarRentalContextAction) -> CarRentalContext:
+    def return_car(rentalContext: CarRentalContext, 
+                   posteriorReturnCar: CarRentalContextAction,
+                   posteriorNoCarsToReturn: CarRentalContextAction) -> CarRentalContext:
         # validation
         CarRentalCommands.validate_context(rentalContext)
 
         # go!
-        rentalContext.RentalTransaction = rentalContext.car_rental_system.return_car(
-            rentalContext.car_rental_system.lookup_customer(rentalContext.customer_id))
+        rental_system = rentalContext.car_rental_system
+        customer = rental_system.lookup_customer(rentalContext.customer_id)
+        # rental_system.return_car(customer)
+        rentalContext.closed_transactions = rental_system.return_all_customer_cars(customer)
 
-        # finally
-        rentalContext.ActionCompleted = rentalContext.RentalTransaction.is_closed
+        if customer is None:
+            rentalContext.action_completed= False
+            return rentalContext
         
-        if rentalContext.ActionCompleted:
-            rentalContext = posteriorReturnCar(rentalContext)
+        # finally
+        rentalContext.action_completed = False
+        for tx in rentalContext.closed_transactions:
+            rentalContext.action_completed = tx.is_closed
+            if rentalContext.action_completed:
+                break 
+        
+        if rentalContext.action_completed:
+            posteriorReturnCar(rentalContext)
+        else:
+            posteriorNoCarsToReturn(rentalContext)
         
         return rentalContext
 

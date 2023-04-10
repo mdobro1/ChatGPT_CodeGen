@@ -6,7 +6,6 @@
     "configurations": [
 
 
-
         {
             "name": "Python: Current File",
             "type": "python",
@@ -39,8 +38,7 @@
                 "car=\"CAR11,Audi,A1,2021,90.0\""
             ],
             "justMyCode": true
-        }
-        ,
+        },
         {
             "name": "Python: Register Customer C003",
             "type": "python",
@@ -90,7 +88,38 @@
                 "cmd=rent_car",
                 "car=\"CAR911\"",
                 "customer=\"C003\"",
-                "from=\"2023-04-09\"",
+                "from=\"2023-04-10\"",
+                "to=\"2023-04-12\""
+            ],
+            "justMyCode": true
+        }
+        ,
+        {
+            "name": "Python: Rent Car CAR11 by Customer C003",
+            "type": "python",
+            "request": "launch",
+            "program": "./car_rental.py",
+            "console": "integratedTerminal",
+            "args": [
+                "cmd=rent_car",
+                "car=\"CAR11\"",
+                "customer=\"C003\"",
+                "from=\"2023-04-10\"",
+                "to=\"2023-04-12\""
+            ],
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Rent Car CAR11 by Customer C001",
+            "type": "python",
+            "request": "launch",
+            "program": "./car_rental.py",
+            "console": "integratedTerminal",
+            "args": [
+                "cmd=rent_car",
+                "car=\"CAR11\"",
+                "customer=\"C001\"",
+                "from=\"2023-04-10\"",
                 "to=\"2023-04-12\""
             ],
             "justMyCode": true

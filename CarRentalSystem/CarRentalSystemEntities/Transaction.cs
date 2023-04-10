@@ -40,7 +40,7 @@ namespace sf.systems.rentals.cars
             Customer.ReturnCar(Car);
             IsClosed = true;
             ClosedDate = DateTime.Now;
-            entitiesList.ReturnCar(Car);
+            entitiesList.UnregisterCarAsRented(Car);
             entitiesList.ArchiveTransaction(this);
         }
 
