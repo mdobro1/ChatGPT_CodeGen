@@ -33,7 +33,19 @@ To run the Car Rental System, you need to have the following installed on your s
 - .NET Core 3.1 or later
 - Newtonsoft Json (13.0.3)
 - Visual Studio (recommended) or any other C# compiler
-- Once you have installed the required dependencies, you can clone this repository and open the solution file in Visual Studio to build and run the application.
+- Once you have installed the required dependencies, you can clone this repository and open the solution file in Visual Studio to build and run the application *CarRentalSystem"* with the relevant parameters (see "Usage"-chapter below).
+
+### Python implementation (CarRentalSystemPython)
+Draft Python code for this project hase been translated by [Chat-GPT 3.5](https://chat.openai.com/) see *"Experiment_4.txt"* file in [Experiments](Experiments) and then was fixed manually.
+Using ChatGPT as a translation tool has saved much less time and effort in comparison with a manual rewriting. Furthermore there is no need to rewrite unit-tests.   
+
+#### Installation
+To run the Car Rental System (Python), you need to have the following installed on your system:
+
+- Python 3.8 or later.
+- Once you have installed the required dependencies, you can clone this repository and open the code in your favorite editor (i.e. VS Code).
+- Start program *car_rental.py* with relevant arguments (see "Usage"-chapter below).
+
 
 ### Usage
 The Car Rental System is a console-based application that takes input as command-line arguments. Here are the available commands and their usage:
